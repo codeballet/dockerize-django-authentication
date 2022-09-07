@@ -1,3 +1,14 @@
+# Introduction to Dockerize Django: Authentication
+
+This is a test app to explore how to use authentication for a Django webapp, running on Docker.
+
+The aim is for the app to be production ready, using the following components:
+
+- Gunicorn as production server.
+- Nginx as proxy-server.
+- Postgres as database.
+- Certbot with Let's Encrypt for HTTPS encryption.
+
 ## Ownership of files created inside containers
 
 If you are running Docker on Linux, the files django-admin created are owned by root. This happens because the container runs as the root user. Change the ownership of the new files.
@@ -10,5 +21,19 @@ sudo chown -R $USER:$USER composeexample manage.py
 
 ## Sources
 
-[Quickstart: Compose and Django](https://docs.docker.com/samples/django/)
-[Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
+### [Quickstart: Compose and Django](https://docs.docker.com/samples/django/)
+
+Basic information on how to set up Django and Postgres on Docker, with everything running in Docker.
+
+### [Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
+
+A rather in-depth guide on how to use Gunicorn as a Django wsgi server for production, with Nginx as a proxy-server, everthing running on Docker.
+
+### [Dimple Django deployment: a guide](https://mattsegal.dev/simple-django-deployment.html)
+
+Lots of helpful detail on Django deployment. However, this guide does not use Docker.
+
+## Articles for further research and development
+
+[How to backup and restore a Postgres database](https://mattsegal.dev/postgres-backup-and-restore.html)
+[How to automate your Postgres database backups](https://mattsegal.dev/postgres-backup-automate.html)
