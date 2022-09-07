@@ -57,10 +57,29 @@ Remember to change the ownership of the files created by the Docker containers, 
 
 ## Database migrations
 
+To make migrations:
+
+```
+docker compose exec web python manage.py makemigrations
+```
+
 To manually apply migrations on a running container:
 
 ```
 docker compose exec web python manage.py migrate --no-input
+
+```
+
+## Errors
+
+### Django auth.User.groups: (fields.E304) Reverse accessor for User.groups clashes with reverse
+
+According to [DebugAH](https://debugah.com/django-auth-user-groups-fields-e304-reverse-accessor-for-user-groups-clashes-with-reverse-5735/), this is because a new AbstractUser user class conflicts with Django’s own user class.
+
+Solution: Add a line of configuration in the `settings.py` file:
+
+```
+AUTH_USER_MODEL = 'user.User'  #  where user is the app name and User is the model class name
 ```
 
 ## Sources
@@ -83,3 +102,7 @@ Lots of helpful detail on Django deployment. However, this guide does not use Do
 
 - [How to backup and restore a Postgres database](https://mattsegal.dev/postgres-backup-and-restore.html)
 - [How to automate your Postgres database backups](https://mattsegal.dev/postgres-backup-automate.html)
+
+```
+
+```
