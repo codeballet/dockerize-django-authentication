@@ -25,10 +25,10 @@ Initial file structure:
 └── nginx/
 ```
 
-After having created the initial project directory structure, with the `Dockerfile` and `docker-compose.yml` files, start a new project called "authentication" with command:
+After having created the initial project directory structure, with the `Dockerfile` and `docker-compose.yml` files, start a new project called "project" with command:
 
 ```
-docker-compose run web django-admin startproject authentication .
+docker-compose run web django-admin startproject project .
 ```
 
 ## Ownership of files created inside containers
@@ -38,15 +38,19 @@ If you are running Docker on Linux, the files django-admin created are owned by 
 In case you use a data folder for a database, do not change the permission of the data folder where the database has its file, otherwise the database will not be able to start due to permission issues.
 
 ```
-sudo chown -R $USER:$USER composeexample manage.py
+sudo chown -R $USER:$USER ./app/project ./app/manage.py
 ```
+
+## Test run the project
+
+The Django project should now be possible to run with `docker compose up`.
 
 ## Start a new app
 
-To start a new app called "auth":
+To start a new app called "testapp":
 
 ```
-docker compose exec web python manage.py startapp auth
+docker compose exec web python manage.py startapp testapp
 ```
 
 Remember to change the ownership of the files created by the Docker containers, as described above.
