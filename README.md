@@ -21,6 +21,8 @@ sudo chown -R $USER:$USER composeexample manage.py
 
 ## Sources
 
+Here are some of the key sources used for the development of the app.
+
 ### [Quickstart: Compose and Django](https://docs.docker.com/samples/django/)
 
 Basic information on how to set up Django and Postgres on Docker, with everything running in Docker.
@@ -35,5 +37,5 @@ Lots of helpful detail on Django deployment. However, this guide does not use Do
 
 ## Articles for further research and development
 
-[How to backup and restore a Postgres database](https://mattsegal.dev/postgres-backup-and-restore.html)
-[How to automate your Postgres database backups](https://mattsegal.dev/postgres-backup-automate.html)
+- [How to backup and restore a Postgres database](https://mattsegal.dev/postgres-backup-and-restore.html)
+- [How to automate your Postgres database backups](https://mattsegal.dev/postgres-backup-automate.html)
