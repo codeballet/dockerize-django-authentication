@@ -110,6 +110,30 @@ function pageRegister() {
     document.querySelector('#register_form').append(submit);
 }
 
+// Objects
+const ObjectPage = function (content) {
+    this.content = content;
+}
+
+ObjectPage.prototype.generate = function () {
+    const div = document.createElement('div');
+    div.id = 'object_page';
+    div.className = 'page';
+
+    const text = document.createElement('p');
+    text.innerHTML = this.content;
+
+    document.querySelector('.container').append(div);
+    document.querySelector('#object_page').append(text);
+}
+
+ObjectPage.prototype.hide = function () {
+    document.querySelector('#object_page').style.display = 'none';
+}
+
+ObjectPage.prototype.show = function () {
+    document.querySelector('#object_page').style.display = 'block';
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     createNav();
@@ -118,4 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setHistory();
     console.log(history.state.page);
     showPage(history.state.page);
+    const page = new ObjectPage("I can change the content too!");
+    page.generate();
+    page.show();
 })
