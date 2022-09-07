@@ -7,7 +7,6 @@ ENV PYTHONUNBUFFERED 1
 
 # update package manager and install packages
 RUN apt-get update -y \
-    && apt-get install -y netcat \
     && apt-get install -y vim
 
 # set work directory

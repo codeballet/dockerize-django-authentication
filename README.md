@@ -9,6 +9,28 @@ The aim is for the app to be production ready, using the following components:
 - Postgres as database.
 - Certbot with Let's Encrypt for HTTPS encryption.
 
+## Start a new Django project
+
+Initial file structure:
+
+```
+.
+├── README.md
+├── app/
+│   ├── Dockerfile
+│   └── requirements.txt
+├── .env.dev
+├── .gitignore
+├── docker-compose.yml
+└── nginx/
+```
+
+After having created the initial project directory structure, with the `Dockerfile` and `docker-compose.yml` files, start a new project called "authentication" with command:
+
+```
+docker-compose run web django-admin startproject authentication .
+```
+
 ## Ownership of files created inside containers
 
 If you are running Docker on Linux, the files django-admin created are owned by root. This happens because the container runs as the root user. Change the ownership of the new files.
@@ -17,6 +39,24 @@ In case you use a data folder for a database, do not change the permission of th
 
 ```
 sudo chown -R $USER:$USER composeexample manage.py
+```
+
+## Start a new app
+
+To start a new app called "auth":
+
+```
+docker compose exec web python manage.py startapp auth
+```
+
+Remember to change the ownership of the files created by the Docker containers, as described above.
+
+## Database migrations
+
+To manually apply migrations on a running container:
+
+```
+docker compose exec web python manage.py migrate --no-input
 ```
 
 ## Sources
