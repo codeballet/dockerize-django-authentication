@@ -1,19 +1,9 @@
-// Constants
-const DEFAULT_PAGE = 'home';
-
 function getPage() {
     // returns last part of url
     const url = window.location.href;
     const url_list = url.split('/');
     const page = url_list[url_list.length -1];
     return page;
-}
-
-function hidePages() {
-    const pages = document.querySelectorAll('.page');
-    for (let i = 0; i < pages.length; i++) {
-        pages[i].style.display = 'none';
-    }
 }
 
 function pushPage(page) {
@@ -30,119 +20,190 @@ function setHistory() {
     }
 }
 
-function showPage(page) {
-    console.log(page);
-    hidePages();
-    document.querySelector(`#${page}_page`).style.display = 'block';
+
+/////////////////
+// Form inputs //
+/////////////////
+
+const registerFormInput = {
+    given_name: {
+        id: 'register_given_name',
+        classname: 'form_field',
+        name: 'register_given_name',
+        type: 'text',
+        placeholder: 'Given name'
+    },
+    family_name: {
+        id: 'register_family_name',
+        classname: 'form_field',
+        name: 'register_family_name',
+        type: 'text',
+        placeholder: 'Family name'
+    },
+    email: {
+        id: 'register_email',
+        classname: 'form_field',
+        name: 'register_email',
+        type: 'text',
+        placeholder: 'Email'
+    },
+    submit: {
+        id: 'register_submit',
+        classname: 'button',
+        type: 'submit'
+    }
 }
 
-// Navigation menu
-function createNav() {
-    // div for nav elements
+/////////////
+// Objects //
+/////////////
+
+// Form object
+const InputForm = function(
+        input = {}, 
+        appendTo = 'register_page', 
+        id = 'register_form', 
+        classname = 'form'
+    ) {
+    this.input = input;
+    this.appendTo = appendTo;
+    this.id = id;
+    this.classname = classname;
+
+    // Create and append form element
+    const form = document.createElement('form')
+    form.id = this.id;
+    form.className = this.classname;
+    document.querySelector(`#${this.appendTo}`).append(form);
+
+    // Generate the form inputs
+    for (const [key, value] of Object.entries(this.input)) {
+        // for each form input
+        const field = document.createElement('input');
+        for (const [k, v] of Object.entries(value)) {
+            // set form input values
+            if (k === 'id') { field.id = v; }
+            if (k === 'classname') { field.className = v }
+            if (k === 'name') { field.name = v; }
+            if (k === 'type') { field.type = v; }
+            if (k === 'placeholder') { field.placeholder = v; }
+        }
+        // append inputs to form
+        document.querySelector(`#${this.id}`).append(field);
+    }
+
+}
+
+
+// Home page object
+const HomePage = function (id = 'home_page', className = 'page') {
+    this.id = id;
+    this.className = className;
+
     const div = document.createElement('div');
-    div.id = 'nav';
-    // home nav button
-    const home_nav = document.createElement('button');
-    home_nav.id = 'home_nav';
-    home_nav.innerHTML = 'Home';
-    // register nav button
-    const register_nav = document.createElement('button');
-    register_nav.id = 'register_nav';
-    register_nav.innerHTML = 'Register';
-    // append nav elements
-    document.querySelector('.container').append(div);
-    document.querySelector('#nav').append(home_nav);
-    document.querySelector('#nav').append(register_nav);
-}
+    div.id = this.id;
+    div.className = this.className;
 
-// Home page
-function pageHome() {
-    // div for Home page
-    const div = document.createElement('div');
-    div.id = 'home_page';
-    div.className = 'page';
-    // content
-    const content = document.createElement('h1');
-    content.id = 'home_content';
-    content.innerHTML = 'This is the Home Page.';
-    // append elements
-    document.querySelector('.container').append(div);
-    document.querySelector('#home_page').append(content);
-}
-
-// Registration page
-function pageRegister() {
-    // div for registration page
-    const div = document.createElement('div');
-    div.id = 'register_page'
-    div.className = 'page';
-    // form
-    const form = document.createElement('form');
-    form.id = 'register_form';
-    // given name text input
-    const given_name = document.createElement('input');
-    given_name.id = 'register_name';
-    given_name.name = 'given_name';
-    given_name.type = 'text';
-    given_name.placeholder = 'Given name';
-    // name text input
-    const family_name = document.createElement('input');
-    family_name.id = 'register_name';
-    family_name.name = 'family_name';
-    family_name.type = 'text';
-    family_name.placeholder = 'Family name';
-    // email text input
-    const email = document.createElement('input');
-    email.id = 'register_email';
-    email.name = 'email';
-    email.type = 'text';
-    email.placeholder = 'Email';
-    // submit element
-    const submit = document.createElement('input');
-    submit.id = 'register_submit';
-    submit.type = 'submit';
-    //append elements
-    document.querySelector('.container').append(div);
-    document.querySelector('#register_page').append(form);
-    document.querySelector('#register_form').append(family_name);
-    document.querySelector('#register_form').append(given_name);
-    document.querySelector('#register_form').append(email);
-    document.querySelector('#register_form').append(submit);
-}
-
-// Objects
-const ObjectPage = function (content) {
-    this.content = content;
-}
-
-ObjectPage.prototype.generate = function () {
-    const div = document.createElement('div');
-    div.id = 'object_page';
-    div.className = 'page';
-
-    const text = document.createElement('p');
-    text.innerHTML = this.content;
+    div.innerHTML = 'This is the homepage';
 
     document.querySelector('.container').append(div);
-    document.querySelector('#object_page').append(text);
+    document.querySelector(`#${this.id}`).style.display = 'none';
 }
 
-ObjectPage.prototype.hide = function () {
-    document.querySelector('#object_page').style.display = 'none';
+HomePage.prototype.hide = function() {
+    document.querySelector(`#${this.id}`).style.display = 'none';
 }
 
-ObjectPage.prototype.show = function () {
-    document.querySelector('#object_page').style.display = 'block';
+HomePage.prototype.show = function() {
+    document.querySelector(`#${this.id}`).style.display = 'Block';
 }
+
+
+// Navigation menu object
+const NavMenu = function(id = 'nav', className = 'page') {
+    this.id = id;
+    this.className = className
+
+    const div = document.createElement('div');
+    div.id = this.id
+    div.className = this.className
+    
+    document.querySelector('.container').append(div);
+}
+
+
+// Navigation button object
+const NavButton = function(innerHtml, id, className = 'nav_button button') {
+    this.innerHtml = innerHtml;
+    this.id = id;
+    this.classname = className;
+
+    // create and append nav button
+    const navButton = document.createElement('button');
+    navButton.id = this.id;
+    navButton.className = this.classname;
+    navButton.innerHTML = this.innerHtml;
+    document.querySelector('#nav').append(navButton);
+}
+
+
+// Register page object
+const RegisterPage = function(id = 'register_page', className = 'page') {
+    this.id = id;
+    this.className = className;
+
+    const div = document.createElement('div');
+    div.id = this.id;
+    div.className = this.className;
+
+    div.innerHTML = 'This is the Register page';
+
+    document.querySelector('.container').append(div);
+    document.querySelector(`#${this.id}`).style.display = 'none';
+}
+
+RegisterPage.prototype.hide = function() {
+    document.querySelector(`#${this.id}`).style.display = 'none';
+}
+
+RegisterPage.prototype.show = function() {
+    document.querySelector(`#${this.id}`).style.display = 'Block';
+}
+
+
+
+////////////////////////
+// DOM Content Loaded //
+////////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
-    createNav();
-    pageRegister();
-    pageHome();
-    setHistory();
-    console.log(history.state.page);
-    showPage(history.state.page);
-    const page = new ObjectPage("I can change the content too!");
-    page.generate();
-    page.show();
+    // create navigation menu objects
+    const navMenu = new NavMenu();
+    const homeNavButton = new NavButton('Home', 'home_nav');
+    const registerNavButton = new NavButton('Register', 'register_nav');
+
+    // create page objects
+    const homePage = new HomePage();
+    const registerPage = new RegisterPage();
+    const registerInputForm = new InputForm(registerFormInput);
+
+    // link navigation button ids to pages
+    pages = {
+        home_nav: homePage,
+        register_nav: registerPage
+    };
+
+    // add event listener to navigation buttons
+    document.querySelectorAll('.nav_button').forEach(button => {
+        button.onclick = function() {
+            console.log(`Clicked on ${this.id}`);
+            for (const [key, value] of Object.entries(pages)) {
+                if (key === this.id) {
+                    value.show();
+                } else {
+                    value.hide();
+                }
+            }
+        }
+    })
 })
