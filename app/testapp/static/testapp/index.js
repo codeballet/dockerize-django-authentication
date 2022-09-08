@@ -1,5 +1,9 @@
+///////////////
+// Functions //
+///////////////
+
 function getPage() {
-    // returns last part of url
+    // returns last part of current url
     const url = window.location.href;
     const url_list = url.split('/');
     const page = url_list[url_list.length -1];
@@ -10,11 +14,11 @@ function pushPage(page) {
     history.pushState({page: page}, "", page)
 }
 
-function setHistory() {
+function setHistory(page = 'home') {
     // sets history state to current page or DEFAULT_PAGE
     const current_page = getPage();
     if (current_page === '') {
-        pushPage(DEFAULT_PAGE);
+        pushPage(page);
     } else {
         pushPage(current_page);
     }
@@ -119,19 +123,6 @@ HomePage.prototype.show = function() {
 }
 
 
-// Navigation menu object
-const NavMenu = function(id = 'nav', className = 'page') {
-    this.id = id;
-    this.className = className
-
-    const div = document.createElement('div');
-    div.id = this.id
-    div.className = this.className
-    
-    document.querySelector('.container').append(div);
-}
-
-
 // Navigation button object
 const NavButton = function(innerHtml, id, className = 'nav_button button') {
     this.innerHtml = innerHtml;
@@ -144,6 +135,19 @@ const NavButton = function(innerHtml, id, className = 'nav_button button') {
     navButton.className = this.classname;
     navButton.innerHTML = this.innerHtml;
     document.querySelector('#nav').append(navButton);
+}
+
+
+// Navigation menu object
+const NavMenu = function(id = 'nav', className = 'page') {
+    this.id = id;
+    this.className = className
+
+    const div = document.createElement('div');
+    div.id = this.id
+    div.className = this.className
+    
+    document.querySelector('.container').append(div);
 }
 
 
@@ -187,11 +191,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerPage = new RegisterPage();
     const registerInputForm = new InputForm(registerFormInput);
 
-    // link navigation button ids to pages
+    // show home page by default
+    homePage.show();
+
+    // set browser history
+    setHistory();
+
+    // dictionary linking navigation button ids to page objects
     pages = {
         home_nav: homePage,
         register_nav: registerPage
     };
+
+    // browser back button action
+    window.onpopstate = event => {
+        page = event.state.page;
+        console.log(`popping to ${page}`)
+        for (const [key, value] of Object.entries(pages)) {
+            if (key.split('_')[0] === page) {
+                value.show();
+            } else {
+                value.hide();
+            }
+        }
+    }
 
     // add event listener to navigation buttons
     document.querySelectorAll('.nav_button').forEach(button => {
@@ -200,6 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
             for (const [key, value] of Object.entries(pages)) {
                 if (key === this.id) {
                     value.show();
+                    // push relevant page on browser history
+                    pushPage(this.id.split('_')[0]);
                 } else {
                     value.hide();
                 }
