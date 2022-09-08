@@ -1,6 +1,6 @@
 # Introduction to Dockerize Django: Authentication
 
-This is a test app to explore how to use authentication for a Django webapp, running on Docker.
+This is a test app to explore the development of a webapp based on Django, running on Docker.
 
 The overall aim is for the app to be production ready, using the following components:
 
