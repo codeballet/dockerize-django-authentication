@@ -76,7 +76,7 @@ const HomePage = function (id = 'home_page', className = 'page') {
     div.id = this.id;
     div.className = this.className;
 
-    div.innerHTML = 'This is the homepage';
+    div.textContent = 'This is the homepage';
 
     document.querySelector('.container').append(div);
     document.querySelector(`#${this.id}`).style.display = 'none';
@@ -92,8 +92,8 @@ HomePage.prototype.show = function() {
 
 
 // Navigation button object
-const NavButton = function(innerHtml, id, className = 'nav_button button') {
-    this.innerHtml = innerHtml;
+const NavButton = function(textContent, id, className = 'nav_button button') {
+    this.textContent = textContent;
     this.id = id;
     this.classname = className;
 
@@ -101,7 +101,7 @@ const NavButton = function(innerHtml, id, className = 'nav_button button') {
     const navButton = document.createElement('button');
     navButton.id = this.id;
     navButton.className = this.classname;
-    navButton.innerHTML = this.innerHtml;
+    navButton.textContent = this.textContent;
     document.querySelector('#nav').append(navButton);
 }
 
@@ -128,7 +128,7 @@ const RegisterPage = function(id = 'register_page', className = 'page') {
     div.id = this.id;
     div.className = this.className;
 
-    div.innerHTML = 'This is the Register page';
+    div.textContent = 'This is the Register page';
 
     document.querySelector('.container').append(div);
     document.querySelector(`#${this.id}`).style.display = 'none';
