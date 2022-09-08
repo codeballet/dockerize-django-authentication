@@ -1,30 +1,3 @@
-///////////////
-// Functions //
-///////////////
-
-function getPage() {
-    // returns last part of current url
-    const url = window.location.href;
-    const url_list = url.split('/');
-    const page = url_list[url_list.length -1];
-    return page;
-}
-
-function pushPage(page) {
-    history.pushState({page: page}, "", page)
-}
-
-function setHistory(page = 'home') {
-    // sets history state to current page or DEFAULT_PAGE
-    const current_page = getPage();
-    if (current_page === '') {
-        pushPage(page);
-    } else {
-        pushPage(current_page);
-    }
-}
-
-
 /////////////////
 // Form inputs //
 /////////////////
@@ -58,17 +31,12 @@ const registerFormInput = {
     }
 }
 
-/////////////
-// Objects //
-/////////////
+//////////////////
+// Page Objects //
+//////////////////
 
 // Form object
-const InputForm = function(
-        input = {}, 
-        appendTo = 'register_page', 
-        id = 'register_form', 
-        classname = 'form'
-    ) {
+const InputForm = function(input, appendTo, id, classname) {
     this.input = input;
     this.appendTo = appendTo;
     this.id = id;
@@ -175,12 +143,40 @@ RegisterPage.prototype.show = function() {
 }
 
 
+///////////////////
+// State Objects //
+///////////////////
+
+// Browser history state object
+function BrowserHistory(page = '') {
+    this.page = page
+}
+
+BrowserHistory.prototype.setPage = function(page) {
+    this.page = page;
+    history.pushState({page: this.page}, "", this.page);
+}
+
+BrowserHistory.prototype.getPage = function() {
+    // gets last part of current url
+    const url = window.location.href;
+    const url_list = url.split('/');
+    this.page = url_list[url_list.length -1];
+    return this.page
+}
+
 
 ////////////////////////
 // DOM Content Loaded //
 ////////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
+    // check localStorage for lastState
+    let lastState = '';
+    if (localStorage.getItem('lastState')) {
+        lastState = localStorage.getItem('lastState');
+    }
+
     // create navigation menu objects
     const navMenu = new NavMenu();
     const homeNavButton = new NavButton('Home', 'home_nav');
@@ -189,13 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // create page objects
     const homePage = new HomePage();
     const registerPage = new RegisterPage();
-    const registerInputForm = new InputForm(registerFormInput);
+    const registerInputForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
 
-    // show home page by default
-    homePage.show();
-
-    // set browser history
-    setHistory();
+    // create browser history object
+    const browserHistory = new BrowserHistory(lastState);
 
     // dictionary linking navigation button ids to page objects
     pages = {
@@ -203,10 +196,29 @@ document.addEventListener('DOMContentLoaded', () => {
         register_nav: registerPage
     };
 
-    // browser back button action
+    // show default or browserHistory state page
+    if (browserHistory.getPage() === '') {
+        // Show default page
+        browserHistory.setPage('home');
+        homePage.show();
+    } else {
+        // match browserHistory state to page
+        for (const [key, value] of Object.entries(pages)) {
+            if (key.split('_')[0] === browserHistory.getPage()) {
+                value.show();
+            }
+        }
+    }
+
+    // on browser refresh button, save url to localStorage
+    window.onbeforeunload = event => {
+        localStorage.setItem('lastState', browserHistory.getPage())
+    }
+
+    // on browser back button
     window.onpopstate = event => {
         page = event.state.page;
-        console.log(`popping to ${page}`)
+        // match the popped value to entry in the pages object
         for (const [key, value] of Object.entries(pages)) {
             if (key.split('_')[0] === page) {
                 value.show();
@@ -216,15 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // add event listener to navigation buttons
+    // add event listeners to navigation buttons
     document.querySelectorAll('.nav_button').forEach(button => {
         button.onclick = function() {
-            console.log(`Clicked on ${this.id}`);
             for (const [key, value] of Object.entries(pages)) {
                 if (key === this.id) {
                     value.show();
-                    // push relevant page on browser history
-                    pushPage(this.id.split('_')[0]);
+                    // update browser history state object
+                    browserHistory.setPage(this.id.split('_')[0]);
                 } else {
                     value.hide();
                 }
