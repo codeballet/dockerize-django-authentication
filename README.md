@@ -2,14 +2,19 @@
 
 This is a test app to explore how to use authentication for a Django webapp, running on Docker.
 
-The aim is for the app to be production ready, using the following components:
+The overall aim is for the app to be production ready, using the following components:
 
+- A Singlepage frontend, programmed in Object Oriented JavaScript.
+- SASS for styling.
+- Django as the backend server
 - Gunicorn as production server.
 - Nginx as proxy-server.
 - Postgres as database.
 - Certbot with Let's Encrypt for HTTPS encryption.
 
 ## Start a new Django project
+
+Here are some brief instructions for how to get going with your own project.
 
 Initial file structure:
 
@@ -25,7 +30,7 @@ Initial file structure:
 └── nginx/
 ```
 
-After having created the initial project directory structure, with the `Dockerfile` and `docker-compose.yml` files, start a new project called "project" with command:
+After having created the initial project directory structure, with the `Dockerfile` and `docker-compose.yml` files: from the project root directory, start a new Django project called "project" with command:
 
 ```
 docker-compose run web django-admin startproject project .
@@ -45,6 +50,21 @@ sudo chown -R $USER:$USER ./app/project ./app/manage.py
 
 The Django project should now be possible to run with `docker compose up`.
 
+## Database migrations
+
+To create migrations:
+
+```
+docker compose exec web python manage.py makemigrations
+```
+
+To apply migrations:
+
+```
+docker compose exec web python manage.py migrate --no-input
+
+```
+
 ## Start a new app
 
 To start a new app called "testapp":
@@ -53,33 +73,18 @@ To start a new app called "testapp":
 docker compose exec web python manage.py startapp testapp
 ```
 
-Remember to change the ownership of the files created by the Docker containers, as described above.
+As above for the project, remember to change the ownership of the files created by the Docker containers.
 
-## Database migrations
+## Errors and troubleshoting
 
-To make migrations:
-
-```
-docker compose exec web python manage.py makemigrations
-```
-
-To manually apply migrations on a running container:
-
-```
-docker compose exec web python manage.py migrate --no-input
-
-```
-
-## Errors
-
-### Django auth.User.groups: (fields.E304) Reverse accessor for User.groups clashes with reverse
+### ERROR -- Django auth.User.groups: (fields.E304) Reverse accessor for User.groups clashes with reverse
 
 According to [DebugAH](https://debugah.com/django-auth-user-groups-fields-e304-reverse-accessor-for-user-groups-clashes-with-reverse-5735/), this is because a new AbstractUser user class conflicts with Django’s own user class.
 
 Solution: Add a line of configuration in the `settings.py` file:
 
 ```
-AUTH_USER_MODEL = 'user.User'  #  where user is the app name and User is the model class name
+AUTH_USER_MODEL = 'testapp.User'  #  where testapp is the app name and User is the model class name
 ```
 
 ## Sources
@@ -96,13 +101,9 @@ A rather in-depth guide on how to use Gunicorn as a Django wsgi server for produ
 
 ### [Dimple Django deployment: a guide](https://mattsegal.dev/simple-django-deployment.html)
 
-Lots of helpful detail on Django deployment. However, this guide does not use Docker.
+Lots of helpful detail on Django deployment. However, not using Docker.
 
 ## Articles for further research and development
 
 - [How to backup and restore a Postgres database](https://mattsegal.dev/postgres-backup-and-restore.html)
 - [How to automate your Postgres database backups](https://mattsegal.dev/postgres-backup-automate.html)
-
-```
-
-```
