@@ -33,114 +33,119 @@ const registerFormInput = {
 
 
 //////////////////
-// Page Objects //
+// Page Classes //
 //////////////////
 
-// Form object
-const InputForm = function(input, appendTo, id, classname) {
-    this.input = input;
-    this.appendTo = appendTo;
-    this.id = id;
-    this.classname = classname;
+// Form class
+class InputForm {
+    constructor(input, appendTo, id, classname) {
+        this.input = input;
+        this.appendTo = appendTo;
+        this.id = id;
+        this.classname = classname;
 
-    // Create and append form element
-    const form = document.createElement('form')
-    form.id = this.id;
-    form.className = this.classname;
-    document.querySelector(`#${this.appendTo}`).append(form);
+        // Create and append form element
+        const form = document.createElement('form')
+        form.id = this.id;
+        form.className = this.classname;
+        document.querySelector(`#${this.appendTo}`).append(form);
 
-    // Generate the form inputs
-    for (const [key, value] of Object.entries(this.input)) {
-        // for each form input
-        const field = document.createElement('input');
-        for (const [k, v] of Object.entries(value)) {
-            // set form input values
-            if (k === 'id') { field.id = v; }
-            if (k === 'classname') { field.className = v }
-            if (k === 'name') { field.name = v; }
-            if (k === 'type') { field.type = v; }
-            if (k === 'placeholder') { field.placeholder = v; }
+        // Generate the form fields
+        for (const [key, value] of Object.entries(this.input)) {
+            // for each form input
+            const field = document.createElement('input');
+            for (const [k, v] of Object.entries(value)) {
+                // set form input values
+                if (k === 'id') { field.id = v; }
+                if (k === 'classname') { field.className = v }
+                if (k === 'name') { field.name = v; }
+                if (k === 'type') { field.type = v; }
+                if (k === 'placeholder') { field.placeholder = v; }
+            }
+            // append inputs to form
+            document.querySelector(`#${this.id}`).append(field);
         }
-        // append inputs to form
-        document.querySelector(`#${this.id}`).append(field);
     }
-
 }
 
 
-// Home page object
-const HomePage = function (id = 'home_page', className = 'page') {
-    this.id = id;
-    this.className = className;
-
-    const div = document.createElement('div');
-    div.id = this.id;
-    div.className = this.className;
-
-    div.textContent = 'This is the homepage';
-
-    document.querySelector('.container').append(div);
-    document.querySelector(`#${this.id}`).style.display = 'none';
-}
-
-HomePage.prototype.hide = function() {
-    document.querySelector(`#${this.id}`).style.display = 'none';
-}
-
-HomePage.prototype.show = function() {
-    document.querySelector(`#${this.id}`).style.display = 'Block';
-}
-
-
-// Navigation button object
-const NavButton = function(textContent, id, className = 'nav_button button') {
-    this.textContent = textContent;
-    this.id = id;
-    this.classname = className;
-
-    // create and append nav button
-    const navButton = document.createElement('button');
-    navButton.id = this.id;
-    navButton.className = this.classname;
-    navButton.textContent = this.textContent;
-    document.querySelector('#nav').append(navButton);
-}
-
-
-// Navigation menu object
-const NavMenu = function(id = 'nav', className = 'page') {
-    this.id = id;
-    this.className = className
-
-    const div = document.createElement('div');
-    div.id = this.id
-    div.className = this.className
+// Home page class
+class HomePage {
+    constructor(id = 'home_page', className = 'page') {
+        this.id = id;
+        this.className = className;
     
-    document.querySelector('.container').append(div);
+        const div = document.createElement('div');
+        div.id = this.id;
+        div.className = this.className;
+    
+        div.textContent = 'This is the homepage';
+    
+        document.querySelector('.container').append(div);
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'Block';
+    }
 }
 
 
-// Register page object
-const RegisterPage = function(id = 'register_page', className = 'page') {
-    this.id = id;
-    this.className = className;
-
-    const div = document.createElement('div');
-    div.id = this.id;
-    div.className = this.className;
-
-    div.textContent = 'This is the Register page';
-
-    document.querySelector('.container').append(div);
-    document.querySelector(`#${this.id}`).style.display = 'none';
+// Navigation button class
+class NavButton {
+    constructor(textContent, id, className = 'nav_button button') {
+        this.textContent = textContent;
+        this.id = id;
+        this.classname = className;
+    
+        // create and append nav button
+        const navButton = document.createElement('button');
+        navButton.id = this.id;
+        navButton.className = this.classname;
+        navButton.textContent = this.textContent;
+        document.querySelector('#nav').append(navButton);
+    }
 }
 
-RegisterPage.prototype.hide = function() {
-    document.querySelector(`#${this.id}`).style.display = 'none';
+
+// Navigation menu class
+class NavMenu {
+    constructor(id = 'nav', className = 'page') {
+        this.id = id;
+        this.className = className
+    
+        const div = document.createElement('div');
+        div.id = this.id
+        div.className = this.className
+        
+        document.querySelector('.container').append(div);
+    }
 }
 
-RegisterPage.prototype.show = function() {
-    document.querySelector(`#${this.id}`).style.display = 'Block';
+
+// Register page class
+class RegisterPage {
+    constructor(id = 'register_page', className = 'page') {
+        this.id = id;
+        this.className = className;
+    
+        const div = document.createElement('div');
+        div.id = this.id;
+        div.className = this.className;
+    
+        div.textContent = 'This is the Register page';
+    
+        document.querySelector('.container').append(div);
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'Block';
+    }
 }
 
 
@@ -148,20 +153,20 @@ RegisterPage.prototype.show = function() {
 // State Objects //
 ///////////////////
 
-// Browser history state object
-function BrowserHistory(page = '') {
-    this.page = page
-}
-
-BrowserHistory.prototype.setPage = function(page) {
-    this.page = page;
-    history.pushState({page: this.page}, "", this.page);
-}
-
-BrowserHistory.prototype.getPage = function() {
-    // gets last part of current url
-    const url = window.location.href;
-    const url_list = url.split('/');
-    this.page = url_list[url_list.length -1];
-    return this.page
+// Browser history state class
+class BrowserHistory {
+    constructor(page = '') {
+        this.page = page
+    }
+    setPage(page) {
+        this.page = page;
+        history.pushState({page: this.page}, "", this.page);
+    }
+    getPage() {
+        // gets last part of current url
+        const url = window.location.href;
+        const url_list = url.split('/');
+        this.page = url_list[url_list.length -1];
+        return this.page
+    }
 }
