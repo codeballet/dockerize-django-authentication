@@ -1,4 +1,4 @@
-# Introduction to Dockerize Django: Authentication
+# Introduction to the Dockerize Django app
 
 This is a test app to explore the development of a webapp based on Django, running on Docker.
 
