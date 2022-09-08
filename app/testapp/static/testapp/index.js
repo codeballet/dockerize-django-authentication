@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerNavButton = new NavButton('Register', 'register_nav');
 
     // create page objects
-    const homePage = new HomePage();
-    const registerPage = new RegisterPage();
+    const homePage = new Page('home_page', 'page');
+    const registerPage = new Page('register_page', 'page');
     const registerInputForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
 
     // create browser history object

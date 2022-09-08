@@ -33,7 +33,7 @@ const registerFormInput = {
 
 
 //////////////////
-// Page Classes //
+// Site Classes //
 //////////////////
 
 // Form class
@@ -65,30 +65,6 @@ class InputForm {
             // append inputs to form
             document.querySelector(`#${this.id}`).append(field);
         }
-    }
-}
-
-
-// Home page class
-class HomePage {
-    constructor(id = 'home_page', className = 'page') {
-        this.id = id;
-        this.className = className;
-    
-        const div = document.createElement('div');
-        div.id = this.id;
-        div.className = this.className;
-    
-        div.textContent = 'This is the homepage';
-    
-        document.querySelector('.container').append(div);
-        document.querySelector(`#${this.id}`).style.display = 'none';
-    }
-    hide() {
-        document.querySelector(`#${this.id}`).style.display = 'none';
-    }
-    show() {
-        document.querySelector(`#${this.id}`).style.display = 'Block';
     }
 }
 
@@ -125,18 +101,16 @@ class NavMenu {
 }
 
 
-// Register page class
-class RegisterPage {
-    constructor(id = 'register_page', className = 'page') {
+// Page class
+class Page {
+    constructor(id, className) {
         this.id = id;
         this.className = className;
     
         const div = document.createElement('div');
         div.id = this.id;
         div.className = this.className;
-    
-        div.textContent = 'This is the Register page';
-    
+        
         document.querySelector('.container').append(div);
         document.querySelector(`#${this.id}`).style.display = 'none';
     }
@@ -150,7 +124,7 @@ class RegisterPage {
 
 
 ///////////////////
-// State Objects //
+// State Classes //
 ///////////////////
 
 // Browser history state class
