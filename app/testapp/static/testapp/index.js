@@ -19,6 +19,31 @@ function getCookie(name) {
 }
 
 
+////////////////////
+// Event handlers //
+////////////////////
+function logout() {
+    console.log('logout button clicked');
+}
+
+function navEvent(id, pages, browserHistory) {
+    console.log(id);
+    // logout
+    if (id === 'logout_nav') {
+        logout();
+    }
+    // normal pages
+    for (const [key, value] of Object.entries(pages)) {
+        if (key === id) {
+            value.show();
+            // update browser history state object
+            browserHistory.setPage(id.split('_')[0]);
+        } else {
+            value.hide();
+        }
+    }
+}
+
 ////////////////////////
 // DOM Content Loaded //
 ////////////////////////
@@ -31,12 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // Pages
+    // Pages content
 
     // create navigation menu objects
     const navMenu = new NavMenu();
     const homeNavButton = new NavButton('Home', 'home_nav');
     const registerNavButton = new NavButton('Register', 'register_nav');
+    const logoutNavButton = new NavButton('Logout', 'logout_nav');
 
     // create page objects
     const homePage = new Page('home_page', 'page');
@@ -46,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerInputForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
 
 
-    // State object
+    // State objects
 
     // create browser history object
     const browserHistory = new BrowserHistory(lastState);
@@ -72,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // Browser actions
+    // On browser actions
 
     // on browser refresh button, save url to localStorage
     window.onbeforeunload = event => {
@@ -80,8 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // on browser back button
-    window.onpopstate = event => {
-        page = event.state.page;
+    window.onpopstate = e => {
+        page = e.state.page;
         // match the popped value to entry in the pages object
         for (const [key, value] of Object.entries(pages)) {
             if (key.split('_')[0] === page) {
@@ -98,15 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // navigation buttons event listeners
     document.querySelectorAll('.nav_button').forEach(button => {
         button.onclick = function() {
-            for (const [key, value] of Object.entries(pages)) {
-                if (key === this.id) {
-                    value.show();
-                    // update browser history state object
-                    browserHistory.setPage(this.id.split('_')[0]);
-                } else {
-                    value.hide();
-                }
-            }
+            navEvent(button.id, pages, browserHistory)
         }
     });
 

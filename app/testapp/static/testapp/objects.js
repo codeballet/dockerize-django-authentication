@@ -90,6 +90,12 @@ class NavButton {
         navButton.textContent = this.textContent;
         document.querySelector('#nav').append(navButton);
     }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'Block';
+    }
 }
 
 
