@@ -1,3 +1,24 @@
+////////////////
+// csrf token //
+////////////////
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
 ////////////////////////
 // DOM Content Loaded //
 ////////////////////////
@@ -9,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
         lastState = localStorage.getItem('lastState');
     }
 
+
+    // Pages
+
     // create navigation menu objects
     const navMenu = new NavMenu();
     const homeNavButton = new NavButton('Home', 'home_nav');
@@ -17,7 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // create page objects
     const homePage = new Page('home_page', 'page');
     const registerPage = new Page('register_page', 'page');
+
+    // create forms
     const registerInputForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
+
+
+    // State object
 
     // create browser history object
     const browserHistory = new BrowserHistory(lastState);
@@ -42,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    // Browser actions
+
     // on browser refresh button, save url to localStorage
     window.onbeforeunload = event => {
         localStorage.setItem('lastState', browserHistory.getPage())
@@ -60,7 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // add event listeners to navigation buttons
+
+    // Event listeners
+
+    // navigation buttons event listeners
     document.querySelectorAll('.nav_button').forEach(button => {
         button.onclick = function() {
             for (const [key, value] of Object.entries(pages)) {
@@ -73,5 +108,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-    })
-})
+    });
+
+    // registration form event listener
+    document.querySelector('#register_form').onsubmit = e => {
+        e.preventDefault();
+        console.log('Submitted registration form');
+
+        // get csrf token
+        const csrftoken = getCookie('csrftoken');
+
+        // call api/register backend
+        fetch('api/register', {
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            mode: 'same-origin',
+            body: JSON.stringify({
+                register_username: document.querySelector('#register_username').value
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+        });
+    }
+});

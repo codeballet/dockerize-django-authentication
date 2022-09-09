@@ -3,19 +3,12 @@
 ////////////////////////
 
 const registerFormInput = {
-    given_name: {
-        id: 'register_given_name',
+    username: {
+        id: 'register_username',
         classname: 'form_field',
-        name: 'register_given_name',
+        name: 'register_username',
         type: 'text',
-        placeholder: 'Given name'
-    },
-    family_name: {
-        id: 'register_family_name',
-        classname: 'form_field',
-        name: 'register_family_name',
-        type: 'text',
-        placeholder: 'Family name'
+        placeholder: 'Username'
     },
     email: {
         id: 'register_email',
@@ -23,6 +16,20 @@ const registerFormInput = {
         name: 'register_email',
         type: 'text',
         placeholder: 'Email'
+    },
+    password: {
+        id: 'register_password',
+        classname: 'form_field',
+        name: 'register_password',
+        type: 'password',
+        placeholder: 'Password'
+    },
+    confirmPassword: {
+        id: 'register_confirm_password',
+        classname: 'form_field',
+        name: 'register_confirm_password',
+        type: 'password',
+        placeholder: 'Confirm password'
     },
     submit: {
         id: 'register_submit',
@@ -38,14 +45,14 @@ const registerFormInput = {
 
 // Form class
 class InputForm {
-    constructor(input, appendTo, id, classname) {
+    constructor(input, appendTo, id, classname = 'form') {
         this.input = input;
         this.appendTo = appendTo;
         this.id = id;
         this.classname = classname;
 
         // Create and append form element
-        const form = document.createElement('form')
+        const form = document.createElement('form');
         form.id = this.id;
         form.className = this.classname;
         document.querySelector(`#${this.appendTo}`).append(form);
