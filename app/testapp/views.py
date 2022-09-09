@@ -19,13 +19,15 @@ def login_view(request):
     pass
 
 
-def logout_view(request):
-    pass
-
-
 #######
 # API #
 #######
+
+def logout_api(request):
+    logout(request)
+    return JsonResponse({
+        "message": "Logged out."
+    }, status=200)
 
 def register_api(request):
     """Add registration to database"""

@@ -1,7 +1,8 @@
-////////////////
-// csrf token //
-////////////////
+//////////////////////
+// helper functions //
+//////////////////////
 
+// get csrf cookie from browser
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -18,30 +19,41 @@ function getCookie(name) {
     return cookieValue;
 }
 
-
-////////////////////
-// Event handlers //
-////////////////////
-function logout() {
-    console.log('logout button clicked');
-}
-
-function navEvent(id, pages, browserHistory) {
-    console.log(id);
-    // logout
-    if (id === 'logout_nav') {
-        logout();
-    }
-    // normal pages
+// show relevant page and update browserHistory state
+function showPage(navId, pages, browserHistory = null) {
+    console.log(navId);
     for (const [key, value] of Object.entries(pages)) {
-        if (key === id) {
+        if (key === navId) {
             value.show();
-            // update browser history state object
-            browserHistory.setPage(id.split('_')[0]);
+            if (browserHistory){
+                browserHistory.setPage(navId.split('_')[0]);
+            }
         } else {
             value.hide();
         }
     }
+}
+
+
+////////////////////
+// Event handlers //
+////////////////////
+function logout(pages, browserHistory) {
+    fetch('api/logout', {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result)
+    });
+    // then show home page
+}
+
+function navEvent(id, pages, browserHistory) {
+    if (id === 'logout_nav') {
+        logout(pages, browserHistory);
+    }
+    showPage(id, pages, browserHistory);
 }
 
 ////////////////////////
@@ -50,72 +62,64 @@ function navEvent(id, pages, browserHistory) {
 
 document.addEventListener('DOMContentLoaded', () => {
     // check localStorage for lastState
+    console.log(localStorage.getItem('lastState'));
     let lastState = '';
     if (localStorage.getItem('lastState')) {
         lastState = localStorage.getItem('lastState');
     }
 
 
-    // Pages content
+    // create page content
 
-    // create navigation menu objects
+    // navigation menu objects
     const navMenu = new NavMenu();
     const homeNavButton = new NavButton('Home', 'home_nav');
     const registerNavButton = new NavButton('Register', 'register_nav');
+    const loginNavButton = new NavButton('Login', 'login_nav');
     const logoutNavButton = new NavButton('Logout', 'logout_nav');
 
-    // create page objects
+    // page objects
     const homePage = new Page('home_page', 'page');
     const registerPage = new Page('register_page', 'page');
 
-    // create forms
+    // forms
     const registerInputForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
 
 
-    // State objects
+    // create state objects
 
-    // create browser history object
+    // browser history object
     const browserHistory = new BrowserHistory(lastState);
 
-    // dictionary linking navigation button ids to page objects
+    // link nav button ids to page objects object
     pages = {
         home_nav: homePage,
         register_nav: registerPage
     };
 
+
+    // setup page view
+
     // show default or browserHistory state page
     if (browserHistory.getPage() === '') {
-        // Show default page
         browserHistory.setPage('home');
         homePage.show();
     } else {
         // match browserHistory state to page
-        for (const [key, value] of Object.entries(pages)) {
-            if (key.split('_')[0] === browserHistory.getPage()) {
-                value.show();
-            }
-        }
+        showPage(`${browserHistory.getPage()}_nav` , pages, browserHistory)
     }
 
 
-    // On browser actions
+    // Browser actions
 
-    // on browser refresh button, save url to localStorage
+    // on browser refresh, save url to localStorage
     window.onbeforeunload = event => {
         localStorage.setItem('lastState', browserHistory.getPage())
     }
 
     // on browser back button
     window.onpopstate = e => {
-        page = e.state.page;
-        // match the popped value to entry in the pages object
-        for (const [key, value] of Object.entries(pages)) {
-            if (key.split('_')[0] === page) {
-                value.show();
-            } else {
-                value.hide();
-            }
-        }
+        showPage(`${e.state.page}_nav`, pages);
     }
 
 
@@ -123,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // navigation buttons event listeners
     document.querySelectorAll('.nav_button').forEach(button => {
-        button.onclick = function() {
+        button.onclick = () => {
             navEvent(button.id, pages, browserHistory)
         }
     });
@@ -136,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // get csrf token
         const csrftoken = getCookie('csrftoken');
 
-        // call api/register backend
+        // fetch api/register
         fetch('api/register', {
             method: 'POST',
             headers: {'X-CSRFToken': csrftoken},
