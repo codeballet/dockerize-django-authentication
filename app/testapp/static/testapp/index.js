@@ -2,7 +2,7 @@
 // helper functions //
 //////////////////////
 
-// get csrf cookie from browser
+// get csrf cookie
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -17,6 +17,19 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+// logout user and display homepage
+function logout(pages, browserHistory) {
+    fetch('api/logout', {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result)
+    });
+    // then show home page
+    showPage('home_nav', pages, browserHistory);
 }
 
 // show relevant page and update browserHistory state
@@ -34,20 +47,14 @@ function showPage(navId, pages, browserHistory = null) {
     }
 }
 
+// factor out fetch from registration form event listener (line 143)
+
+// create login fetch and api
+
 
 ////////////////////
 // Event handlers //
 ////////////////////
-function logout(pages, browserHistory) {
-    fetch('api/logout', {
-        method: 'GET'
-    })
-    .then(response => response.json())
-    .then(result => {
-        console.log(result)
-    });
-    // then show home page
-}
 
 function navEvent(id, pages, browserHistory) {
     if (id === 'logout_nav') {
@@ -55,6 +62,7 @@ function navEvent(id, pages, browserHistory) {
     }
     showPage(id, pages, browserHistory);
 }
+
 
 ////////////////////////
 // DOM Content Loaded //
@@ -69,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // create page content
+    // page content
 
     // navigation menu objects
     const navMenu = new NavMenu();
@@ -87,8 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
     const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
 
-    
-    // create state objects
+
+    // state objects
 
     // browser history object
     const browserHistory = new BrowserHistory(lastState);
@@ -105,8 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // show default or browserHistory state page
     if (browserHistory.getPage() === '') {
-        browserHistory.setPage('home');
-        homePage.show();
+        showPage('home_nav', pages, browserHistory);
     } else {
         // match browserHistory state to page
         showPage(`${browserHistory.getPage()}_nav` , pages, browserHistory)
