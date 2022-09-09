@@ -124,7 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: {'X-CSRFToken': csrftoken},
             mode: 'same-origin',
             body: JSON.stringify({
-                register_username: document.querySelector('#register_username').value
+                username: document.querySelector('#register_username').value,
+                email: document.querySelector('#register_email').value,
+                password: document.querySelector('#register_password').value,
+                confirmation: document.querySelector('#register_confirmation').value
             })
         })
         .then(response => response.json())

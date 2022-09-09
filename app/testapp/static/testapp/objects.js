@@ -24,10 +24,10 @@ const registerFormInput = {
         type: 'password',
         placeholder: 'Password'
     },
-    confirmPassword: {
-        id: 'register_confirm_password',
+    confirmation: {
+        id: 'register_confirmation',
         classname: 'form_field',
-        name: 'register_confirm_password',
+        name: 'register_confirmation',
         type: 'password',
         placeholder: 'Confirm password'
     },
@@ -40,7 +40,7 @@ const registerFormInput = {
 
 
 //////////////////
-// Site Classes //
+// Page Classes //
 //////////////////
 
 // Form class

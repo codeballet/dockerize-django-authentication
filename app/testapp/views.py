@@ -1,5 +1,6 @@
 import json
 from django.contrib.auth import authenticate, login, logout
+from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.http.response import JsonResponse
 from django.shortcuts import render
@@ -8,7 +9,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 from .models import User
 
-# Single page view
+
 @ensure_csrf_cookie
 def index(request):
     return render(request, "testapp/index.html")
@@ -16,26 +17,52 @@ def index(request):
 
 def login_view(request):
     pass
-    # if request.method == "POST":
-    #     # Attempt to sign user in
-    #     username = request.POST["username"]
-    #     password = request.POST["password"]
-    #     user = authenticate(request, username=username, password=password)
-
-    #     # Check if authentication successful
-    #     if user is not None:
-    #         login(request, user)
-    #         return HttpResponseRedirect(reverse("index"))
-    #     else:
-    #         return render(request, )
 
 
 def logout_view(request):
     pass
 
-# API
+
+#######
+# API #
+#######
+
 def register_api(request):
-    if request.method == "POST":
+    """Add registration to database"""
+    if request.method != "POST":
         return JsonResponse({
-            "message": "Form submitted successfully!"
-        }, status=200)
+            "error": "POST request required."
+        }, status=405)
+
+    try:
+        # get form field values
+        data = json.loads(request.body)
+        username = data["username"]
+        email = data["email"]
+        password = data["password"]
+        confirmation = data["confirmation"]
+
+        # ensure password matches confirmation
+        if password != confirmation:
+            return JsonResponse({
+                "message": "Password fields not matching."
+            }, status=406)
+
+    except:
+        return JsonResponse({
+            "error": "Could not extract data from request."
+        }, status=500)
+
+    try:
+        # create new user
+        user = User.objects.create_user(username, email, password)
+    except IntegrityError:
+        return JsonResponse({
+            "message": "Username already taken."
+        }, status=409)
+
+    # login(request, user)
+
+    return JsonResponse({
+        "message": f"{username} is logged in."
+    }, status=201)
