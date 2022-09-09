@@ -80,12 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // page objects
     const homePage = new Page('home_page', 'page');
+    const loginPage = new Page('login_page', 'page');
     const registerPage = new Page('register_page', 'page');
 
     // forms
-    const registerInputForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
+    const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
+    const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
 
-
+    
     // create state objects
 
     // browser history object
@@ -94,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // link nav button ids to page objects object
     pages = {
         home_nav: homePage,
+        login_nav: loginPage,
         register_nav: registerPage
     };
 

@@ -15,13 +15,12 @@ def index(request):
     return render(request, "testapp/index.html")
 
 
-def login_view(request):
-    pass
-
-
 #######
 # API #
 #######
+
+def login_api(request):
+    pass
 
 def logout_api(request):
     logout(request)

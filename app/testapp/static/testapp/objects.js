@@ -38,6 +38,28 @@ const registerFormInput = {
     }
 }
 
+const loginFormInput = {
+    username: {
+        id: 'login_username',
+        classname: 'form_field',
+        name: 'login_username',
+        type: 'text',
+        placeholder: 'Username'
+    },
+    password: {
+        id: 'login_password',
+        classname: 'form_field',
+        name: 'login_password',
+        type: 'password',
+        placeholder: 'Password'
+    },
+    submit: {
+        id: 'login_submit',
+        classname: 'button',
+        type: 'submit'
+    }
+}
+
 
 //////////////////
 // Page Classes //
