@@ -9,12 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
         lastState = localStorage.getItem('lastState');
     }
 
-    // Check localStorage for loggedIn
-    let loggedIn = 'no';
+    // Check localStorage if 'loggedIn'
     if (!localStorage.getItem('loggedIn')) {
-        localStorage.setItem('loggedIn', loggedIn)
-    } else {
-        loggedIn = localStorage.getItem('loggedIn');
+        localStorage.setItem('loggedIn', 'no')
     }
 
     // Create the browserHistory object
