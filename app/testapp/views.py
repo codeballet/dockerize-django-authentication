@@ -10,6 +10,10 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from .models import User
 
 
+#########
+# Views #
+#########
+
 @ensure_csrf_cookie
 def index(request):
     return render(request, "testapp/index.html")
@@ -20,15 +24,42 @@ def index(request):
 #######
 
 def login_api(request):
-    return JsonResponse({
-        "message": "Received login request"
-    })
+    if request.method != "POST":
+        return JsonResponse({
+            "error": "POST request required."
+        }, status=405)
+
+    # Acquire form field values
+    try:
+        data = json.loads(request.body)
+        username = data["username"]
+        password = data["password"]
+    except:
+        return JsonResponse({
+            "error": "Could not acquire data from request."
+        }, status=500)
+
+    # Attempt to authenticate user
+    user = authenticate(request, username=username, password=password)
+
+    # If authentication successful, sign in user
+    if user is not None:
+        login(request, user)
+        return JsonResponse({
+            "message": f"{user} logged in."
+        }, status=200)
+    else:
+        return JsonResponse({
+            "error": "Invalid username and/or password."
+        }, status=406)
+
 
 def logout_api(request):
     logout(request)
     return JsonResponse({
         "message": "Logged out."
     }, status=200)
+
 
 def register_api(request):
     """Add registration to database"""
@@ -48,11 +79,11 @@ def register_api(request):
         # ensure password matches confirmation
         if password != confirmation:
             return JsonResponse({
-                "message": "Password fields not matching."
+                "error": "Password fields not matching."
             }, status=406)
     except:
         return JsonResponse({
-            "error": "Could not extract data from request."
+            "error": "Could not acquire data from request."
         }, status=500)
 
     # create new user
@@ -60,7 +91,7 @@ def register_api(request):
         user = User.objects.create_user(username, email, password)
     except IntegrityError:
         return JsonResponse({
-            "message": "Username already taken."
+            "error": "Username already taken."
         }, status=409)
 
     # log in user
@@ -71,5 +102,5 @@ def register_api(request):
         }, status=201)
     except:
         return JsonResponse({
-            "message": "Failed to log in."
+            "error": "Failed to log in."
         }, status=500)

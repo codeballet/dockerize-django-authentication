@@ -56,10 +56,16 @@ function showPage(navId, pages, browserHistory = null) {
 // Event handlers //
 ////////////////////
 
+function loginFormEvent() {
+
+}
+
 function navEvent(id, pages, browserHistory) {
+    // if logout button clicked, log out user
     if (id === 'logout_nav') {
         logout(pages, browserHistory);
     }
+    // otherwise, show corresponding page
     showPage(id, pages, browserHistory);
 }
 
@@ -142,10 +148,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // login form event listener
+    document.querySelector('#login_form').onsubmit = e => {
+        e.preventDefault();
+        console.log('Submit login form')
+
+        // get csrf token
+        const csrftoken = getCookie('csrftoken');
+
+        // fetch api/login
+        fetch('api/login', {
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            mode: 'same-origin',
+            body: JSON.stringify({
+                username: document.querySelector('#login_username').value,
+                password: document.querySelector('#login_password').value,
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            console.log('Get session id cookie')
+            const sessionid = getCookie('sessionid');
+            console.log(`sessionid: ${sessionid}`)
+        });
+    }
+
     // registration form event listener
     document.querySelector('#register_form').onsubmit = e => {
         e.preventDefault();
-        console.log('Submitted registration form');
+        console.log('Submit registration form');
 
         // get csrf token
         const csrftoken = getCookie('csrftoken');
