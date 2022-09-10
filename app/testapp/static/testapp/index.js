@@ -19,6 +19,18 @@ const registerForm = new InputForm(registerFormInput, 'register_page', 'register
 const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
 
 
+//////////////////////
+// Global variables //
+//////////////////////
+
+// link nav button ids to page objects object
+pages = {
+    home_nav: homePage,
+    login_nav: loginPage,
+    register_nav: registerPage,
+};
+
+
 ////////////////////////
 // DOM Content Loaded //
 ////////////////////////
@@ -57,13 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // browser history object
     const browserHistory = new BrowserHistory(lastState);
-
-    // link nav button ids to page objects object
-    pages = {
-        home_nav: homePage,
-        login_nav: loginPage,
-        register_nav: registerPage,
-    };
 
 
     // View content
