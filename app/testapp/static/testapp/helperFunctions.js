@@ -49,20 +49,3 @@ function showPage(navId, browserHistory) {
         }
     }
 }
-
-// show nav buttons depending on loggedIn status
-// function showNav(homeNavButton, registerNavButton, loginNavButton, logoutNavButton) {
-//     if (localStorage.getItem('loggedIn')) {
-//         homeNavButton.show();
-//         logoutNavButton.show();
-//     } else {
-//         // logged out
-//         homeNavButton.show();
-//         loginNavButton.show();
-//         registerNavButton.show();
-//     }
-// }
-
-// factor out fetch from registration form event listener (line 143)
-
-// create login fetch and api
