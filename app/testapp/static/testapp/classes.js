@@ -50,7 +50,7 @@ class NavButton {
         navButton.className = this.classname;
         navButton.textContent = this.textContent;
         document.querySelector('#nav').append(navButton);
-        // document.querySelector(`#${this.id}`).style.display = 'none';
+        document.querySelector(`#${this.id}`).style.display = 'none';
     }
     hide() {
         document.querySelector(`#${this.id}`).style.display = 'none';
@@ -87,7 +87,7 @@ class Page {
         div.id = this.id;
         div.className = this.className;
         document.querySelector('.container').append(div);
-        // document.querySelector(`#${this.id}`).style.display = 'none';
+        document.querySelector(`#${this.id}`).style.display = 'none';
     }
     hide() {
         document.querySelector(`#${this.id}`).style.display = 'none';

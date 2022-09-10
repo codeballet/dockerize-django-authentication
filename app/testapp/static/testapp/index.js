@@ -3,6 +3,7 @@
 ////////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log(localStorage.getItem('loggedIn'));
     // Check localStorage for lastState
     let lastState = '';
     if (localStorage.getItem('lastState')) {
@@ -10,8 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Check localStorage for loggedIn
-    let loggedIn = false;
-    if (localStorage.getItem('loggedIn')) {
+    let loggedIn = 'no';
+    if (!localStorage.getItem('loggedIn')) {
+        localStorage.setItem('loggedIn', loggedIn)
+    } else {
         loggedIn = localStorage.getItem('loggedIn');
     }
 
@@ -32,10 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     REGISTER_FORM.append();
     LOGIN_FORM.append();
 
-    // navigation
-    // showNav(HOME_NAV_BUTTON, REGISTER_NAV_BUTTON, LOGIN_NAV_BUTTON, LOGOUT_NAV_BUTTON);
-
-    // default or browserHistory state page
+    // Show default or browserHistory state page
     if (browserHistory.getPage() === '') {
         showPage('home_nav', browserHistory);
     } else {
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // login form event listener
     document.querySelector('#login_form').onsubmit = e => {
         e.preventDefault();
-        loginEvent();
+        loginEvent(browserHistory);
     }
 
     // registration form event listener

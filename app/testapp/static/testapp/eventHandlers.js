@@ -2,7 +2,7 @@
 // Event handlers //
 ////////////////////
 
-function loginEvent() {
+function loginEvent(browserHistory) {
     // get csrf token
     const csrftoken = getCookie('csrftoken');
 
@@ -20,12 +20,16 @@ function loginEvent() {
         console.log(response.status);
         if (response.status === 200) {
             // logged in, set localStorate
-            localStorage.setItem('loggedIn', true);
+            localStorage.setItem('loggedIn', 'yes');
         }
         return response.json();
     })
     .then(result => {
         console.log(result);
+        // show home page if login successful
+        if (localStorage.getItem('loggedIn') === 'yes') {
+            showPage('home_nav', browserHistory);
+        }
     });
 }
 
