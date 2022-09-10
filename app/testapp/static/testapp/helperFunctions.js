@@ -20,7 +20,7 @@ function getCookie(name) {
 }
 
 // logout user and display homepage
-function logout(pages, browserHistory) {
+function logout(browserHistory) {
     fetch('api/logout', {
         method: 'GET'
     })
@@ -35,18 +35,17 @@ function logout(pages, browserHistory) {
         console.log(result)
     });
     // then show home page
-    showPage('home_nav', pages, browserHistory);
+    showPage('home_nav', browserHistory);
 }
 
 // show relevant page and update browserHistory state
-function showPage(navId, pages, browserHistory = null) {
+function showPage(navId, browserHistory) {
     console.log(navId);
-    for (const [key, value] of Object.entries(pages)) {
+    for (const [key, value] of Object.entries(PAGES)) {
         if (key === navId) {
             value.show();
-            if (browserHistory){
-                browserHistory.setPage(navId.split('_')[0]);
-            }
+            console.log(`in showPage, browserhistory: ${browserHistory.getPage()}`)
+            browserHistory.setPage(navId.split('_')[0]);
         } else {
             value.hide();
         }

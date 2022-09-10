@@ -1,22 +1,22 @@
 ////////////////////
-// Create objects //
+// Global objects //
 ////////////////////
 
 // navigation menu objects
-const navMenu = new NavMenu();
-const homeNavButton = new NavButton('Home', 'home_nav');
-const registerNavButton = new NavButton('Register', 'register_nav');
-const loginNavButton = new NavButton('Login', 'login_nav');
-const logoutNavButton = new NavButton('Logout', 'logout_nav');
+const NAV_MENU = new NavMenu();
+const HOME_NAV_BUTTON = new NavButton('Home', 'home_nav');
+const REGISTER_NAV_BUTTON = new NavButton('Register', 'register_nav');
+const LOGIN_NAV_BUTTON = new NavButton('Login', 'login_nav');
+const LOGOUT_NAV_BUTTON = new NavButton('Logout', 'logout_nav');
 
 // page objects
-const homePage = new Page('home_page', 'page');
-const loginPage = new Page('login_page', 'page');
-const registerPage = new Page('register_page', 'page');
+const HOME_PAGE = new Page('home_page', 'page');
+const LOGIN_PAGE = new Page('login_page', 'page');
+const REGISTER_PAGE = new Page('register_page', 'page');
 
 // forms
-const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
-const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
+const REGISTER_FORM = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
+const LOGIN_FORM = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
 
 
 //////////////////////
@@ -24,10 +24,10 @@ const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'for
 //////////////////////
 
 // link nav button ids to page objects object
-pages = {
-    home_nav: homePage,
-    login_nav: loginPage,
-    register_nav: registerPage,
+PAGES = {
+    home_nav: HOME_PAGE,
+    login_nav: LOGIN_PAGE,
+    register_nav: REGISTER_PAGE,
 };
 
 
@@ -52,18 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(`loggedIn: ${loggedIn}`);
 
     // Append content
-    navMenu.append();
-    homeNavButton.append();
-    registerNavButton.append();
-    loginNavButton.append();
-    logoutNavButton.append();
+    NAV_MENU.append();
+    HOME_NAV_BUTTON.append();
+    REGISTER_NAV_BUTTON.append();
+    LOGIN_NAV_BUTTON.append();
+    LOGOUT_NAV_BUTTON.append();
 
-    homePage.append();
-    loginPage.append();
-    registerPage.append();
+    HOME_PAGE.append();
+    LOGIN_PAGE.append();
+    REGISTER_PAGE.append();
 
-    registerForm.append();
-    loginForm.append();
+    REGISTER_FORM.append();
+    LOGIN_FORM.append();
 
     // Create state objects
 
@@ -74,14 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // View content
 
     // navigation
-    // showNav(homeNavButton, registerNavButton, loginNavButton, logoutNavButton);
+    // showNav(HOME_NAV_BUTTON, REGISTER_NAV_BUTTON, LOGIN_NAV_BUTTON, LOGOUT_NAV_BUTTON);
 
     // default or browserHistory state page
     if (browserHistory.getPage() === '') {
-        showPage('home_nav', pages, browserHistory);
+        showPage('home_nav', browserHistory);
     } else {
         // match browserHistory state to page
-        showPage(`${browserHistory.getPage()}_nav` , pages, browserHistory)
+        showPage(`${browserHistory.getPage()}_nav`, browserHistory)
     }
 
 
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // on browser back button
     window.onpopstate = e => {
-        showPage(`${e.state.page}_nav`, pages);
+        showPage(`${e.state.page}_nav`, browserHistory);
     }
 
 
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // navigation buttons event listeners
     document.querySelectorAll('.nav_button').forEach(button => {
         button.onclick = () => {
-            navEvent(button.id, pages, browserHistory)
+            navEvent(button.id, browserHistory)
         }
     });
 

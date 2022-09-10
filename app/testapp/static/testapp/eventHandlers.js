@@ -6,11 +6,11 @@ function loginFormEvent() {
 
 }
 
-function navEvent(id, pages, browserHistory) {
+function navEvent(id, browserHistory) {
     // if logout button clicked, log out user
     if (id === 'logout_nav') {
-        logout(pages, browserHistory);
+        logout(browserHistory);
     }
     // otherwise, show corresponding page
-    showPage(id, pages, browserHistory);
+    showPage(id, browserHistory);
 }
