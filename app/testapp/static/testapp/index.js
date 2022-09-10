@@ -3,22 +3,19 @@
 ////////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
-    // check localStorage for lastState
-    console.log(`localStorage lastState: ${localStorage.getItem('lastState')}`);
+    // Check localStorage for lastState
     let lastState = '';
     if (localStorage.getItem('lastState')) {
         lastState = localStorage.getItem('lastState');
     }
 
-    // check localStorage for loggedIn
-    console.log(`localStorage loggedIn: ${localStorage.getItem('loggedIn')}`);
+    // Check localStorage for loggedIn
     let loggedIn = false;
     if (localStorage.getItem('loggedIn')) {
         loggedIn = localStorage.getItem('loggedIn');
     }
-    console.log(`loggedIn: ${loggedIn}`);
 
-    // Append content
+    // Append page contents
     NAV_MENU.append();
     HOME_NAV_BUTTON.append();
     REGISTER_NAV_BUTTON.append();
@@ -32,13 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     REGISTER_FORM.append();
     LOGIN_FORM.append();
 
-    // Create state objects
-
-    // browser history object
+    // Create browser history object
     const browserHistory = new BrowserHistory(lastState);
-
-
-    // View content
 
     // navigation
     // showNav(HOME_NAV_BUTTON, REGISTER_NAV_BUTTON, LOGIN_NAV_BUTTON, LOGOUT_NAV_BUTTON);
@@ -51,9 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showPage(`${browserHistory.getPage()}_nav`, browserHistory)
     }
 
-
-    // Browser actions
-
     // on browser refresh, save url to localStorage
     window.onbeforeunload = event => {
         localStorage.setItem('lastState', browserHistory.getPage())
@@ -63,9 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onpopstate = e => {
         showPage(`${e.state.page}_nav`, browserHistory);
     }
-
-
-    // Event listeners
 
     // navigation buttons event listeners
     document.querySelectorAll('.nav_button').forEach(button => {
