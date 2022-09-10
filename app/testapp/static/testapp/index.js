@@ -1,19 +1,22 @@
 ////////////////////
-// Event handlers //
+// Create objects //
 ////////////////////
 
-function loginFormEvent() {
+// navigation menu objects
+const navMenu = new NavMenu();
+const homeNavButton = new NavButton('Home', 'home_nav');
+const registerNavButton = new NavButton('Register', 'register_nav');
+const loginNavButton = new NavButton('Login', 'login_nav');
+const logoutNavButton = new NavButton('Logout', 'logout_nav');
 
-}
+// page objects
+const homePage = new Page('home_page', 'page');
+const loginPage = new Page('login_page', 'page');
+const registerPage = new Page('register_page', 'page');
 
-function navEvent(id, pages, browserHistory) {
-    // if logout button clicked, log out user
-    if (id === 'logout_nav') {
-        logout(pages, browserHistory);
-    }
-    // otherwise, show corresponding page
-    showPage(id, pages, browserHistory);
-}
+// forms
+const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
+const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
 
 
 ////////////////////////
@@ -35,27 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loggedIn = localStorage.getItem('loggedIn');
     }
     console.log(`loggedIn: ${loggedIn}`);
-
-
-
-    // Create content objects
-
-    // navigation menu objects
-    const navMenu = new NavMenu();
-    const homeNavButton = new NavButton('Home', 'home_nav');
-    const registerNavButton = new NavButton('Register', 'register_nav');
-    const loginNavButton = new NavButton('Login', 'login_nav');
-    const logoutNavButton = new NavButton('Logout', 'logout_nav');
-
-    // page objects
-    const homePage = new Page('home_page', 'page');
-    const loginPage = new Page('login_page', 'page');
-    const registerPage = new Page('register_page', 'page');
-
-    // forms
-    const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
-    const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
-
 
     // Append content
     navMenu.append();
