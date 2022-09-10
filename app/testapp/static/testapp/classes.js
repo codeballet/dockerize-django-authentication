@@ -107,11 +107,11 @@ class BrowserHistory {
     constructor(page = '') {
         this.page = page
     }
-    setPage(page) {
+    set currentPage(page) {
         this.page = page;
         history.pushState({page: this.page}, "", this.page);
     }
-    getPage() {
+    get currentPage() {
         // gets last part of current url
         const url = window.location.href;
         const url_list = url.split('/');

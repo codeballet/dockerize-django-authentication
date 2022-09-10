@@ -21,22 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
     appendContent();
 
     // Decide which page to show
-    if (browserHistory.getPage() === '') {
+    if (browserHistory.currentPage === '') {
         // default page
         showPage('home_nav', browserHistory);
     } else {
         // match page to browserHistory state
-        showPage(`${browserHistory.getPage()}_nav`, browserHistory)
+        showPage(`${browserHistory.currentPage}_nav`, browserHistory)
     }
 
     // On browser refresh button click, save url to localStorage
     window.onbeforeunload = event => {
-        localStorage.setItem('lastState', browserHistory.getPage())
+        localStorage.setItem('lastState', browserHistory.currentPage)
     }
 
     // On browser back button click
     window.onpopstate = e => {
-        showPage(`${e.state.page}_nav`, browserHistory);
+        showPage(`${e.state.page}_nav`, browserHistory, 'pop');
     }
 
     // Create navigation buttons event listeners

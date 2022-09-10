@@ -72,12 +72,15 @@ function showNav() {
 }
 
 // Show relevant page and update browserHistory state
-function showPage(navId, browserHistory) {
+function showPage(navId, browserHistory, source = '') {
     showNav();
     for (const [key, value] of Object.entries(PAGES)) {
         if (key === navId) {
             value.show();
-            browserHistory.setPage(navId.split('_')[0]);
+            // only update browserHistory if browser backbutton not used
+            if (source !== 'pop') {
+                browserHistory.currentPage = navId.split('_')[0];
+            }
         } else {
             value.hide();
         }
