@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         loggedIn = localStorage.getItem('loggedIn');
     }
 
+    // Create browser history object
+    const browserHistory = new BrowserHistory(lastState);
+
     // Append page contents
     NAV_MENU.append();
     HOME_NAV_BUTTON.append();
@@ -28,9 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     REGISTER_FORM.append();
     LOGIN_FORM.append();
-
-    // Create browser history object
-    const browserHistory = new BrowserHistory(lastState);
 
     // navigation
     // showNav(HOME_NAV_BUTTON, REGISTER_NAV_BUTTON, LOGIN_NAV_BUTTON, LOGOUT_NAV_BUTTON);
