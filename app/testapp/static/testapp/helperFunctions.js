@@ -40,11 +40,9 @@ function logout(browserHistory) {
 
 // show relevant page and update browserHistory state
 function showPage(navId, browserHistory) {
-    console.log(navId);
     for (const [key, value] of Object.entries(PAGES)) {
         if (key === navId) {
             value.show();
-            console.log(`in showPage, browserhistory: ${browserHistory.getPage()}`)
             browserHistory.setPage(navId.split('_')[0]);
         } else {
             value.hide();

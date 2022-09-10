@@ -98,7 +98,7 @@ def register_api(request):
     try:
         login(request, user)
         return JsonResponse({
-            "message": f"{username} is logged in."
+            "message": f"{username} is registered and logged in."
         }, status=201)
     except:
         return JsonResponse({
