@@ -12,6 +12,10 @@ The overall aim is for the app to be production ready, using the following compo
 - Postgres as database.
 - Certbot with Let's Encrypt for HTTPS encryption.
 
+## The Frontend: Modularity with vanilla JavaScript
+
+The frontend is coded solely in JavaScript, using an object oriented approach. The aim is to keep the code modular and re-useable. Thus, there are some conceptual similarities to how React components work, while still keeping a strict separation between the JavaScript code and the CSS styling.
+
 ## Start a new Django project
 
 Here are some brief instructions for how to get going with your own project.

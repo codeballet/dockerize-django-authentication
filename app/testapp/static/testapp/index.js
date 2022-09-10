@@ -1,9 +1,8 @@
-////////////////////////
-// DOM Content Loaded //
-////////////////////////
+/////////////////////////////////////
+// DOMContentLoaded event listener //
+/////////////////////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log(localStorage.getItem('loggedIn'));
     // Check localStorage for lastState
     let lastState = '';
     if (localStorage.getItem('lastState')) {
