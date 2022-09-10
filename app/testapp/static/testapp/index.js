@@ -24,7 +24,13 @@ function logout(pages, browserHistory) {
     fetch('api/logout', {
         method: 'GET'
     })
-    .then(response => response.json())
+    .then(response => {
+        if (response.status === 200) {
+            // logged out, set localStorage
+            localStorage.setItem('loggedIn', false);
+        }
+        return response.json()
+    })
     .then(result => {
         console.log(result)
     });
@@ -76,11 +82,20 @@ function navEvent(id, pages, browserHistory) {
 
 document.addEventListener('DOMContentLoaded', () => {
     // check localStorage for lastState
-    console.log(localStorage.getItem('lastState'));
+    console.log(`localStorage lastState: ${localStorage.getItem('lastState')}`);
     let lastState = '';
     if (localStorage.getItem('lastState')) {
         lastState = localStorage.getItem('lastState');
     }
+
+    // check localStorage for loggedIn
+    console.log(`localStorage loggedIn: ${localStorage.getItem('loggedIn')}`);
+    let loggedIn = false;
+    if (localStorage.getItem('loggedIn')) {
+        loggedIn = localStorage.getItem('loggedIn');
+    }
+    console.log(`loggedIn: ${loggedIn}`);
+
 
 
     // page content
@@ -115,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // setup page view
+    // set which page to view
 
     // show default or browserHistory state page
     if (browserHistory.getPage() === '') {
@@ -166,12 +181,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 password: document.querySelector('#login_password').value,
             })
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log(response.status);
+            if (response.status === 200) {
+                // logged in, set localStorate
+                localStorage.setItem('loggedIn', true);
+            }
+            return response.json();
+        })
         .then(result => {
             console.log(result);
-            console.log('Get session id cookie')
-            const sessionid = getCookie('sessionid');
-            console.log(`sessionid: ${sessionid}`)
         });
     }
 
