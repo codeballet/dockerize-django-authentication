@@ -2,6 +2,7 @@
 // Event handlers //
 ////////////////////
 
+// On submitting the login form
 function loginEvent(browserHistory) {
     // get csrf token
     const csrftoken = getCookie('csrftoken');
@@ -33,6 +34,7 @@ function loginEvent(browserHistory) {
     });
 }
 
+// On clicking a navigation button
 function navEvent(id, browserHistory) {
     // if logout button clicked, log out user
     if (id === 'logout_nav') {
@@ -42,6 +44,7 @@ function navEvent(id, browserHistory) {
     showPage(id, browserHistory);
 }
 
+// On submitting the registration form
 function registerEvent() {
     // get csrf token
     const csrftoken = getCookie('csrftoken');

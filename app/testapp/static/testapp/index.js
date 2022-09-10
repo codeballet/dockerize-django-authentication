@@ -18,55 +18,45 @@ document.addEventListener('DOMContentLoaded', () => {
         loggedIn = localStorage.getItem('loggedIn');
     }
 
-    // Create browser history object
+    // Create the browserHistory object
     const browserHistory = new BrowserHistory(lastState);
 
-    // Append page contents
-    NAV_MENU.append();
-    HOME_NAV_BUTTON.append();
-    REGISTER_NAV_BUTTON.append();
-    LOGIN_NAV_BUTTON.append();
-    LOGOUT_NAV_BUTTON.append();
+    // Append all HTML content to the base container
+    appendContent();
 
-    HOME_PAGE.append();
-    LOGIN_PAGE.append();
-    REGISTER_PAGE.append();
-
-    REGISTER_FORM.append();
-    LOGIN_FORM.append();
-
-    // Show default or browserHistory state page
+    // Decide which page to show
     if (browserHistory.getPage() === '') {
+        // default page
         showPage('home_nav', browserHistory);
     } else {
-        // match browserHistory state to page
+        // match page to browserHistory state
         showPage(`${browserHistory.getPage()}_nav`, browserHistory)
     }
 
-    // on browser refresh, save url to localStorage
+    // On browser refresh button click, save url to localStorage
     window.onbeforeunload = event => {
         localStorage.setItem('lastState', browserHistory.getPage())
     }
 
-    // on browser back button
+    // On browser back button click
     window.onpopstate = e => {
         showPage(`${e.state.page}_nav`, browserHistory);
     }
 
-    // navigation buttons event listeners
+    // Create navigation buttons event listeners
     document.querySelectorAll('.nav_button').forEach(button => {
         button.onclick = () => {
             navEvent(button.id, browserHistory)
         }
     });
 
-    // login form event listener
+    // Create login form event listener
     document.querySelector('#login_form').onsubmit = e => {
         e.preventDefault();
         loginEvent(browserHistory);
     }
 
-    // registration form event listener
+    // Create registration form event listener
     document.querySelector('#register_form').onsubmit = e => {
         e.preventDefault();
         registerEvent();

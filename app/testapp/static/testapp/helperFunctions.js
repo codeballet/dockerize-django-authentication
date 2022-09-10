@@ -2,7 +2,23 @@
 // helper functions //
 //////////////////////
 
-// get csrf cookie
+// Append all elements to HTML page
+function appendContent() {
+    NAV_MENU.append();
+    HOME_NAV_BUTTON.append();
+    REGISTER_NAV_BUTTON.append();
+    LOGIN_NAV_BUTTON.append();
+    LOGOUT_NAV_BUTTON.append();
+
+    HOME_PAGE.append();
+    LOGIN_PAGE.append();
+    REGISTER_PAGE.append();
+
+    REGISTER_FORM.append();
+    LOGIN_FORM.append();
+}
+
+// Get csrf cookie
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -19,7 +35,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// logout user and display homepage
+// Logout user
 function logout(browserHistory) {
     fetch('api/logout', {
         method: 'GET'
@@ -40,7 +56,7 @@ function logout(browserHistory) {
     });
 }
 
-// show relevant nav buttons
+// Show relevant nav buttons
 function showNav() {
     HOME_NAV_BUTTON.show();
     if (localStorage.getItem('loggedIn') === 'yes') {
@@ -55,7 +71,7 @@ function showNav() {
     }
 }
 
-// show relevant page and update browserHistory state
+// Show relevant page and update browserHistory state
 function showPage(navId, browserHistory) {
     showNav();
     for (const [key, value] of Object.entries(PAGES)) {
