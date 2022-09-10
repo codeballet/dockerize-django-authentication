@@ -9,7 +9,8 @@ class InputForm {
         this.appendTo = appendTo;
         this.id = id;
         this.classname = classname;
-
+    }
+    append() {
         // Create and append form element
         const form = document.createElement('form');
         form.id = this.id;
@@ -41,13 +42,15 @@ class NavButton {
         this.textContent = textContent;
         this.id = id;
         this.classname = className;
-    
+    }
+    append() {
         // create and append nav button
         const navButton = document.createElement('button');
         navButton.id = this.id;
         navButton.className = this.classname;
         navButton.textContent = this.textContent;
         document.querySelector('#nav').append(navButton);
+        // document.querySelector(`#${this.id}`).style.display = 'none';
     }
     hide() {
         document.querySelector(`#${this.id}`).style.display = 'none';
@@ -63,11 +66,11 @@ class NavMenu {
     constructor(id = 'nav', className = 'page') {
         this.id = id;
         this.className = className
-    
+    }
+    append() {
         const div = document.createElement('div');
         div.id = this.id
-        div.className = this.className
-        
+        div.className = this.className    
         document.querySelector('.container').append(div);
     }
 }
@@ -78,13 +81,13 @@ class Page {
     constructor(id, className) {
         this.id = id;
         this.className = className;
-    
+    }
+    append() {
         const div = document.createElement('div');
         div.id = this.id;
         div.className = this.className;
-        
         document.querySelector('.container').append(div);
-        document.querySelector(`#${this.id}`).style.display = 'none';
+        // document.querySelector(`#${this.id}`).style.display = 'none';
     }
     hide() {
         document.querySelector(`#${this.id}`).style.display = 'none';

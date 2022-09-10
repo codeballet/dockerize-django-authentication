@@ -53,6 +53,19 @@ function showPage(navId, pages, browserHistory = null) {
     }
 }
 
+// show nav buttons depending on loggedIn status
+// function showNav(homeNavButton, registerNavButton, loginNavButton, logoutNavButton) {
+//     if (localStorage.getItem('loggedIn')) {
+//         homeNavButton.show();
+//         logoutNavButton.show();
+//     } else {
+//         // logged out
+//         homeNavButton.show();
+//         loginNavButton.show();
+//         registerNavButton.show();
+//     }
+// }
+
 // factor out fetch from registration form event listener (line 143)
 
 // create login fetch and api
@@ -98,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    // page content
+    // Create content objects
 
     // navigation menu objects
     const navMenu = new NavMenu();
@@ -117,7 +130,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
 
 
-    // state objects
+    // Append content
+    navMenu.append();
+    homeNavButton.append();
+    registerNavButton.append();
+    loginNavButton.append();
+    logoutNavButton.append();
+
+    homePage.append();
+    loginPage.append();
+    registerPage.append();
+
+    registerForm.append();
+    loginForm.append();
+
+    // Create state objects
 
     // browser history object
     const browserHistory = new BrowserHistory(lastState);
@@ -126,13 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
     pages = {
         home_nav: homePage,
         login_nav: loginPage,
-        register_nav: registerPage
+        register_nav: registerPage,
     };
 
 
-    // set which page to view
+    // View content
 
-    // show default or browserHistory state page
+    // navigation
+    // showNav(homeNavButton, registerNavButton, loginNavButton, logoutNavButton);
+
+    // default or browserHistory state page
     if (browserHistory.getPage() === '') {
         showPage('home_nav', pages, browserHistory);
     } else {
