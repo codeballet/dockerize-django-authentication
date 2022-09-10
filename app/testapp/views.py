@@ -20,7 +20,9 @@ def index(request):
 #######
 
 def login_api(request):
-    pass
+    return JsonResponse({
+        "message": "Received login request"
+    })
 
 def logout_api(request):
     logout(request)
@@ -35,8 +37,8 @@ def register_api(request):
             "error": "POST request required."
         }, status=405)
 
+    # acquire form field values
     try:
-        # get form field values
         data = json.loads(request.body)
         username = data["username"]
         email = data["email"]
@@ -48,22 +50,26 @@ def register_api(request):
             return JsonResponse({
                 "message": "Password fields not matching."
             }, status=406)
-
     except:
         return JsonResponse({
             "error": "Could not extract data from request."
         }, status=500)
 
+    # create new user
     try:
-        # create new user
         user = User.objects.create_user(username, email, password)
     except IntegrityError:
         return JsonResponse({
             "message": "Username already taken."
         }, status=409)
 
-    # login(request, user)
-
-    return JsonResponse({
-        "message": f"{username} is logged in."
-    }, status=201)
+    # log in user
+    try:
+        login(request, user)
+        return JsonResponse({
+            "message": f"{username} is logged in."
+        }, status=201)
+    except:
+        return JsonResponse({
+            "message": "Failed to log in."
+        }, status=500)
