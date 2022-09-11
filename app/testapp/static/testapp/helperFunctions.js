@@ -35,6 +35,38 @@ function getCookie(name) {
     return cookieValue;
 }
 
+// Login user
+function login(browserHistory) {
+    // get csrf token
+    const csrftoken = getCookie('csrftoken');
+
+    // fetch api/login
+    fetch('api/login', {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin',
+        body: JSON.stringify({
+            username: document.querySelector('#login_username').value,
+            password: document.querySelector('#login_password').value,
+        })
+    })
+    .then(response => {
+        console.log(response.status);
+        if (response.status === 200) {
+            // logged in, set localStorate
+            localStorage.setItem('loggedIn', 'yes');
+        }
+        return response.json();
+    })
+    .then(result => {
+        console.log(result);
+        // show home page if login successful
+        if (localStorage.getItem('loggedIn') === 'yes') {
+            showPage('home_nav', browserHistory);
+        }
+    });
+}
+
 // Logout user
 function logout(browserHistory) {
     fetch('api/logout', {
