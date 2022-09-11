@@ -55,6 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create registration form event listener
     document.querySelector('#register_form').onsubmit = e => {
         e.preventDefault();
-        registerEvent();
+        registerEvent(browserHistory);
     }
 });
