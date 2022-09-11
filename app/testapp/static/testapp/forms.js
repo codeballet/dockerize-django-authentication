@@ -4,35 +4,35 @@
 
 const registerFormInput = {
     username: {
-        id: 'register_username',
-        classname: 'form_field',
-        name: 'register_username',
+        id: 'register-username',
+        classname: 'form-field',
+        name: 'registerUsername',
         type: 'text',
         placeholder: 'Username'
     },
     email: {
-        id: 'register_email',
-        classname: 'form_field',
-        name: 'register_email',
+        id: 'register-email',
+        classname: 'form-field',
+        name: 'registerEmail',
         type: 'text',
         placeholder: 'Email'
     },
     password: {
-        id: 'register_password',
-        classname: 'form_field',
-        name: 'register_password',
+        id: 'register-password',
+        classname: 'form-field',
+        name: 'registerPassword',
         type: 'password',
         placeholder: 'Password'
     },
     confirmation: {
-        id: 'register_confirmation',
-        classname: 'form_field',
-        name: 'register_confirmation',
+        id: 'register-confirmation',
+        classname: 'form-field',
+        name: 'registerConfirmation',
         type: 'password',
         placeholder: 'Confirm password'
     },
     submit: {
-        id: 'register_submit',
+        id: 'register-submit',
         classname: 'button',
         type: 'submit'
     }
@@ -40,21 +40,21 @@ const registerFormInput = {
 
 const loginFormInput = {
     username: {
-        id: 'login_username',
-        classname: 'form_field',
-        name: 'login_username',
+        id: 'login-username',
+        classname: 'form-field',
+        name: 'loginUsername',
         type: 'text',
         placeholder: 'Username'
     },
     password: {
-        id: 'login_password',
-        classname: 'form_field',
-        name: 'login_password',
+        id: 'login-password',
+        classname: 'form-field',
+        name: 'loginPassword',
         type: 'password',
         placeholder: 'Password'
     },
     submit: {
-        id: 'login_submit',
+        id: 'login-submit',
         classname: 'button',
         type: 'submit'
     }
