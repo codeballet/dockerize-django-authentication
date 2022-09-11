@@ -13,8 +13,8 @@ function loginEvent(browserHistory) {
         headers: {'X-CSRFToken': csrftoken},
         mode: 'same-origin',
         body: JSON.stringify({
-            username: document.querySelector('#login_username').value,
-            password: document.querySelector('#login_password').value,
+            username: document.querySelector('#login-username').value,
+            password: document.querySelector('#login-password').value,
         })
     })
     .then(response => {
@@ -55,10 +55,10 @@ function registerEvent() {
         headers: {'X-CSRFToken': csrftoken},
         mode: 'same-origin',
         body: JSON.stringify({
-            username: document.querySelector('#register_username').value,
-            email: document.querySelector('#register_email').value,
-            password: document.querySelector('#register_password').value,
-            confirmation: document.querySelector('#register_confirmation').value
+            username: document.querySelector('#register-username').value,
+            email: document.querySelector('#register-email').value,
+            password: document.querySelector('#register-password').value,
+            confirmation: document.querySelector('#register-confirmation').value
         })
     })
     .then(response => response.json())

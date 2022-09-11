@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Create login form event listener
-    document.querySelector('#login_form').onsubmit = e => {
+    document.querySelector('#login-form').onsubmit = e => {
         e.preventDefault();
         loginEvent(browserHistory);
     }
 
     // Create registration form event listener
-    document.querySelector('#register_form').onsubmit = e => {
+    document.querySelector('#register-form').onsubmit = e => {
         e.preventDefault();
         registerEvent();
     }
