@@ -29,3 +29,10 @@ PAGES = {
     login_nav: LOGIN_PAGE,
     register_nav: REGISTER_PAGE,
 };
+
+
+/////////////////////////////////
+// browserHistory state object //
+/////////////////////////////////
+
+const browserHistory = new BrowserHistory(localStorage.getItem('lastState'));
