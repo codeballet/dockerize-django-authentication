@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create navigation buttons event listeners
     document.querySelectorAll('.nav_button').forEach(button => {
         button.onclick = () => {
-            navEvent(button.id)
+            navEvent(button.id);
         }
     });
 
