@@ -45,12 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create login form event listener
     document.querySelector('#login_form').onsubmit = e => {
         e.preventDefault();
-        loginEvent();
+        loginEvent(e);
     }
 
     // Create registration form event listener
     document.querySelector('#register_form').onsubmit = e => {
         e.preventDefault();
-        registerEvent();
+        registerEvent(e);
     }
 });

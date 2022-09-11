@@ -6,28 +6,28 @@ const registerFormInput = {
     username: {
         id: 'register_username',
         classname: 'form_field',
-        name: 'registerUsername',
+        name: 'username',
         type: 'text',
         placeholder: 'Username'
     },
     email: {
         id: 'register_email',
         classname: 'form_field',
-        name: 'registerEmail',
+        name: 'email',
         type: 'text',
         placeholder: 'Email'
     },
     password: {
         id: 'register_password',
         classname: 'form_field',
-        name: 'registerPassword',
+        name: 'password',
         type: 'password',
         placeholder: 'Password'
     },
     confirmation: {
         id: 'register_confirmation',
         classname: 'form_field',
-        name: 'registerConfirmation',
+        name: 'confirmation',
         type: 'password',
         placeholder: 'Confirm password'
     },
@@ -42,14 +42,14 @@ const loginFormInput = {
     username: {
         id: 'login_username',
         classname: 'form_field',
-        name: 'loginUsername',
+        name: 'username',
         type: 'text',
         placeholder: 'Username'
     },
     password: {
         id: 'login_password',
         classname: 'form_field',
-        name: 'loginPassword',
+        name: 'password',
         type: 'password',
         placeholder: 'Password'
     },

@@ -36,7 +36,7 @@ function getCookie(name) {
 }
 
 // Login user
-function login() {
+function login(username, password) {
     // get csrf token
     const csrftoken = getCookie('csrftoken');
 
@@ -46,8 +46,8 @@ function login() {
         headers: {'X-CSRFToken': csrftoken},
         mode: 'same-origin',
         body: JSON.stringify({
-            username: document.querySelector('#login_username').value,
-            password: document.querySelector('#login_password').value,
+            username: username,
+            password: password,
         })
     })
     .then(response => {
@@ -88,7 +88,7 @@ function logout() {
     });
 }
 
-function register() {
+function register(username, email, password, confirmation) {
     // get csrf token
     const csrftoken = getCookie('csrftoken');
 
@@ -98,10 +98,10 @@ function register() {
         headers: {'X-CSRFToken': csrftoken},
         mode: 'same-origin',
         body: JSON.stringify({
-            username: document.querySelector('#register_username').value,
-            email: document.querySelector('#register_email').value,
-            password: document.querySelector('#register_password').value,
-            confirmation: document.querySelector('#register_confirmation').value
+            username: username,
+            email: email,
+            password: password,
+            confirmation: confirmation
         })
     })
     .then(response => {
