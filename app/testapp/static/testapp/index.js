@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // On browser refresh button click, save url to localStorage
-    window.onbeforeunload = event => {
+    window.onbeforeunload = () => {
         localStorage.setItem('lastState', browserHistory.currentPage)
     }
 
@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Create login form event listener
-    document.querySelector('#login-form').onsubmit = e => {
+    document.querySelector('#login_form').onsubmit = e => {
         e.preventDefault();
         loginEvent(browserHistory);
     }
 
     // Create registration form event listener
-    document.querySelector('#register-form').onsubmit = e => {
+    document.querySelector('#register_form').onsubmit = e => {
         e.preventDefault();
         registerEvent(browserHistory);
     }

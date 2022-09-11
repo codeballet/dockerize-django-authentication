@@ -15,8 +15,8 @@ const LOGIN_PAGE = new Page('login_page', 'page');
 const REGISTER_PAGE = new Page('register_page', 'page');
 
 // Create forms
-const REGISTER_FORM = new InputForm(registerFormInput, 'register_page', 'register-form', 'form');
-const LOGIN_FORM = new InputForm(loginFormInput, 'login_page', 'login-form', 'form');
+const REGISTER_FORM = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
+const LOGIN_FORM = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
 
 
 //////////////////////
