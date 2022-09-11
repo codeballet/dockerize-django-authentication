@@ -4,18 +4,18 @@
 
 // Append all elements to HTML page
 function appendContent() {
-    NAV_MENU.append();
-    HOME_NAV_BUTTON.append();
-    REGISTER_NAV_BUTTON.append();
-    LOGIN_NAV_BUTTON.append();
-    LOGOUT_NAV_BUTTON.append();
+    navMenu.append();
+    homeNavButton.append();
+    registerNavButton.append();
+    loginNavButton.append();
+    logoutNavButton.append();
 
-    HOME_PAGE.append();
-    LOGIN_PAGE.append();
-    REGISTER_PAGE.append();
+    homePage.append();
+    loginPage.append();
+    registerPage.append();
 
-    REGISTER_FORM.append();
-    LOGIN_FORM.append();
+    registerForm.append();
+    loginForm.append();
 }
 
 // Get csrf cookie
@@ -122,23 +122,23 @@ function register() {
 
 // Show relevant nav buttons
 function showNav() {
-    HOME_NAV_BUTTON.show();
+    homeNavButton.show();
     if (localStorage.getItem('loggedIn') === 'yes') {
-        REGISTER_NAV_BUTTON.hide();
-        LOGIN_NAV_BUTTON.hide();
-        LOGOUT_NAV_BUTTON.show();
+        registerNavButton.hide();
+        loginNavButton.hide();
+        logoutNavButton.show();
     } else {
         // logged out
-        REGISTER_NAV_BUTTON.show();
-        LOGIN_NAV_BUTTON.show();
-        LOGOUT_NAV_BUTTON.hide();
+        registerNavButton.show();
+        loginNavButton.show();
+        logoutNavButton.hide();
     }
 }
 
 // Show relevant page and update browserHistory state
 function showPage(navId = 'home_nav', source = '') {
     showNav();
-    for (const [key, value] of Object.entries(PAGES)) {
+    for (const [key, value] of Object.entries(pages)) {
         if (key === navId) {
             value.show();
             // only update browserHistory if browser backbutton not used
