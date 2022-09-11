@@ -3,21 +3,21 @@
 ////////////////////
 
 // On submitting the login form
-function loginEvent(browserHistory) {
-    login(browserHistory);
+function loginEvent() {
+    login();
 }
 
 // On clicking a navigation button
-function navEvent(id, browserHistory) {
+function navEvent(id) {
     // if logout button clicked, log out user
     if (id === 'logout_nav') {
-        logout(browserHistory);
+        logout();
     }
     // otherwise, show corresponding page
-    showPage(id, browserHistory);
+    showPage(id);
 }
 
 // On submitting the registration form
-function registerEvent(browserHistory) {
-    register(browserHistory);
+function registerEvent() {
+    register();
 }

@@ -36,7 +36,7 @@ function getCookie(name) {
 }
 
 // Login user
-function login(browserHistory) {
+function login() {
     // get csrf token
     const csrftoken = getCookie('csrftoken');
 
@@ -62,13 +62,13 @@ function login(browserHistory) {
         console.log(result);
         // show home page if login success
         if (localStorage.getItem('loggedIn') === 'yes') {
-            showPage('home_nav', browserHistory);
+            showPage('home_nav');
         }
     });
 }
 
 // Logout user
-function logout(browserHistory) {
+function logout() {
     fetch('api/logout', {
         method: 'GET'
     })
@@ -83,12 +83,12 @@ function logout(browserHistory) {
         console.log(result)
         // show home page if logout successful
         if (localStorage.getItem('loggedIn') === 'no') {
-            showPage('home_nav', browserHistory);
+            showPage('home_nav');
         }
     });
 }
 
-function register(browserHistory) {
+function register() {
     // get csrf token
     const csrftoken = getCookie('csrftoken');
 
@@ -115,7 +115,7 @@ function register(browserHistory) {
         console.log(result);
         // show home page if login success
         if (localStorage.getItem('loggedIn') === 'yes') {
-            showPage('home_nav', browserHistory);
+            showPage('home_nav');
         }
     });
 }
@@ -136,7 +136,7 @@ function showNav() {
 }
 
 // Show relevant page and update browserHistory state
-function showPage(navId, browserHistory, source = '') {
+function showPage(navId = 'home_nav', source = '') {
     showNav();
     for (const [key, value] of Object.entries(PAGES)) {
         if (key === navId) {
