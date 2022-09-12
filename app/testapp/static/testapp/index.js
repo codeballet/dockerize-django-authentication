@@ -25,10 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
         showPage(`${browserHistory.currentPage}_nav`)
     }
 
-    // On browser refresh button click, save url to localStorage
+    // On browser refresh button click, update browser state
     window.onbeforeunload = () => {
         browserHistory.currentPage
-        // localStorage.setItem('lastState', browserHistory.currentPage)
     }
 
     // On browser back button click

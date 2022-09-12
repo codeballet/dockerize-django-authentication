@@ -109,14 +109,17 @@ class BrowserHistory {
     }
     set currentPage(page) {
         this.page = page;
+        // update browser history
         history.pushState({page: this.page}, "", this.page);
+        // update browser localStorage
+        localStorage.setItem('lastState', this.page);
     }
     get currentPage() {
         // gets last part of current url
         const url = window.location.href;
         const url_list = url.split('/');
         this.page = url_list[url_list.length -1];
-        // update localStorage lastState value
+        // update browser localStorage
         localStorage.setItem('lastState', this.page);
 
         return this.page
