@@ -55,7 +55,6 @@ function login(username, password) {
         if (response.status === 200) {
             // logged in, update userState
             userState.loggedIn = true;
-            // localStorage.setItem('loggedIn', 'yes');
         }
         return response.json();
     })
@@ -65,9 +64,6 @@ function login(username, password) {
         if (userState.loggedIn) {
             showPage('home_nav');
         }
-        // if (localStorage.getItem('loggedIn') === 'yes') {
-        //     showPage('home_nav');
-        // }
     });
 }
 
@@ -80,7 +76,6 @@ function logout() {
         if (response.status === 200) {
             // logged out, update userState
             userState.loggedIn = false;
-            // localStorage.setItem('loggedIn', 'no');
         }
         return response.json()
     })
@@ -90,9 +85,6 @@ function logout() {
         if (!userState.loggedIn) {
             showPage('home_nav');
         }
-        // if (localStorage.getItem('loggedIn') === 'no') {
-        //     showPage('home_nav');
-        // }
     });
 }
 
@@ -114,8 +106,8 @@ function register(username, email, password, confirmation) {
     })
     .then(response => {
         if (response.status === 201) {
-            // registered and logged in, set localStorage
-            localStorage.setItem('loggedIn', 'yes');
+            // registered and logged in, update userState
+            userState.loggedIn = true;
         }
         return response.json()
     })
@@ -125,9 +117,6 @@ function register(username, email, password, confirmation) {
         if (userState.loggedIn) {
             showPage('home_nav');
         }
-        // if (localStorage.getItem('loggedIn') === 'yes') {
-        //     showPage('home_nav');
-        // }
     });
 }
 
@@ -144,16 +133,6 @@ function showNav() {
         loginNavButton.show();
         logoutNavButton.hide();
     }
-    // if (localStorage.getItem('loggedIn') === 'yes') {
-    //     registerNavButton.hide();
-    //     loginNavButton.hide();
-    //     logoutNavButton.show();
-    // } else {
-    //     // logged out
-    //     registerNavButton.show();
-    //     loginNavButton.show();
-    //     logoutNavButton.hide();
-    // }
 }
 
 // Show relevant page and update browserHistory state
