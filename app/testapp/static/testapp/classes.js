@@ -145,7 +145,7 @@ class UserState {
             // not logged in
             this.loginState = false;
             // make sure localStorage is 'no'
-            localStorage.setItem('loggedIn', 'no')
+            localStorage.setItem('loggedIn', 'no');
             return this.loginState;
         }
     }
