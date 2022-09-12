@@ -7,17 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     appendContent();
 
     // Decide which page to show
-    if (browserHistory.currentPage === '') {
+    if (browserState.currentPage === '') {
         // default page
         showPage();
     } else {
-        // match page to browserHistory state
-        showPage(`${browserHistory.currentPage}_nav`)
+        // match page to browserState
+        showPage(`${browserState.currentPage}_nav`)
     }
 
     // On browser refresh button click, update browser state
     window.onbeforeunload = () => {
-        browserHistory.currentPage
+        browserState.currentPage
     }
 
     // On browser back button click

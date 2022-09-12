@@ -103,7 +103,7 @@ class Page {
 ///////////////////
 
 // Track browser history state
-class BrowserHistory {
+class BrowserState {
     constructor(page = '') {
         this.page = page;
     }
