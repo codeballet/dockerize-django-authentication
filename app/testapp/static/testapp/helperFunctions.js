@@ -53,17 +53,21 @@ function login(username, password) {
     .then(response => {
         console.log(response.status);
         if (response.status === 200) {
-            // logged in, set localStorate
-            localStorage.setItem('loggedIn', 'yes');
+            // logged in, update userState
+            userState.loggedIn = true;
+            // localStorage.setItem('loggedIn', 'yes');
         }
         return response.json();
     })
     .then(result => {
         console.log(result);
         // show home page if login success
-        if (localStorage.getItem('loggedIn') === 'yes') {
+        if (userState.loggedIn) {
             showPage('home_nav');
         }
+        // if (localStorage.getItem('loggedIn') === 'yes') {
+        //     showPage('home_nav');
+        // }
     });
 }
 
@@ -74,17 +78,21 @@ function logout() {
     })
     .then(response => {
         if (response.status === 200) {
-            // logged out, set localStorage
-            localStorage.setItem('loggedIn', 'no');
+            // logged out, update userState
+            userState.loggedIn = false;
+            // localStorage.setItem('loggedIn', 'no');
         }
         return response.json()
     })
     .then(result => {
         console.log(result)
         // show home page if logout successful
-        if (localStorage.getItem('loggedIn') === 'no') {
+        if (!userState.loggedIn) {
             showPage('home_nav');
         }
+        // if (localStorage.getItem('loggedIn') === 'no') {
+        //     showPage('home_nav');
+        // }
     });
 }
 
@@ -114,16 +122,19 @@ function register(username, email, password, confirmation) {
     .then(result => {
         console.log(result);
         // show home page if login success
-        if (localStorage.getItem('loggedIn') === 'yes') {
+        if (userState.loggedIn) {
             showPage('home_nav');
         }
+        // if (localStorage.getItem('loggedIn') === 'yes') {
+        //     showPage('home_nav');
+        // }
     });
 }
 
 // Show relevant nav buttons
 function showNav() {
     homeNavButton.show();
-    if (localStorage.getItem('loggedIn') === 'yes') {
+    if (userState.loggedIn) {
         registerNavButton.hide();
         loginNavButton.hide();
         logoutNavButton.show();
@@ -133,6 +144,16 @@ function showNav() {
         loginNavButton.show();
         logoutNavButton.hide();
     }
+    // if (localStorage.getItem('loggedIn') === 'yes') {
+    //     registerNavButton.hide();
+    //     loginNavButton.hide();
+    //     logoutNavButton.show();
+    // } else {
+    //     // logged out
+    //     registerNavButton.show();
+    //     loginNavButton.show();
+    //     logoutNavButton.hide();
+    // }
 }
 
 // Show relevant page and update browserHistory state

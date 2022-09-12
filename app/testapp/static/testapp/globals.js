@@ -31,8 +31,9 @@ pages = {
 };
 
 
-/////////////////////////////////
-// browserHistory state object //
-/////////////////////////////////
+///////////////////
+// State objects //
+///////////////////
 
 const browserHistory = new BrowserHistory(localStorage.getItem('lastState'));
+const userState = new UserState();

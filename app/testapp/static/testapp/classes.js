@@ -65,12 +65,12 @@ class NavButton {
 class NavMenu {
     constructor(id = 'nav', className = 'page') {
         this.id = id;
-        this.className = className
+        this.className = className;
     }
     append() {
         const div = document.createElement('div');
-        div.id = this.id
-        div.className = this.className    
+        div.id = this.id;
+        div.className = this.className;
         document.querySelector('.container').append(div);
     }
 }
@@ -105,7 +105,17 @@ class Page {
 // Browser history state class
 class BrowserHistory {
     constructor(page = '') {
-        this.page = page
+        this.page = page;
+    }
+    get currentPage() {
+        // acquire last part of current url
+        const url = window.location.href;
+        const url_list = url.split('/');
+        this.page = url_list[url_list.length -1];
+        // update browser localStorage
+        localStorage.setItem('lastState', this.page);
+
+        return this.page;
     }
     set currentPage(page) {
         this.page = page;
@@ -114,14 +124,35 @@ class BrowserHistory {
         // update browser localStorage
         localStorage.setItem('lastState', this.page);
     }
-    get currentPage() {
-        // gets last part of current url
-        const url = window.location.href;
-        const url_list = url.split('/');
-        this.page = url_list[url_list.length -1];
-        // update browser localStorage
-        localStorage.setItem('lastState', this.page);
+}
 
-        return this.page
+// User state
+class UserState {
+    constructor(loginState = false) {
+        this.loginState = loginState;
+    }
+    get loggedIn() {
+        if (!localStorage.getItem('loggedIn')) {
+            // localStorage value not created
+            localStorage.setItem('loggedIn', 'no');
+            this.loginState = false
+            return this.loginState;
+        } else if (localStorage.getItem('loggedIn') === 'yes') {
+            // logged in
+            this.loginState = true;
+            return this.loginState;
+        } else {
+            // not logged in
+            this.loginState = false;
+            return this.loginState;
+        }
+    }
+    set loggedIn(value) {
+        this.loginState = value;
+        if (value) {
+            localStorage.setItem('loggedIn', 'yes');
+        } else {
+            localStorage.setItem('loggedIn', 'no');
+        }
     }
 }
