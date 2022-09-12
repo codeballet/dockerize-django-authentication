@@ -102,7 +102,7 @@ class Page {
 // State Classes //
 ///////////////////
 
-// Browser history state class
+// Track browser history state
 class BrowserHistory {
     constructor(page = '') {
         this.page = page;
@@ -126,7 +126,7 @@ class BrowserHistory {
     }
 }
 
-// User state
+// Track user state
 class UserState {
     constructor(loginState = false) {
         this.loginState = loginState;
