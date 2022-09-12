@@ -1,3 +1,5 @@
+'use strict'
+
 //////////
 // HTML //
 //////////
@@ -24,7 +26,7 @@ const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'for
 ///////////////
 
 // link nav button ids to page objects object
-pages = {
+const pages = {
     home_nav: homePage,
     login_nav: loginPage,
     register_nav: registerPage,
