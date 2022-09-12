@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // On browser refresh button click, save url to localStorage
     window.onbeforeunload = () => {
-        localStorage.setItem('lastState', browserHistory.currentPage)
+        browserHistory.currentPage
+        // localStorage.setItem('lastState', browserHistory.currentPage)
     }
 
     // On browser back button click

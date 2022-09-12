@@ -116,6 +116,9 @@ class BrowserHistory {
         const url = window.location.href;
         const url_list = url.split('/');
         this.page = url_list[url_list.length -1];
+        // update localStorage lastState value
+        localStorage.setItem('lastState', this.page);
+
         return this.page
     }
 }
