@@ -38,12 +38,10 @@ function getCookie(name) {
 }
 
 // Login user
-function login(username, password) {
-    // get csrf token
+const login = async (username, password) => {
     const csrftoken = getCookie('csrftoken');
 
-    // fetch api/login
-    fetch('api/login', {
+    const response = await fetch('api/login', {
         method: 'POST',
         headers: {'X-CSRFToken': csrftoken},
         mode: 'same-origin',
@@ -51,22 +49,15 @@ function login(username, password) {
             username: username,
             password: password,
         })
-    })
-    .then(response => {
-        console.log(response.status);
-        if (response.status === 200) {
-            // logged in, update userState
-            userState.loggedIn = true;
-        }
-        return response.json();
-    })
-    .then(result => {
-        console.log(result);
-        // show home page if login success
-        if (userState.loggedIn) {
-            showPage('home_nav');
-        }
     });
+
+    const result = await response.json();
+
+    if (response.status === 200) {
+        return result.message
+    } else {
+        throw new Error(result.error);
+    }
 }
 
 // Logout user

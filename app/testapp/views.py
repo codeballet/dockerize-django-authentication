@@ -46,7 +46,7 @@ def login_api(request):
     if user is not None:
         login(request, user)
         return JsonResponse({
-            "message": f"{user} logged in."
+            "message": f"{user} logged in"
         }, status=200)
     else:
         return JsonResponse({

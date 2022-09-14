@@ -12,7 +12,14 @@ function loginEvent(e) {
     // reset form fields
     e.target.elements.username.value = '';
     e.target.elements.password.value = '';
-    login(username, password);
+    login(username, password).then((message) => {
+        console.log(message);
+        userState.loggedIn = true;
+        showPage('home_nav');
+    }).catch((error) => {
+        console.log(error);
+        showPage('login_nav');
+    })
 }
 
 // On clicking a navigation button
