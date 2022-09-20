@@ -6,17 +6,17 @@
 
 // Form class
 class InputForm {
-    constructor(input, appendTo, id, classname = 'form') {
+    constructor(input, appendTo, id, className = 'form') {
         this.input = input;
         this.appendTo = appendTo;
         this.id = id;
-        this.classname = classname;
+        this.className = className;
     }
     append() {
         // Create and append form element
         const form = document.createElement('form');
         form.id = this.id;
-        form.className = this.classname;
+        form.className = this.className;
         document.querySelector(`#${this.appendTo}`).append(form);
 
         // Generate the form fields
@@ -26,7 +26,7 @@ class InputForm {
             for (const [k, v] of Object.entries(value)) {
                 // set form input values
                 if (k === 'id') { field.id = v; }
-                if (k === 'classname') { field.className = v }
+                if (k === 'className') { field.className = v }
                 if (k === 'name') { field.name = v; }
                 if (k === 'type') { field.type = v; }
                 if (k === 'placeholder') { field.placeholder = v; }
@@ -43,13 +43,13 @@ class NavButton {
     constructor(textContent, id, className = 'nav_button button') {
         this.textContent = textContent;
         this.id = id;
-        this.classname = className;
+        this.className = className;
     }
     append() {
         // create and append nav button
         const navButton = document.createElement('button');
         navButton.id = this.id;
-        navButton.className = this.classname;
+        navButton.className = this.className;
         navButton.textContent = this.textContent;
         document.querySelector('#nav').append(navButton);
         document.querySelector(`#${this.id}`).style.display = 'none';
@@ -80,7 +80,7 @@ class NavMenu {
 
 // Page class
 class Page {
-    constructor(id, className) {
+    constructor(id, className = 'page') {
         this.id = id;
         this.className = className;
     }
