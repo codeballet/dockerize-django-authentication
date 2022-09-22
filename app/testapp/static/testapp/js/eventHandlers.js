@@ -43,7 +43,16 @@ function navEvent(id) {
 // On submitting the registration form
 function registerEvent(e) {
     // get form field name values
-    const username = e.target.elements.username.value;
+
+
+    // check so that all fields have relevant values
+
+
+    if (e.target.elements.username.value) {
+        const username = e.target.elements.username.value;
+    } else {
+        console.log('Username missing')
+    }
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
     const confirmation = e.target.elements.confirmation.value

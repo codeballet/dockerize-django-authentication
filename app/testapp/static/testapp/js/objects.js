@@ -32,6 +32,13 @@ const pages = {
     register_nav: registerPage,
 };
 
+const color = {
+    active: '#90fba2',
+    inactive: '#bdd5d2',
+    hover: '#f7d18a',
+    submit: '#a3eaff'
+}
+
 
 ////////////
 // States //

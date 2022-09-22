@@ -104,8 +104,9 @@ const register = async(username, email, password, confirmation) => {
     }
 }
 
-// Show relevant nav buttons
+// nav buttons appearance
 function showNav() {
+    // show relevant nav buttons
     homeNavButton.show();
     if (userState.loggedIn) {
         registerNavButton.hide();
@@ -117,11 +118,18 @@ function showNav() {
         loginNavButton.show();
         logoutNavButton.hide();
     }
+
+    // inactivate all nav buttons
+    document.querySelectorAll('.nav_button').forEach(button => {
+        button.style.background = color.inactive;
+    });
+    // activate nav button for displayed page
+    const page = browserState.currentPage;
+    document.querySelector(`#${page}_nav`).style.background = color.active;
 }
 
 // Show relevant page and update browserState state
 function showPage(navId = 'home_nav', source = '') {
-    showNav();
     for (const [key, value] of Object.entries(pages)) {
         if (key === navId) {
             value.show();
@@ -133,4 +141,5 @@ function showPage(navId = 'home_nav', source = '') {
             value.hide();
         }
     }
+    showNav();
 }

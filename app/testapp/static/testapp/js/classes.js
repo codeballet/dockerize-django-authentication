@@ -30,6 +30,8 @@ class InputForm {
                 if (k === 'name') { field.name = v; }
                 if (k === 'type') { field.type = v; }
                 if (k === 'placeholder') { field.placeholder = v; }
+                // color the submit button
+                if (v === 'button submit') { field.style.background = color.submit; }
             }
             // append inputs to form
             document.querySelector(`#${this.id}`).append(field);
@@ -51,6 +53,7 @@ class NavButton {
         navButton.id = this.id;
         navButton.className = this.className;
         navButton.textContent = this.textContent;
+        navButton.style.background = color.inactive;
         document.querySelector('#nav').append(navButton);
         document.querySelector(`#${this.id}`).style.display = 'none';
     }

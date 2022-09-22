@@ -1,11 +1,11 @@
-// variables
-$hover-color: darkorange;
-
 // inheritance
 %button {
-    padding: 0.5rem;
+    height: 2rem;
+    width: 5rem;
+    margin: 0.3rem;
     border: none;
     text-align: center;
+    border-radius: 0.3rem;
 }
 
 // animation
@@ -27,7 +27,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 
     #nav {
-        display: block;
+        display: flex;
+        flex-wrap: wrap;
         margin-bottom: 1rem;
     }
     
@@ -37,33 +38,27 @@ body {
             animation-fill-mode: forwards;
         }
 
-    #form_name {
-        height: 1.5rem;
-        margin-right: 0.3rem;
-    }
-
-    #form_submit {
+    .button {
         @extend %button;
-    }
-
-    #form_submit:hover {
-        color: $hover-color;
-    }
-
-    .list_button {
-        margin: 0.2rem;
     }
     
+    .form {
+        display: flex;
+        flex-direction: column;
+
+        .form_field {
+            height: 1.5rem;
+            width: 12rem;
+            margin: 0.3rem;
+            text-align: left;
+            padding-left: 0.3rem;
+            border: 1px solid #808080;
+            border-radius: 0.3rem;
+        }
+    }
+
     .pages {
         display: block;
-    }
-
-    button {
-        @extend %button;
-    }
-
-    button:hover {
-        color: $hover-color;
     }
 }
 

@@ -45,4 +45,26 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         registerEvent(e);
     }
+
+    // Create button highlight event listeners
+    document.querySelectorAll('.button').forEach(button => {
+        button.onmouseenter = e => {
+            // hover color button if not active
+            const page = browserState.currentPage
+            if (e.target.id !== `${page}_nav`) {
+                document.querySelector(`#${e.target.id}`).style.background = color.hover;
+            }
+        }
+        button.onmouseleave = e => {
+            // reset button to original color if not active
+            const page = browserState.currentPage
+            if (e.target.id !== `${page}_nav` && e.target.className !== 'button submit') {
+                document.querySelector(`#${e.target.id}`).style.background = color.inactive;
+            } else if (e.target.className === 'button submit') {
+                document.querySelectorAll('.submit').forEach(button => {
+                    button.style.background = color.submit;
+                })
+            }
+        }
+    })
 });
