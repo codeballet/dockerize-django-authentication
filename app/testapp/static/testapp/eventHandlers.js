@@ -12,6 +12,7 @@ function loginEvent(e) {
     // reset form fields
     e.target.elements.username.value = '';
     e.target.elements.password.value = '';
+    // call the async login function
     login(username, password).then((message) => {
         console.log(message);
         userState.loggedIn = true;
@@ -24,9 +25,17 @@ function loginEvent(e) {
 
 // On clicking a navigation button
 function navEvent(id) {
-    // if logout button clicked, log out user
+    // if logout button clicked, logout user
     if (id === 'logout_nav') {
-        logout();
+        // call the async logout function
+        logout().then(message => {
+            console.log(message);
+            userState.loggedIn = false;
+            showPage('login_nav');
+        }).catch(error => {
+            console.log(error);
+            showPage(login_nav);
+        });
     }
     // otherwise, show corresponding page
     showPage(id);

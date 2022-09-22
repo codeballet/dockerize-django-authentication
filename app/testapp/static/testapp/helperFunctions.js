@@ -54,32 +54,47 @@ const login = async (username, password) => {
     const result = await response.json();
 
     if (response.status === 200) {
-        return result.message
+        return result.message;
     } else {
         throw new Error(result.error);
     }
 }
 
 // Logout user
-function logout() {
-    fetch('api/logout', {
+const logout = async() => {
+    const response = await fetch('api/logout', {
         method: 'GET'
-    })
-    .then(response => {
-        if (response.status === 200) {
-            // logged out, update userState
-            userState.loggedIn = false;
-        }
-        return response.json()
-    })
-    .then(result => {
-        console.log(result)
-        // show home page if logout successful
-        if (!userState.loggedIn) {
-            showPage('home_nav');
-        }
     });
+
+    const result = await response.json();
+
+    if (result.message) {
+        // logged out
+        return result.message;
+    } else {
+        throw new Error(error);
+    }
 }
+
+// function logout () {
+//     fetch('api/logout', {
+//         method: 'GET'
+//     })
+//     .then(response => {
+//         if (response.status === 200) {
+//             // logged out, update userState
+//             userState.loggedIn = false;
+//         }
+//         return response.json();
+//     })
+//     .then(result => {
+//         console.log(result)
+//         // show home page if logout successful
+//         if (!userState.loggedIn) {
+//             showPage('home_nav');
+//         }
+//     });
+// }
 
 function register(username, email, password, confirmation) {
     // get csrf token
@@ -102,7 +117,7 @@ function register(username, email, password, confirmation) {
             // registered and logged in, update userState
             userState.loggedIn = true;
         }
-        return response.json()
+        return response.json();
     })
     .then(result => {
         console.log(result);
