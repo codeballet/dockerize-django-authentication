@@ -9,13 +9,11 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update -y \
     && apt-get install -y vim
 
-# set work directory
-WORKDIR /code
-
 # install dependencies
+WORKDIR /code
 RUN pip install --upgrade pip
-COPY requirements.txt /code/
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # copy project
-COPY . /code/
+COPY . /code

@@ -13,12 +13,19 @@ services:
     build: ./app
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./app:/code
+      - ./app:/code:ro
+      - ./styles/testapp:/code/testapp/static/testapp/css:ro
     ports:
       - "8000:8000"
     env_file:
       - ./.env.dev
     depends_on:
       - db
+      - styles
+  styles:
+    build: ./styles
+    command: /opt/dart-sass/sass --watch /styles/styles.scss:/styles/styles.css
+    volumes:
+      - ./styles/testapp:/styles:rw
 volumes:
   postgres_data:
