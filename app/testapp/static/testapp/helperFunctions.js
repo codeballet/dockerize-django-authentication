@@ -80,26 +80,6 @@ const logout = async() => {
     }
 }
 
-// function logout () {
-//     fetch('api/logout', {
-//         method: 'GET'
-//     })
-//     .then(response => {
-//         if (response.status === 200) {
-//             // logged out, update userState
-//             userState.loggedIn = false;
-//         }
-//         return response.json();
-//     })
-//     .then(result => {
-//         console.log(result)
-//         // show home page if logout successful
-//         if (!userState.loggedIn) {
-//             showPage('home_nav');
-//         }
-//     });
-// }
-
 function register(username, email, password, confirmation) {
     // get csrf token
     const csrftoken = getCookie('csrftoken');
