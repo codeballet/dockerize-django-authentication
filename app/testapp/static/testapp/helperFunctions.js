@@ -80,12 +80,10 @@ const logout = async() => {
     }
 }
 
-function register(username, email, password, confirmation) {
-    // get csrf token
+const register = async(username, email, password, confirmation) => {
     const csrftoken = getCookie('csrftoken');
 
-    // fetch api/register
-    fetch('api/register', {
+    const response = await fetch('api/register', {
         method: 'POST',
         headers: {'X-CSRFToken': csrftoken},
         mode: 'same-origin',
@@ -95,21 +93,15 @@ function register(username, email, password, confirmation) {
             password: password,
             confirmation: confirmation
         })
-    })
-    .then(response => {
-        if (response.status === 201) {
-            // registered and logged in, update userState
-            userState.loggedIn = true;
-        }
-        return response.json();
-    })
-    .then(result => {
-        console.log(result);
-        // show home page if login success
-        if (userState.loggedIn) {
-            showPage('home_nav');
-        }
     });
+
+    const result = await response.json();
+
+    if (result.message) {
+        return result.message;
+    } else {
+        throw new Error(result.error);
+    }
 }
 
 // Show relevant nav buttons

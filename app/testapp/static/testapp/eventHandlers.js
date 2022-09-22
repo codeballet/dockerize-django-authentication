@@ -12,7 +12,7 @@ function loginEvent(e) {
     // reset form fields
     e.target.elements.username.value = '';
     e.target.elements.password.value = '';
-    // call the async login function
+    // call the async login helperFunction
     login(username, password).then((message) => {
         console.log(message);
         userState.loggedIn = true;
@@ -25,9 +25,8 @@ function loginEvent(e) {
 
 // On clicking a navigation button
 function navEvent(id) {
-    // if logout button clicked, logout user
     if (id === 'logout_nav') {
-        // call the async logout function
+        // call the async logout helperFunction
         logout().then((message) => {
             console.log(message);
             userState.loggedIn = false;
@@ -53,5 +52,13 @@ function registerEvent(e) {
     e.target.elements.email.value = '';
     e.target.elements.password.value = '';
     e.target.elements.confirmation.value = '';
-    register(username, email, password, confirmation);
+    // call the async register helperFunction
+    register(username, email, password, confirmation).then(message => {
+        console.log(message);
+        userState.loggedIn = true;
+        showPage('home_nav');
+    }).catch(error => {
+        console.log(error)
+        showPage('register_nav');
+    });
 }
