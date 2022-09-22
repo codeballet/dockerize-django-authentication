@@ -53,7 +53,7 @@ const login = async (username, password) => {
 
     const result = await response.json();
 
-    if (response.status === 200) {
+    if (result.message) {
         return result.message;
     } else {
         throw new Error(result.error);
