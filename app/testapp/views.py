@@ -26,7 +26,7 @@ def index(request):
 def login_api(request):
     if request.method != "POST":
         return JsonResponse({
-            "error": "POST request required."
+            "error": "POST request required"
         }, status=405)
 
     # Acquire form field values
@@ -36,7 +36,7 @@ def login_api(request):
         password = data["password"]
     except:
         return JsonResponse({
-            "error": "Could not acquire data from request."
+            "error": "Could not acquire data from request"
         }, status=500)
 
     # Attempt to authenticate user
@@ -50,14 +50,20 @@ def login_api(request):
         }, status=200)
     else:
         return JsonResponse({
-            "error": "Invalid username and/or password."
+            "error": "Invalid username and/or password"
         }, status=406)
 
 
 def logout_api(request):
+    if request.method != "POST":
+        return JsonResponse({
+            "error": "POST request required"
+        }, status=405)
+
     logout(request)
+
     return JsonResponse({
-        "message": "Logged out."
+        "message": "Logged out"
     }, status=200)
 
 
@@ -65,7 +71,7 @@ def register_api(request):
     """Add registration to database"""
     if request.method != "POST":
         return JsonResponse({
-            "error": "POST request required."
+            "error": "POST request required"
         }, status=405)
 
     # acquire form field values
@@ -79,11 +85,11 @@ def register_api(request):
         # ensure password matches confirmation
         if password != confirmation:
             return JsonResponse({
-                "error": "Password fields not matching."
+                "error": "Password fields not matching"
             }, status=406)
     except:
         return JsonResponse({
-            "error": "Could not acquire data from request."
+            "error": "Could not acquire data from request"
         }, status=500)
 
     # create new user
@@ -91,16 +97,16 @@ def register_api(request):
         user = User.objects.create_user(username, email, password)
     except IntegrityError:
         return JsonResponse({
-            "error": "Username already taken."
+            "error": "Username already taken"
         }, status=409)
 
     # log in user
     try:
         login(request, user)
         return JsonResponse({
-            "message": f"{username} is registered and logged in."
+            "message": f"{username} is registered and logged in"
         }, status=201)
     except:
         return JsonResponse({
-            "error": "Failed to log in."
+            "error": "Failed to log in"
         }, status=500)

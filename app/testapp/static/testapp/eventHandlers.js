@@ -28,13 +28,13 @@ function navEvent(id) {
     // if logout button clicked, logout user
     if (id === 'logout_nav') {
         // call the async logout function
-        logout().then(message => {
+        logout().then((message) => {
             console.log(message);
             userState.loggedIn = false;
             showPage('login_nav');
-        }).catch(error => {
+        }).catch((error) => {
             console.log(error);
-            showPage(login_nav);
+            showPage('login_nav');
         });
     }
     // otherwise, show corresponding page

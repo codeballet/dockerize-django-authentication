@@ -62,8 +62,12 @@ const login = async (username, password) => {
 
 // Logout user
 const logout = async() => {
+    const csrftoken = getCookie('csrftoken');
+
     const response = await fetch('api/logout', {
-        method: 'GET'
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin'
     });
 
     const result = await response.json();
@@ -72,7 +76,7 @@ const logout = async() => {
         // logged out
         return result.message;
     } else {
-        throw new Error(error);
+        throw new Error(result.error);
     }
 }
 
