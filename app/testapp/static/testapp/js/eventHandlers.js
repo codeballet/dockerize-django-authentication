@@ -42,9 +42,8 @@ function navEvent(id) {
 
 // On submitting the registration form
 function registerEvent(e) {
-    let values = {}
     try {
-        values = validateRegistration(e);
+        const values = validateRegistration(e);
 
         // reset form fields
         e.target.elements.username.value = '';
