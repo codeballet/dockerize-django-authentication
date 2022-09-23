@@ -1,11 +1,14 @@
 'use strict'
 
-/////////////////////////////////////
-// DOMContentLoaded event listener //
-/////////////////////////////////////
+//////////////////////////
+// After page is loaded //
+//////////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Append all HTML content to the base container
+    //////////////////
+    // HTML content //
+    //////////////////
+
     appendContent();
 
     // Decide which page to show
@@ -17,6 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
         showPage(`${browserState.currentPage}_nav`)
     }
 
+
+    /////////////////////
+    // Browser actions //
+    /////////////////////
+
     // On browser refresh button click, update browser state
     window.onbeforeunload = () => {
         browserState.currentPage
@@ -27,26 +35,31 @@ document.addEventListener('DOMContentLoaded', () => {
         showPage(`${e.state.page}_nav`, 'pop');
     }
 
-    // Create navigation buttons event listeners
+
+    /////////////////////
+    // Event listeners //
+    /////////////////////
+
+    // Navigation button events
     document.querySelectorAll('.nav_button').forEach(button => {
         button.onclick = () => {
             navEvent(button.id);
         }
     });
 
-    // Create login form event listener
+    // Login form event
     document.querySelector('#login_form').onsubmit = e => {
         e.preventDefault();
         loginEvent(e);
     }
 
-    // Create registration form event listener
+    // Registration form event
     document.querySelector('#register_form').onsubmit = e => {
         e.preventDefault();
         registerEvent(e);
     }
 
-    // Create button highlight event listeners
+    // Button highlight events
     document.querySelectorAll('.button').forEach(button => {
         button.onmouseenter = e => {
             // hover color button if not active
