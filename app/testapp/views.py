@@ -24,6 +24,10 @@ def index(request):
 #######
 
 def login_api(request):
+    """Logs in users"""
+
+    # TODO: Add form validation
+
     if request.method != "POST":
         return JsonResponse({
             "error": "POST request required"
@@ -55,6 +59,7 @@ def login_api(request):
 
 
 def logout_api(request):
+    """Logs out users"""    
     if request.method != "POST":
         return JsonResponse({
             "error": "POST request required"
@@ -69,6 +74,9 @@ def logout_api(request):
 
 def register_api(request):
     """Add registration to database"""
+
+    # TODO: Add form validation
+
     if request.method != "POST":
         return JsonResponse({
             "error": "POST request required"
@@ -81,8 +89,6 @@ def register_api(request):
         email = data["email"]
         password = data["password"]
         confirmation = data["confirmation"]
-
-        # TODO: validate the input
 
         # ensure password matches confirmation
         if password != confirmation:

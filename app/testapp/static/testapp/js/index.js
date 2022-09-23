@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // HTML content //
     //////////////////
 
+    // Append all content
     appendContent();
 
     // Decide which page to show

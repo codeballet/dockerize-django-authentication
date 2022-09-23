@@ -22,7 +22,8 @@ function loginEvent(e) {
         })
         .catch((error) => {
             console.log(error.message);
-            alert(error.message)
+            alert(error.message);
+            showPage('login_nav');
         })
     } catch (error) {
         console.log(error.message);

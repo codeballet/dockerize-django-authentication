@@ -25,6 +25,13 @@ function appendContent() {
     loginForm.append();
 }
 
+// Set focus on form fields
+const formFocus = () => {
+    for (const [key, value] of Object.entries(focus)) {
+        document.querySelector(`#${value}`).focus();
+    }
+}
+
 // Get csrf cookie
 function getCookie(name) {
     let cookieValue = null;
@@ -147,6 +154,7 @@ function showPage(navId = 'home_nav', source = '') {
         }
     }
     showNav();
+    formFocus();
 }
 
 // Tests of single form fields

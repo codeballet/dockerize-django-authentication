@@ -25,19 +25,26 @@ const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'for
 // Variables //
 ///////////////
 
-// link nav button ids to page objects object
-const pages = {
-    home_nav: homePage,
-    login_nav: loginPage,
-    register_nav: registerPage,
-};
-
+// Button colours
 const color = {
     active: '#90fba2',
     inactive: '#bdd5d2',
     hover: '#f7d18a',
     submit: '#a3eaff'
 }
+
+// Form field focuses
+const focus = {
+    register: 'register_username',
+    login: 'login_username'
+}
+
+// link nav button ids to page objects object
+const pages = {
+    home_nav: homePage,
+    login_nav: loginPage,
+    register_nav: registerPage,
+};
 
 
 ////////////
