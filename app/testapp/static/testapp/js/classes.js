@@ -6,8 +6,8 @@
 
 // Form class
 class InputForm {
-    constructor(input, appendTo, id, className = 'form') {
-        this.input = input;
+    constructor(object, appendTo, id, className = 'form') {
+        this.object = object;
         this.appendTo = appendTo;
         this.id = id;
         this.className = className;
@@ -20,11 +20,11 @@ class InputForm {
         document.querySelector(`#${this.appendTo}`).append(form);
 
         // Generate the form fields
-        for (const [key, value] of Object.entries(this.input)) {
-            // for each form input
+        for (const [key, value] of Object.entries(this.object)) {
+            // for each form object
             const field = document.createElement('input');
             for (const [k, v] of Object.entries(value)) {
-                // set form input values
+                // set form field values
                 if (k === 'id') { field.id = v; }
                 if (k === 'className') { field.className = v }
                 if (k === 'name') { field.name = v; }
@@ -33,7 +33,7 @@ class InputForm {
                 // color the submit button
                 if (v === 'button submit') { field.style.background = color.submit; }
             }
-            // append inputs to form
+            // append fields to form
             document.querySelector(`#${this.id}`).append(field);
         }
     }

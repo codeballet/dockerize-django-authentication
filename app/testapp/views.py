@@ -82,6 +82,8 @@ def register_api(request):
         password = data["password"]
         confirmation = data["confirmation"]
 
+        # TODO: validate the input
+
         # ensure password matches confirmation
         if password != confirmation:
             return JsonResponse({
@@ -94,6 +96,7 @@ def register_api(request):
 
     # create new user
     try:
+        print('creating new user...')
         user = User.objects.create_user(username, email, password)
     except IntegrityError:
         return JsonResponse({

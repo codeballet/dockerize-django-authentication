@@ -42,32 +42,28 @@ function navEvent(id) {
 
 // On submitting the registration form
 function registerEvent(e) {
-    // get form field name values
+    let values = {}
+    try {
+        values = validateRegistration(e);
 
+        // reset form fields
+        e.target.elements.username.value = '';
+        e.target.elements.email.value = '';
+        e.target.elements.password.value = '';
+        e.target.elements.confirmation.value = '';
 
-    // check so that all fields have relevant values
-
-
-    if (e.target.elements.username.value) {
-        const username = e.target.elements.username.value;
-    } else {
-        console.log('Username missing')
+        // call the async register helperFunction
+        register(values.username, values.email, values.password, values.confirmation)
+        .then(message => {
+            console.log(message);
+            userState.loggedIn = true;
+            showPage('home_nav');
+        }).catch(error => {
+            console.log(error)
+            showPage('register_nav');
+        });
+    } catch (error) {
+        alert(error.message)
+        console.log(error.message);
     }
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-    const confirmation = e.target.elements.confirmation.value
-    // reset form fields
-    e.target.elements.username.value = '';
-    e.target.elements.email.value = '';
-    e.target.elements.password.value = '';
-    e.target.elements.confirmation.value = '';
-    // call the async register helperFunction
-    register(username, email, password, confirmation).then(message => {
-        console.log(message);
-        userState.loggedIn = true;
-        showPage('home_nav');
-    }).catch(error => {
-        console.log(error)
-        showPage('register_nav');
-    });
 }

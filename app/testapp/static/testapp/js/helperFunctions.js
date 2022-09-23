@@ -6,16 +6,21 @@
 
 // Append all elements to HTML page
 function appendContent() {
+    // Navigation
     navMenu.append();
     homeNavButton.append();
     registerNavButton.append();
     loginNavButton.append();
     logoutNavButton.append();
 
+    // Home page
     homePage.append();
-    loginPage.append();
-    registerPage.append();
 
+    // Login page
+    loginPage.append();
+
+    // Registration page
+    registerPage.append();
     registerForm.append();
     loginForm.append();
 }
@@ -142,4 +147,41 @@ function showPage(navId = 'home_nav', source = '') {
         }
     }
     showNav();
+}
+
+// Validate registration form data
+const validateRegistration = e => {
+    // Acquire all form field values
+    const username = e.target.elements.username.value;
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+    const confirmation = e.target.elements.confirmation.value;
+
+    // Check username
+    if (/^\w+$/.test(username)) {
+        console.log('Username OK');
+    } else {
+        throw new Error('Username must be letters, digits, or underscore');
+    }
+
+    // Check email
+    if (/^(\w+)@(\w+)(\.\w+)+$/.test(email)) {
+        console.log('Email OK');
+    } else {
+        throw new Error('Not a valid email');
+    }
+
+    // Check password and confirmation
+    if (password !== '' && password === confirmation) {
+        console.log('Password and confirmation OK');
+    } else {
+        throw new Error('Check your password and confirmation');
+    }
+
+    return {
+        username: username,
+        email: email,
+        password: password,
+        confirmation: confirmation
+    };
 }
