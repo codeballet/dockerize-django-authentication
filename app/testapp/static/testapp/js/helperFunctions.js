@@ -157,21 +157,21 @@ const validateRegistration = e => {
     const password = e.target.elements.password.value;
     const confirmation = e.target.elements.confirmation.value;
 
-    // Check username
+    // Check username for alphanumerical
     if (/^\w+$/.test(username)) {
         console.log('Username OK');
     } else {
         throw new Error('Username must be letters, digits, or underscore');
     }
 
-    // Check email
+    // Check email structure
     if (/^(\w+)@(\w+)(\.\w+)+$/.test(email)) {
         console.log('Email OK');
     } else {
         throw new Error('Not a valid email');
     }
 
-    // Check password and confirmation
+    // Check password and confirmation match
     if (password !== '' && password === confirmation) {
         console.log('Password and confirmation OK');
     } else {
