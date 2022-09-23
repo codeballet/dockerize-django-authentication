@@ -149,6 +149,50 @@ function showPage(navId = 'home_nav', source = '') {
     showNav();
 }
 
+// Tests of single form fields
+const testUsername = username => {
+    // Check username for alphanumerical
+    if (/^\w+$/.test(username)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+const testEmail = email => {
+    if (/^(\w+)@(\w+)(\.\w+)+$/.test(email)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// Validate login form data
+const validateLogin = e => {
+    // Acquire form field name values
+    const username = e.target.elements.username.value;
+    const password = e.target.elements.password.value;
+
+    // Check username
+    if (testUsername(username)) {
+        console.log('Username OK');
+    } else {
+        throw new Error('Username must be letters and / or digits');
+    }
+
+    // Check password
+    if (password !== '') {
+        console.log('Password OK');
+    } else {
+        throw new Error ('Please enter password');
+    }
+
+    return {
+        username: username,
+        password: password
+    };
+}
+
 // Validate registration form data
 const validateRegistration = e => {
     // Acquire all form field values
@@ -157,15 +201,15 @@ const validateRegistration = e => {
     const password = e.target.elements.password.value;
     const confirmation = e.target.elements.confirmation.value;
 
-    // Check username for alphanumerical
-    if (/^\w+$/.test(username)) {
+    // Check username
+    if (testUsername(username)) {
         console.log('Username OK');
     } else {
-        throw new Error('Username must be letters, digits, or underscore');
+        throw new Error('Username must be letters and / or digits');
     }
 
-    // Check email structure
-    if (/^(\w+)@(\w+)(\.\w+)+$/.test(email)) {
+    // Check email
+    if (testEmail(email)) {
         console.log('Email OK');
     } else {
         throw new Error('Not a valid email');

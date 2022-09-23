@@ -6,32 +6,41 @@
 
 // On submitting the login form
 function loginEvent(e) {
-    // get form field name values
-    const username = e.target.elements.username.value;
-    const password = e.target.elements.password.value;
-    // reset form fields
-    e.target.elements.username.value = '';
-    e.target.elements.password.value = '';
-    // call the async login helperFunction
-    login(username, password).then((message) => {
-        console.log(message);
-        userState.loggedIn = true;
-        showPage('home_nav');
-    }).catch((error) => {
-        console.log(error);
-        showPage('login_nav');
-    })
+    try {
+        const values = validateLogin(e);
+
+        // reset form fields
+        e.target.elements.username.value = '';
+        e.target.elements.password.value = '';
+        
+        // call the async login helperFunction
+        login(values.username, values.password)
+        .then((message) => {
+            console.log(message);
+            userState.loggedIn = true;
+            showPage('home_nav');
+        })
+        .catch((error) => {
+            console.log(error.message);
+            alert(error.message)
+        })
+    } catch (error) {
+        console.log(error.message);
+        alert(error.message);
+    }
 }
 
 // On clicking a navigation button
 function navEvent(id) {
     if (id === 'logout_nav') {
         // call the async logout helperFunction
-        logout().then((message) => {
+        logout()
+        .then((message) => {
             console.log(message);
             userState.loggedIn = false;
             showPage('login_nav');
-        }).catch((error) => {
+        })
+        .catch((error) => {
             console.log(error);
             showPage('login_nav');
         });
@@ -57,12 +66,13 @@ function registerEvent(e) {
             console.log(message);
             userState.loggedIn = true;
             showPage('home_nav');
-        }).catch(error => {
-            console.log(error)
-            showPage('register_nav');
+        })
+        .catch(error => {
+            console.log(error.message);
+            alert(error.message);
         });
     } catch (error) {
-        alert(error.message)
         console.log(error.message);
+        alert(error.message)
     }
 }
