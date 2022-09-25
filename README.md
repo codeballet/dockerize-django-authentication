@@ -91,6 +91,9 @@ Solution: Add a line of configuration in the `settings.py` file:
 AUTH_USER_MODEL = 'testapp.User'  #  where testapp is the app name and User is the model class name
 ```
 
+### Static css files directory
+For some reason, it seems that the `/app/testapp/static/testapp/css` directory is not picked up by git. If so, add that manually.
+
 ## Sources
 
 Here are some of the key sources used for the development of the app.
