@@ -93,12 +93,6 @@ def register_api(request):
         email = data["email"]
         password = data["password"]
         confirmation = data["confirmation"]
-
-        # ensure password matches confirmation
-        if password != confirmation:
-            return JsonResponse({
-                "error": "Password fields not matching"
-            }, status=406)
     except:
         return JsonResponse({
             "error": "No valid registration details"
@@ -106,15 +100,20 @@ def register_api(request):
 
     # Form validation
     non_alphanumeric = test_username(username)
-    if non_alphanumeric:
+    if non_alphanumeric is not None:
         return JsonResponse({
             "error": "Username must be alphanumerical"
         }, status=406)
 
     valid_email = test_email(email)
-    if not valid_email:
+    if valid_email is None:
         return JsonResponse({
             "error": "Invalid email"
+        }, status=406)
+
+    if password != confirmation:
+        return JsonResponse({
+            "error": "Password fields not matching"
         }, status=406)
 
     # create new user
@@ -145,11 +144,9 @@ def register_api(request):
 def test_email(email):
     """Detect if email appears valid"""
     pattern = re.compile("^(\w+)@(\w+)(\.\w+)+$")
-    result = True if pattern.fullmatch(email) else False
-    return result
+    return pattern.fullmatch(email)
 
 def test_username(username):
     """Detect if username has non-alphanumeric characters"""
     pattern = re.compile("\W")
-    result = True if pattern.search(username) else False
-    return result
+    return pattern.search(username)
