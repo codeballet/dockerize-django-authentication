@@ -81,8 +81,6 @@ def logout_api(request):
 def register_api(request):
     """Add registration to database"""
 
-    # TODO: Add form validation
-
     if request.method != "POST":
         return JsonResponse({
             "error": "POST request required"
@@ -103,8 +101,21 @@ def register_api(request):
             }, status=406)
     except:
         return JsonResponse({
-            "error": "Could not acquire data from request"
+            "error": "No valid registration details"
         }, status=500)
+
+    # Form validation
+    non_alphanumeric = test_username(username)
+    if non_alphanumeric:
+        return JsonResponse({
+            "error": "Username must be alphanumerical"
+        }, status=406)
+
+    valid_email = test_email(email)
+    if not valid_email:
+        return JsonResponse({
+            "error": "Invalid email"
+        }, status=406)
 
     # create new user
     try:
@@ -130,6 +141,12 @@ def register_api(request):
 ####################
 # Helper functions #
 ####################
+
+def test_email(email):
+    """Detect if email appears valid"""
+    pattern = re.compile("^(\w+)@(\w+)(\.\w+)+$")
+    result = True if pattern.fullmatch(email) else False
+    return result
 
 def test_username(username):
     """Detect if username has non-alphanumeric characters"""

@@ -185,7 +185,7 @@ const validateLogin = e => {
     if (testUsername(username)) {
         console.log('Username OK');
     } else {
-        throw new Error('Username must be letters and / or digits');
+        throw new Error('Username must consist of letters and digits');
     }
 
     // Check password
@@ -213,14 +213,14 @@ const validateRegistration = e => {
     if (testUsername(username)) {
         console.log('Username OK');
     } else {
-        throw new Error('Username must be letters and / or digits');
+        throw new Error('Username must consist of letters and digits');
     }
 
     // Check email
     if (testEmail(email)) {
         console.log('Email OK');
     } else {
-        throw new Error('Not a valid email');
+        throw new Error('Invalid email');
     }
 
     // Check password and confirmation match
