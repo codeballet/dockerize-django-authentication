@@ -1,4 +1,5 @@
 import json
+import re
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
@@ -26,8 +27,6 @@ def index(request):
 def login_api(request):
     """Logs in users"""
 
-    # TODO: Add form validation
-
     if request.method != "POST":
         return JsonResponse({
             "error": "POST request required"
@@ -40,8 +39,15 @@ def login_api(request):
         password = data["password"]
     except:
         return JsonResponse({
-            "error": "Could not acquire data from request"
+            "error": "No valid login details"
         }, status=500)
+
+    # Form validation
+    non_alphanumeric = test_username(username)
+    if non_alphanumeric:
+        return JsonResponse({
+            "error": "Username must be alphanumerical"
+        }, status=406)
 
     # Attempt to authenticate user
     user = authenticate(request, username=username, password=password)
@@ -119,3 +125,14 @@ def register_api(request):
         return JsonResponse({
             "error": "Failed to log in"
         }, status=500)
+
+
+####################
+# Helper functions #
+####################
+
+def test_username(username):
+    """Detect if username has non-alphanumeric characters"""
+    pattern = re.compile("\W")
+    result = True if pattern.search(username) else False
+    return result
