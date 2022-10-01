@@ -1,6 +1,7 @@
 import json
 import re
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.http.response import JsonResponse
@@ -24,8 +25,16 @@ def index(request):
 # API #
 #######
 
+@login_required
+def home_api(request):
+    print(f"Session: {request.session['user']}")
+    return JsonResponse({
+        "message": "You are logged in"
+    }, status=200)
+
+
 def login_api(request):
-    """Logs in users"""
+    """Login users"""
 
     if request.method != "POST":
         return JsonResponse({
@@ -55,6 +64,10 @@ def login_api(request):
     # If authentication successful, sign in user
     if user is not None:
         login(request, user)
+        
+        # Store username in session as 'user'
+        request.session['user'] = username
+
         return JsonResponse({
             "message": f"{user} logged in"
         }, status=200)
@@ -72,6 +85,12 @@ def logout_api(request):
         }, status=405)
 
     logout(request)
+
+    # Clear user from session
+    try:
+        del request.session["user"]
+    except KeyError:
+        pass
 
     return JsonResponse({
         "message": "Logged out"

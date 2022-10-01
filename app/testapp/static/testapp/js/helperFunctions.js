@@ -116,6 +116,22 @@ const register = async(username, email, password, confirmation) => {
     }
 }
 
+// Home page content
+const showHome = async () => {
+    if (browserState.currentPage === 'home') {
+        console.log('In showHome, at the home page');
+    }
+
+    const response = await fetch('api/home');
+    const result = await response.json();
+
+    if (result.message) {
+        return result.message;
+    } else {
+        throw new Error(result.error);
+    }
+}
+
 // nav buttons appearance
 function showNav() {
     // show relevant nav buttons
@@ -153,8 +169,19 @@ function showPage(navId = 'home_nav', source = '') {
             value.hide();
         }
     }
+
     showNav();
     formFocus();
+
+    if (browserState.currentPage === 'home' && userState.loggedIn) {
+        showHome()
+        .then((message) => {
+            console.log(message);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
 }
 
 // Tests of single form fields
