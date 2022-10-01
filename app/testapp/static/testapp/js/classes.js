@@ -4,6 +4,23 @@
 // Page Classes //
 //////////////////
 
+// Header class
+class HeaderOne {
+    constructor(textContent, appendTo, id, className) {
+        this.textContent = textContent;
+        this.appendTo = appendTo;
+        this.id = id;
+        this.className = className;
+    }
+    append(element) {
+        const h1 = document.createElement('h1');
+        h1.id = this.id;
+        h1.className = this.className;
+        h1.textContent = this.textContent;
+        document.querySelector(`#${this.appendTo}`).append(h1);
+    }
+}
+
 // Form class
 class InputForm {
     constructor(object, appendTo, id, className = 'form') {

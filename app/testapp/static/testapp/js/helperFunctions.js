@@ -84,8 +84,15 @@ const logout = async() => {
 
     const result = await response.json();
 
-    if (result.message) {
-        // logged out
+    if (result) {
+        // logged out, remove all user content
+        if (document.querySelectorAll(`.${result.user}`)) {
+            const parent = document.querySelector('#home_page')
+            const children = document.querySelectorAll(`.${result.user}`)
+            children.forEach(child => {
+                parent.removeChild(child);
+            })
+        }
         return result.message;
     } else {
         throw new Error(result.error);
@@ -116,19 +123,30 @@ const register = async(username, email, password, confirmation) => {
     }
 }
 
-// Home page content
+// Show home page content from API
 const showHome = async () => {
-    if (browserState.currentPage === 'home') {
-        console.log('In showHome, at the home page');
-    }
-
-    const response = await fetch('api/home');
-    const result = await response.json();
-
-    if (result.message) {
-        return result.message;
+    if (browserState.currentPage === 'home' && userState.loggedIn) {
+        const response = await fetch('api/home_loggedin');
+        const result = await response.json();
+    
+        if (result.user) {
+            // Clear any existing elements for user
+            if (document.querySelectorAll(`.${result.user}`)) {
+                const parent = document.querySelector('#home_page')
+                const children = document.querySelectorAll(`.${result.user}`)
+                children.forEach(child => {
+                    parent.removeChild(child);
+                })
+            }
+            // Create a message to the user
+            const homeHeaderOne = new HeaderOne(`Hello ${result.user}`, 'home_page', `${result.user}_h1`, `${result.user}`);
+            homeHeaderOne.append();
+            return result.user;
+        } else {
+            throw new Error(result.error);
+        }
     } else {
-        throw new Error(result.error);
+        return 'Please log in'
     }
 }
 
@@ -170,10 +188,12 @@ function showPage(navId = 'home_nav', source = '') {
         }
     }
 
+    // Show navigation and set form focus
     showNav();
     formFocus();
 
-    if (browserState.currentPage === 'home' && userState.loggedIn) {
+    // Get home page content
+    if (browserState.currentPage === 'home') {
         showHome()
         .then((message) => {
             console.log(message);

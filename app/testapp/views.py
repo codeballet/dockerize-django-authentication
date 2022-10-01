@@ -26,10 +26,9 @@ def index(request):
 #######
 
 @login_required
-def home_api(request):
-    print(f"Session: {request.session['user']}")
+def home_loggedin_api(request):
     return JsonResponse({
-        "message": "You are logged in"
+        "user": request.session['user']
     }, status=200)
 
 
@@ -83,6 +82,9 @@ def logout_api(request):
         return JsonResponse({
             "error": "POST request required"
         }, status=405)
+    
+    # identify user to log out
+    user_leaving = request.session["user"]
 
     logout(request)
 
@@ -93,7 +95,8 @@ def logout_api(request):
         pass
 
     return JsonResponse({
-        "message": "Logged out"
+        "user": user_leaving,
+        "message": f"{user_leaving} logged out"
     }, status=200)
 
 
