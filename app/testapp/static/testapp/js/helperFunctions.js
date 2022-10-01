@@ -86,16 +86,20 @@ const logout = async() => {
 
     if (result) {
         // logged out, remove all user content
-        if (document.querySelectorAll(`.${result.user}`)) {
-            const parent = document.querySelector('#home_page')
-            const children = document.querySelectorAll(`.${result.user}`)
-            children.forEach(child => {
-                parent.removeChild(child);
-            })
-        }
+        removeContent(result.user);
         return result.message;
     } else {
         throw new Error(result.error);
+    }
+}
+
+const removeContent = (user) => {
+    if (document.querySelectorAll(`.${user}`)) {
+        const parent = document.querySelector('#home_page')
+        const children = document.querySelectorAll(`.${user}`)
+        children.forEach(child => {
+            parent.removeChild(child);
+        })
     }
 }
 
@@ -129,15 +133,9 @@ const showHome = async () => {
         const response = await fetch('api/home_loggedin');
         const result = await response.json();
     
-        if (result.user) {
+        if (result) {
             // Clear any existing elements for user
-            if (document.querySelectorAll(`.${result.user}`)) {
-                const parent = document.querySelector('#home_page')
-                const children = document.querySelectorAll(`.${result.user}`)
-                children.forEach(child => {
-                    parent.removeChild(child);
-                })
-            }
+            removeContent(result.user);
             // Create a message to the user
             const homeHeaderOne = new HeaderOne(`Hello ${result.user}`, 'home_page', `${result.user}_h1`, `${result.user}`);
             homeHeaderOne.append();
