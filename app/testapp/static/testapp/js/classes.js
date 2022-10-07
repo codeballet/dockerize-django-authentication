@@ -6,18 +6,17 @@
 
 // Header class
 class HeaderOne {
-    constructor(textContent, appendTo, id, className) {
+    constructor(textContent, id, className) {
         this.textContent = textContent;
-        this.appendTo = appendTo;
         this.id = id;
         this.className = className;
     }
-    append(element) {
+    append(appendTo) {
         const h1 = document.createElement('h1');
         h1.id = this.id;
         h1.className = this.className;
         h1.textContent = this.textContent;
-        document.querySelector(`#${this.appendTo}`).append(h1);
+        document.querySelector(`#${appendTo}`).append(h1);
     }
 }
 
@@ -116,6 +115,28 @@ class Page {
     }
     show() {
         document.querySelector(`#${this.id}`).style.display = 'Block';
+    }
+}
+
+// div with paragraphs class
+class Paragraphs {
+    constructor(paragraphs, id, className) {
+        this.paragraphs = paragraphs;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const div = document.createElement('div');
+        div.id = this.id;
+        div.className = this.className;
+        document.querySelector(`#${appendTo}`).append(div);
+        // Create the paragraphs inside the div
+        for (const [key, value] of Object.entries(this.paragraphs)) {
+            const p = document.createElement('p');
+            p.id = `${this.id}_${key}`;
+            p.textContent = value;
+            document.querySelector(`#${this.id}`).append(p);
+        }
     }
 }
 

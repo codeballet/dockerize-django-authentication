@@ -86,20 +86,10 @@ const logout = async() => {
 
     if (result) {
         // logged out, remove all user content
-        removeContent(result.user);
+        removeUserContent(result.user, 'home_page');
         return result.message;
     } else {
         throw new Error(result.error);
-    }
-}
-
-const removeContent = (user) => {
-    if (document.querySelectorAll(`.${user}`)) {
-        const parent = document.querySelector('#home_page')
-        const children = document.querySelectorAll(`.${user}`)
-        children.forEach(child => {
-            parent.removeChild(child);
-        })
     }
 }
 
@@ -127,6 +117,16 @@ const register = async(username, email, password, confirmation) => {
     }
 }
 
+const removeUserContent = (user, page) => {
+    if (document.querySelectorAll(`.${user}`)) {
+        const parent = document.querySelector(`#${page}`);
+        const children = document.querySelectorAll(`.${user}`);
+        children.forEach(child => {
+            parent.removeChild(child);
+        });
+    }
+}
+
 // Show home page content from API
 const showHome = async () => {
     if (browserState.currentPage === 'home' && userState.loggedIn) {
@@ -134,16 +134,28 @@ const showHome = async () => {
         const result = await response.json();
     
         if (result) {
-            // Clear any existing elements for user
-            removeContent(result.user);
-            // Create a message to the user
-            const homeHeaderOne = new HeaderOne(`Hello ${result.user}`, 'home_page', `${result.user}_h1`, `${result.user}`);
-            homeHeaderOne.append();
+            removeUserContent('anon', 'home_page');
+            removeUserContent(result.user, 'home_page');
+
+            let content = {
+                1: `Hello ${result.user}`
+            }
+            const userGreeting = new Paragraphs(content, 'home_greeting', `${result.user}`);
+            userGreeting.append('home_page');
+
             return result.user;
         } else {
             throw new Error(result.error);
         }
     } else {
+        // Not logged in
+        removeUserContent('anon', 'home_page');
+
+        let content = {
+            1: 'Please log in to see more content.'
+        }
+        const anonGreeting = new Paragraphs(content, 'anon_greeting', 'anon');
+        anonGreeting.append('home_page');
         return 'Please log in'
     }
 }
@@ -194,7 +206,7 @@ function showPage(navId = 'home_nav', source = '') {
     if (browserState.currentPage === 'home') {
         showHome()
         .then((message) => {
-            console.log(message);
+            console.log('User: ', message);
         })
         .catch((error) => {
             console.log(error);
