@@ -98,6 +98,8 @@ class NavMenu {
 
 
 // Page class
+// TODO: create a subcontainer for each page
+// with a unique id, so that content easily can be removed.
 class Page {
     constructor(id, className = 'page') {
         this.id = id;
