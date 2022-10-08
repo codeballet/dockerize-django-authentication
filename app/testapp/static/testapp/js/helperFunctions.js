@@ -140,8 +140,16 @@ const showHome = async () => {
 
             let content = {
                 1: `Hello ${result.user}.`,
-                2: result.answer
-            }
+            };
+
+            // Incrementally add answers to content
+            let i = 2;
+            result.answers.forEach(answer => {
+                content[i] = answer;
+                i++;
+            });
+
+            // Append content to user's home page
             const userGreeting = new Paragraphs(content, 'home_greeting', `${result.user}`);
             userGreeting.append('home_page');
 
@@ -151,6 +159,7 @@ const showHome = async () => {
         }
     } else {
         // Not logged in
+        // TODO: remove all page content, also remains from from users
         removeUserContent('anon', 'home_page');
 
         let content = {

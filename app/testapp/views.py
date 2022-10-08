@@ -41,10 +41,10 @@ def index(request):
 
 @login_required
 def home_loggedin_api(request):
-    answer = ai("first")
+    answers = ai("first")
     return JsonResponse({
         "user": request.session['user'],
-        "answer": answer
+        "answers": answers
     }, status=200)
 
 
@@ -195,7 +195,7 @@ def test_username(username):
 ######
 
 FILE_MATCHES =1
-SENTENCE_MATCHES = 1
+SENTENCE_MATCHES = 2
 
 
 def ai(question):
@@ -203,7 +203,7 @@ def ai(question):
     # TODO: Use form input instead of command-line arguments
 
     # Calculate IDF values across files
-    files = load_files("static/testapp/corpus")
+    files = load_files(os.path.abspath("testapp/static/testapp/corpus"))
     file_words = {
         filename: tokenize(files[filename])
         for filename in files
@@ -230,8 +230,8 @@ def ai(question):
 
     # Determine top sentence matches
     matches = top_sentences(query, sentences, idfs, n=SENTENCE_MATCHES)
-    for match in matches:
-        print(match)
+    
+    return matches
 
 
 def load_files(directory):
