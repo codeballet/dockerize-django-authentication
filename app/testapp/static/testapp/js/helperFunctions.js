@@ -83,11 +83,12 @@ const logout = async() => {
     });
 
     const result = await response.json();
+    console.log('Inside logout');
 
     if (result) {
         // logged out, remove all user content
-        removeUserContent(result.user, 'home_page');
-        return result.message;
+        console.log(`Inside logout, result.user: ${result.user}`);
+        return result;
     } else {
         throw new Error(result.error);
     }
@@ -117,8 +118,12 @@ const register = async(username, email, password, confirmation) => {
     }
 }
 
+// TODO: fix remove user content after logout
 const removeUserContent = (user, page) => {
+    console.log('Inside removeUserContent');
+    console.log(`User: ${user}`);
     if (document.querySelectorAll(`.${user}`)) {
+        console.log('Inside if statement in removeUserContent');
         const parent = document.querySelector(`#${page}`);
         const children = document.querySelectorAll(`.${user}`);
         children.forEach(child => {

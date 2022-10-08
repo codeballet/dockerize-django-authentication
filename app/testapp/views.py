@@ -112,7 +112,7 @@ def logout_api(request):
 
     return JsonResponse({
         "user": user_leaving,
-        "message": f"{user_leaving} logged out"
+        "message": "Logged out"
     }, status=200)
 
 

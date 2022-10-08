@@ -39,6 +39,7 @@ function navEvent(id) {
         .then((message) => {
             console.log(message);
             userState.loggedIn = false;
+            removeUserContent(message.user, 'home_page');
             showPage('login_nav');
         })
         .catch((error) => {
