@@ -117,8 +117,6 @@ const register = async(username, email, password, confirmation) => {
     }
 }
 
-// TODO: put all items on a page in a sub-container of that page,
-// then remove them all as one child only.
 const removeUserContent = (user, page) => {
     if (document.querySelectorAll(`.${user}`)) {
         const parent = document.querySelector(`#${page}`);
@@ -136,6 +134,7 @@ const showHome = async () => {
         const result = await response.json();
     
         if (result) {
+            // Logged in user
             removeUserContent('anon', 'home_page');
             removeUserContent(result.user, 'home_page');
 
