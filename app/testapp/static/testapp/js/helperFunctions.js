@@ -139,7 +139,8 @@ const showHome = async () => {
             removeUserContent(result.user, 'home_page');
 
             let content = {
-                1: `Hello ${result.user}`
+                1: `Hello ${result.user}.`,
+                2: result.answer
             }
             const userGreeting = new Paragraphs(content, 'home_greeting', `${result.user}`);
             userGreeting.append('home_page');
