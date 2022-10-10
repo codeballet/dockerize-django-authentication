@@ -48,5 +48,8 @@ body .form .form_field {
 body .pages {
   display: block;
 }
+body p {
+  margin-left: 0.3rem;
+}
 
 /*# sourceMappingURL=styles.css.map */

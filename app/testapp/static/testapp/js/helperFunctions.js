@@ -4,7 +4,7 @@
 // helper functions //
 //////////////////////
 
-// Append all elements to HTML page
+// Append elements to HTML page
 function appendContent() {
     // Navigation
     navMenu.append();
@@ -15,6 +15,9 @@ function appendContent() {
 
     // Home page
     homePage.append();
+    homeGreeting.append('home_page');
+    questionForm.append();
+    questionForm.hide();
 
     // Login page
     loginPage.append();
@@ -47,6 +50,37 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+// Acquire answers from AI
+const getAnswers = async (question) => {
+    const csrftoken = getCookie('csrftoken');
+
+    console.log('inside getAnswers, sending a fetch request');
+    const response = await fetch('api/question', {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        mode: 'same-origin',
+        body: JSON.stringify({
+            question: question
+        })
+    });
+
+    const result = await response.json();
+
+    if (result) {
+        return result;
+    } else {
+        // Logged out
+        questionForm.hide();
+
+        // Change the greeting
+        document.querySelector(('#home_greeting')).textContent = `Please log in to ask the AI questions`;
+
+        return 'Not logged in';
+    }
+
+
 }
 
 // Login user
@@ -118,7 +152,6 @@ const register = async(username, email, password, confirmation) => {
     }
 }
 
-// TODO: fix remove user content after logout
 const removeUserContent = (contentClass, page) => {
     if (document.querySelectorAll(`.${contentClass}`)) {
         const parent = document.querySelector(`#${page}`);
@@ -135,36 +168,41 @@ const showHome = async () => {
     removeUserContent('paragraphs', 'home_page');
 
     try {
-        // Call the api
+        // Call the home api
         const response = await fetch('api/home_loggedin');
         const result = await response.json();
 
-        // Add user greeting to page content
-        let content = {
-            1: `Hello ${result.user}.`,
-        };
+        // Show the questionForm and set focus
+        questionForm.show();
+        formFocus();
 
-        // Incrementally add the answers to page content
-        let i = 2;
-        result.answers.forEach(answer => {
-            content[i] = answer;
-            i++;
-        });
+        // Change the greeting
+        document.querySelector(('#home_greeting')).textContent = `Hello ${result.user}, please ask the AI some questions`;
 
-        // Append content to user's home page
-        const userGreeting = new Paragraphs(content, 'paragraphs_home', `${result.user} paragraphs`);
-        userGreeting.append('home_page');
+        // // Add user greeting to page content
+        // let content = {
+        //     1: `Hello ${result.user}.`,
+        // };
+
+        // // Incrementally add the answers to page content
+        // let i = 2;
+        // result.answers.forEach(answer => {
+        //     content[i] = answer;
+        //     i++;
+        // });
+
+        // // Append content to user's home page
+        // const userGreeting = new Paragraphs(content, 'paragraphs_greet', `${result.user} paragraphs`);
+        // userGreeting.append('home_page');
 
         return result.user;
     } catch {
         // Logged out
+        questionForm.hide();
 
-        // Add anonymous content to home page
-        let content = {
-            1: 'Please log in to see more content.'
-        };
-        const anonGreeting = new Paragraphs(content, 'paragraphs_home', 'anon paragraphs');
-        anonGreeting.append('home_page');
+         // Change the greeting
+         document.querySelector(('#home_greeting')).textContent = `Please log in to ask the AI questions`;
+
 
         return 'Not logged in';
     }

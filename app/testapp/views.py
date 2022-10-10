@@ -35,18 +35,41 @@ def index(request):
     return render(request, "testapp/index.html")
 
 
-#######
-# API #
-#######
+######################
+# API login required #
+######################
 
 @login_required
 def home_loggedin_api(request):
-    answers = ai("first")
+    return JsonResponse({
+        "user": request.session["user"]
+    }, status=200)
+
+
+@login_required
+def question_api(request):
+    print('Inside question_api')
+
+    if request.method != "POST":
+        return JsonResponse({
+            "error": "POST request required"
+        }, status=405)
+
+    data = json.loads(request.body)
+    question = data["question"]
+    answers = ai(question)
+
+    print(answers)
+
     return JsonResponse({
         "user": request.session['user'],
         "answers": answers
     }, status=200)
 
+
+################
+# API no login #
+################
 
 def login_api(request):
     """Login users"""

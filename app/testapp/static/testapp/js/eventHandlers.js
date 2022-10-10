@@ -51,6 +51,27 @@ function navEvent(id) {
     }
 }
 
+// On submitting the question form
+function questionEvent(e) {
+    try {
+        console.log('Got a question event')
+        getAnswers(e.target.elements.question.value)
+        .then(message => {
+            console.log(message);
+            // TODO: send answers to function that displays it on homepage
+        })
+        .catch (error => {
+            console.log(error);
+        });
+
+        // reset form field
+        e.target.elements.question.value = '';
+
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
 // On submitting the registration form
 function registerEvent(e) {
     try {

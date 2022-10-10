@@ -4,6 +4,43 @@
 // Form input objects //
 ////////////////////////
 
+const loginFormInput = {
+    username: {
+        id: 'login_username',
+        className: 'form_field',
+        name: 'username',
+        type: 'text',
+        placeholder: 'Username'
+    },
+    password: {
+        id: 'login_password',
+        className: 'form_field',
+        name: 'password',
+        type: 'password',
+        placeholder: 'Password'
+    },
+    submit: {
+        id: 'login_submit',
+        className: 'button submit',
+        type: 'submit'
+    }
+}
+
+const questionFormInput = {
+    question: {
+        id: 'question',
+        className: 'form_field',
+        name: 'question',
+        type: 'text',
+        placeholder: 'Question'
+    },
+    submit: {
+        id: 'question_submit',
+        className: 'button submit',
+        type: 'submit'
+    }
+}
+
 const registerFormInput = {
     username: {
         id: 'register_username',
@@ -35,28 +72,6 @@ const registerFormInput = {
     },
     submit: {
         id: 'register_submit',
-        className: 'button submit',
-        type: 'submit'
-    }
-}
-
-const loginFormInput = {
-    username: {
-        id: 'login_username',
-        className: 'form_field',
-        name: 'username',
-        type: 'text',
-        placeholder: 'Username'
-    },
-    password: {
-        id: 'login_password',
-        className: 'form_field',
-        name: 'password',
-        type: 'password',
-        placeholder: 'Password'
-    },
-    submit: {
-        id: 'login_submit',
         className: 'button submit',
         type: 'submit'
     }

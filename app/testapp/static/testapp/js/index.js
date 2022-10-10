@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Decide which page to show
     if (browserState.currentPage === '') {
-        // default page
+        // show default page
         showPage();
     } else {
         // match page to browserState
@@ -52,6 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#login_form').onsubmit = e => {
         e.preventDefault();
         loginEvent(e);
+    }
+
+    // Question form event
+    document.querySelector('#question_form').onsubmit = e => {
+        e.preventDefault();
+        questionEvent(e);
     }
 
     // Registration form event

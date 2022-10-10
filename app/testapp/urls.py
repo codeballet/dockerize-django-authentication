@@ -11,5 +11,6 @@ urlpatterns = [
     path('api/home_loggedin', views.home_loggedin_api, name='home_loggedin_api'),
     path('api/login', views.login_api, name='login_api'),
     path('api/logout', views.logout_api, name='logout_api'),
+    path('api/question', views.question_api, name='question_api'),
     path('api/register', views.register_api, name='register_api')
 ]

@@ -5,18 +5,18 @@
 //////////////////
 
 // Header class
-class HeaderOne {
+class Greeting {
     constructor(textContent, id, className) {
         this.textContent = textContent;
         this.id = id;
         this.className = className;
     }
     append(appendTo) {
-        const h1 = document.createElement('h1');
-        h1.id = this.id;
-        h1.className = this.className;
-        h1.textContent = this.textContent;
-        document.querySelector(`#${appendTo}`).append(h1);
+        const p = document.createElement('p');
+        p.id = this.id;
+        p.className = this.className;
+        p.textContent = this.textContent;
+        document.querySelector(`#${appendTo}`).append(p);
     }
 }
 
@@ -53,6 +53,12 @@ class InputForm {
             document.querySelector(`#${this.id}`).append(field);
         }
     }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'block'
+    }
 }
 
 
@@ -77,7 +83,7 @@ class NavButton {
         document.querySelector(`#${this.id}`).style.display = 'none';
     }
     show() {
-        document.querySelector(`#${this.id}`).style.display = 'Block';
+        document.querySelector(`#${this.id}`).style.display = 'block';
     }
 }
 
@@ -114,7 +120,7 @@ class Page {
         document.querySelector(`#${this.id}`).style.display = 'none';
     }
     show() {
-        document.querySelector(`#${this.id}`).style.display = 'Block';
+        document.querySelector(`#${this.id}`).style.display = 'block';
     }
 }
 
