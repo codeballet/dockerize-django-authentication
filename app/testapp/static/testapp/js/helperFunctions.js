@@ -83,11 +83,11 @@ const logout = async() => {
     });
 
     const result = await response.json();
-    console.log('Inside logout');
 
-    if (result) {
-        // logged out, remove all user content
-        console.log(`Inside logout, result.user: ${result.user}`);
+    if (response.status === 200) {
+        // Register new userState
+        userState.loggedIn = false;
+
         return result;
     } else {
         throw new Error(result.error);
@@ -119,13 +119,10 @@ const register = async(username, email, password, confirmation) => {
 }
 
 // TODO: fix remove user content after logout
-const removeUserContent = (user, page) => {
-    console.log('Inside removeUserContent');
-    console.log(`User: ${user}`);
-    if (document.querySelectorAll(`.${user}`)) {
-        console.log('Inside if statement in removeUserContent');
+const removeUserContent = (contentClass, page) => {
+    if (document.querySelectorAll(`.${contentClass}`)) {
         const parent = document.querySelector(`#${page}`);
-        const children = document.querySelectorAll(`.${user}`);
+        const children = document.querySelectorAll(`.${contentClass}`);
         children.forEach(child => {
             parent.removeChild(child);
         });
@@ -134,45 +131,42 @@ const removeUserContent = (user, page) => {
 
 // Show home page content from API
 const showHome = async () => {
-    if (browserState.currentPage === 'home' && userState.loggedIn) {
+    // Remove home page content
+    removeUserContent('paragraphs', 'home_page');
+
+    try {
+        // Call the api
         const response = await fetch('api/home_loggedin');
         const result = await response.json();
-    
-        if (result) {
-            // Logged in user
-            removeUserContent('anon', 'home_page');
-            removeUserContent(result.user, 'home_page');
 
-            let content = {
-                1: `Hello ${result.user}.`,
-            };
+        // Add user greeting to page content
+        let content = {
+            1: `Hello ${result.user}.`,
+        };
 
-            // Incrementally add answers to content
-            let i = 2;
-            result.answers.forEach(answer => {
-                content[i] = answer;
-                i++;
-            });
+        // Incrementally add the answers to page content
+        let i = 2;
+        result.answers.forEach(answer => {
+            content[i] = answer;
+            i++;
+        });
 
-            // Append content to user's home page
-            const userGreeting = new Paragraphs(content, 'home_greeting', `${result.user}`);
-            userGreeting.append('home_page');
+        // Append content to user's home page
+        const userGreeting = new Paragraphs(content, 'paragraphs_home', `${result.user} paragraphs`);
+        userGreeting.append('home_page');
 
-            return result.user;
-        } else {
-            throw new Error(result.error);
-        }
-    } else {
-        // Not logged in
-        // TODO: remove all page content, also remains from from users
-        removeUserContent('anon', 'home_page');
+        return result.user;
+    } catch {
+        // Logged out
 
+        // Add content to home page
         let content = {
             1: 'Please log in to see more content.'
-        }
-        const anonGreeting = new Paragraphs(content, 'anon_greeting', 'anon');
+        };
+        const anonGreeting = new Paragraphs(content, 'paragraphs_home', 'anon paragraphs');
         anonGreeting.append('home_page');
-        return 'Please log in'
+
+        return 'Not logged in';
     }
 }
 
@@ -218,7 +212,7 @@ function showPage(navId = 'home_nav', source = '') {
     showNav();
     formFocus();
 
-    // Get home page content
+    // For home page
     if (browserState.currentPage === 'home') {
         showHome()
         .then((message) => {

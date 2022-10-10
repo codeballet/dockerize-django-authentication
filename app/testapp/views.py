@@ -82,6 +82,7 @@ def login_api(request):
         
         # Store username in session as 'user'
         request.session['user'] = username
+        print(f"Logged in user: {request.session['user']}")
 
         return JsonResponse({
             "message": f"{user} logged in"
@@ -102,18 +103,16 @@ def logout_api(request):
     # identify user to log out
     user_leaving = request.session["user"]
 
-    logout(request)
-
-    # Clear user from session
     try:
-        del request.session["user"]
-    except KeyError:
-        pass
-
-    return JsonResponse({
-        "user": user_leaving,
-        "message": "Logged out"
-    }, status=200)
+        logout(request)
+        return JsonResponse({
+            "user": user_leaving,
+            "message": "Logged out"
+        }, status=200)
+    except:
+        return JsonResponse({
+            "error": "Could not log out user"
+        })
 
 
 def register_api(request):

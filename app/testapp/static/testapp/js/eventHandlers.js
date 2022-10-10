@@ -33,22 +33,22 @@ function loginEvent(e) {
 
 // On clicking a navigation button
 function navEvent(id) {
-    if (id === 'logout_nav') {
+    // If logout button clicked
+    if (id === 'logout_nav') {        
         // call the async logout helperFunction
         logout()
         .then((message) => {
             console.log(message);
-            userState.loggedIn = false;
-            removeUserContent(message.user, 'home_page');
-            showPage('login_nav');
+            showPage('home_nav');
         })
         .catch((error) => {
             console.log(error);
             showPage('login_nav');
         });
+    } else {
+        // Show corresponding page
+        showPage(id);
     }
-    // otherwise, show corresponding page
-    showPage(id);
 }
 
 // On submitting the registration form
