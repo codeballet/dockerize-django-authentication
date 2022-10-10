@@ -159,7 +159,7 @@ const showHome = async () => {
     } catch {
         // Logged out
 
-        // Add content to home page
+        // Add anonymous content to home page
         let content = {
             1: 'Please log in to see more content.'
         };
