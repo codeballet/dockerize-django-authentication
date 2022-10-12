@@ -46,9 +46,9 @@ Thirdly, I am using SASS for styling, which again goes beyond the criteria for a
 
 ### A Class-based, modular JavaScript singlepage frontend paradigm
 
-Fourthly, I spent a lot of effort designing the frontend with JavaScript. Not only according to the singlepage paradigm, however, my approach goes well beyond that of just being a singlepage. It is the frontpage conceptual design that constitutes the main part of the complexity of my application, excluding the AI.
+Fourthly, I spent a lot of effort designing the frontend with JavaScript. However, not only according to the singlepage paradigm. My approach goes well beyond that. Excluding the AI itself, it is the frontpage conceptual design that constitutes the main part of the complexity of my application.
 
-The result of my frontend design effort, I believe, is a rather novel and evolutionary approach to how to code singlepage apps in JavaScript on the Django platform. I have not come across any other project and website that uses the approach I developed for my Ask Me application. Please do inform me if you know of anyone using a similar approach.
+The result of my frontend design effort, I believe, is a rather novel and evolutionary approach to coding singlepage apps in JavaScript on the Django platform. I have not come across any other project and website that uses the specific approach I developed for this Ask Me application. Please do inform me if you know of anyone using a similar approach.
 
 The approach I used was to try to create as much as possible of the site content as Classes and Objects in JavaScript. For instance, all the forms in the application are instances of one single Class called `InputForm`. Meanwhile, the unique fields of each form are stored as JavaScript Objects. In order to generate a new instance of a form, the form Object is passed into the `InputForm` class and appended to the relevant HTML element.
 
@@ -56,15 +56,15 @@ The advantage of the above described approach to forms is that it makes it very 
 
 In more general terms, the approach that I developed could be described as having a somewhat modular character. It may be loosely compared with the React framework: My JavaScript classes in some ways approximate the modular functionality of React components, but without having to use the JSX syntax. Instead, my approach consistently uses vanilla JavaScript.
 
-One potential downside of my approach may be that the structure of the website becomes a bit more abstract and complex, as virtually no HTML is used at all. Everything on the page consists of JavaScript instances of modular Classes and Objects.
+One potential downside of my approach may be that the structure of the website becomes a bit more abstract and complex, as virtually no HTML is used at all. Almost everything on the page consists of JavaScript instances of modular Classes and Objects.
 
-However, one of the advantages of the modular approach is that it makes it easier to track various states, and to modify the pages based on those states. In particular, I use two Classes: `UserState` and `BrowserState`. The former for keeping track of the state of the user, wether they are logged in and logged out, and the latter for keeping track of the Website, which virtual page the user is on.
+However, one of the advantages of the modular approach is that it makes it easier to track various states, and to modify the pages based on those states. In particular, I use two Classes: `UserState` and `BrowserState`. The former for keeping track of the state of the user, wether they are logged in and logged out, and the latter for keeping track of the website, as in which 'page' the user is on.
 
 The `BrowserState` Class enables the navigation buttons to be dynamically coloured and responding to user interaction, depending on which page they are watching. The `UserState` class makes it possible to easily show or hide elements of the interface, depending on wether the user is logged in or logged out.
 
 ### Preparing for production
 
-Fifthly, I have started to think about how to prepare the application for production. In particular, I have moved several of the configuration parameters to a `.env.dev` file, which later on can be complemented by a `.env.prod` file, once the project goes to production.
+Fifthly, I have started to think about how to prepare the application for production. In particular, I have moved several of the configuration parameters to a `.env.dev` file, which later on may be complemented by a `.env.prod` file, once the project goes to production.
 
 The planned `.env.prod` file will contain sensitive and secret materials, such as the Django `SECRET_KEY` variable, and the database password, and should hence be kept strictly private.
 
@@ -92,13 +92,9 @@ The `views.py`, this file contains the one view that activates the the one singl
 
 The `.gitignore` file most notably lists the `.env.prod` file, to be used for production settings of the application, and it should be kept private and secret.
 
-### The `nginx` directory
-
-The `nginx` directory is presently empty, but will be used when the application goes to production, when I plan to use Nginx as a proxy server.
-
 ### Inside the `testapp` directory
 
-The `testapp` directory is where the main body of my files are. There is a `Dockerfile`, defining how to build the container of the web application.
+The `testapp` directory is where the main body of my files are. There is a `Dockerfile`, defining how to build and run the container of the web application.
 
 Inside the `testapp/templates/testapp/` directory, there is a single `index.html` file, serving as the basis for the singlepage frontend.
 
@@ -110,19 +106,25 @@ Inside the `testapp/static/testapp/` directory, there are three subdirectories:
 
 The `corpus` subdirectory contains the text files that the AI reads and generates its answers from
 
-The `css` subdirectory is a directory for linking the `web` Docker service to the `styles` Docker service, which compiles the SASS files, as defined in the `docker-compose.yml` file. Note that the `css` directory is typically only populated inside the running Docker container of the `web` service itself, since the CSS files between the two services are linked by means of Docker bind-volumes. The `css` directory on the versioning repository is typically empty. However, in case it is missing, it seems to produce errors.
+The `css` subdirectory is a directory for linking the `web` Docker service to the `styles` Docker service, which compiles the SASS files, as defined in the `docker-compose.yml` file. Note that the `css` directory is typically only populated inside the running Docker container of the `web` service itself, since the CSS files between the two services are linked by means of Docker bind-volumes. The `css` directory on the versioning repository is typically empty. However, in case that directory is missing, it seems to produce errors.
 
 IMPORTANT NOTE:
-For some reason, it appears that the `/app/testapp/static/testapp/css` directory is not picked up by the git versioning system, unless there is a file inside that directory. Hence, in order not to get errors due to a missing directory, I added the file `css/empty.txt`. That file serves no other purpuse than simply making sure that the `css` directory indeed is picked up by the git versioning system.
+For some reason, it appears that empty directoryies, such as the `/app/testapp/static/testapp/css` directory, are not picked up by the git versioning system, unless there is a file inside that directory. Hence, in order not to get errors due to a missing directory, I added the file `css/empty.txt`. That file serves no other purpuse than simply making sure that the `css` directory indeed is picked up by the git versioning system.
 
 The `js` subdirectory is where all the JavaScript action is happening. Inside that directory is a bunch of files:
 
-- `classes.js`, defining all the classes for the frontend.
+- `classes.js`, defining all the JavaScript Classes for the frontend.
 - `eventHandlers.js`, providing all the event handlers for buttons, etc.
 - `forms.js`, containing all the form Objects, used for instantiation of forms by means of the `InputForm` Class.
 - `helperFunction.js` contains all the functions that are called by the event handlers and the `index.js` files.
 - `index.js` contains the central JavaScript file that goes into action once the HTML content is initially loaded. This file acts as the 'director' that controls all the other JavaScript files.
 - `objects.js` instantiates the classes in the above `classes.js` file, and defines some other JavaScript Objects as global variables.
+
+### Inside the `styles` directory
+
+There is a Dockerfile, specifying how to build the image and run the container. There is also a subdirectory called `testapp/`, which contains the `styles.scss` file and the compiled `styles.css` file.
+
+The `styles/testapp/` directory acts as a Docker bind-volume to make sure that the Docker `web` service gets the compiled `styles.css` file, as defined in the `docker-compose.yml` file.
 
 ## How to run the application
 
