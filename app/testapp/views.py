@@ -63,6 +63,7 @@ def question_api(request):
 
     return JsonResponse({
         "user": request.session['user'],
+        "question": question,
         "answers": answers
     }, status=200)
 

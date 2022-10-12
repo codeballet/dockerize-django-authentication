@@ -162,10 +162,36 @@ const removeUserContent = (contentClass, page) => {
     }
 }
 
+// Show the AI result on the home page
+const showAnswers = result => {
+    console.log(result);
+    
+    // Remove previous answers
+    removeUserContent('answers', 'home_page');
+
+    let content = {
+        1: 'Your question was:',
+        2: `"${result['question']}"`,
+        3: 'The AI says:'
+    };
+
+    // Incrementally add the answers to content
+    let i = 4;
+    result.answers.forEach(answer => {
+        content[i] = `"${answer}"`;
+        i++;
+    });
+
+    // Append content to user's home page
+    const answers = new Answers(content, `answers_${result.user}`, `${result.user} answers`);
+    answers.append('home_page');
+    
+}
+
 // Show home page content from API
 const showHome = async () => {
-    // Remove home page content
-    removeUserContent('paragraphs', 'home_page');
+    // Remove previous answers
+    removeUserContent('answers', 'home_page');
 
     try {
         // Call the home api
@@ -176,28 +202,12 @@ const showHome = async () => {
         questionForm.show();
         formFocus();
 
-        // Change the greeting
+        // Greet the user
         document.querySelector(('#home_greeting')).textContent = `Hello ${result.user}, please ask the AI some questions`;
-
-        // // Add user greeting to page content
-        // let content = {
-        //     1: `Hello ${result.user}.`,
-        // };
-
-        // // Incrementally add the answers to page content
-        // let i = 2;
-        // result.answers.forEach(answer => {
-        //     content[i] = answer;
-        //     i++;
-        // });
-
-        // // Append content to user's home page
-        // const userGreeting = new Paragraphs(content, 'paragraphs_greet', `${result.user} paragraphs`);
-        // userGreeting.append('home_page');
 
         return result.user;
     } catch {
-        // Logged out
+        // Not logged in
         questionForm.hide();
 
          // Change the greeting

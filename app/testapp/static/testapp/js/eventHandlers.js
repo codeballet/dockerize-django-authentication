@@ -54,11 +54,9 @@ function navEvent(id) {
 // On submitting the question form
 function questionEvent(e) {
     try {
-        console.log('Got a question event')
         getAnswers(e.target.elements.question.value)
-        .then(message => {
-            console.log(message);
-            // TODO: send answers to function that displays it on homepage
+        .then(result => {
+            showAnswers(result);
         })
         .catch (error => {
             console.log(error);

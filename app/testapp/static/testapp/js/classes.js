@@ -4,6 +4,31 @@
 // Page Classes //
 //////////////////
 
+// div with AI answers class
+class Answers {
+    constructor(content, id, className) {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const div = document.createElement('div');
+        div.id = this.id;
+        div.className = this.className;
+        document.querySelector(`#${appendTo}`).append(div);
+        // Create the paragraphs inside the div
+        for (const [key, value] of Object.entries(this.content)) {
+            const p = document.createElement('p');
+            p.id = `${this.id}_${key}`;
+            p.textContent = value;
+            if (key === '1' || key === '3') {
+                p.style.fontWeight = 'bold';
+            }
+            document.querySelector(`#${this.id}`).append(p);
+        }
+    }
+}
+
 // Header class
 class Greeting {
     constructor(textContent, id, className) {
@@ -61,7 +86,6 @@ class InputForm {
     }
 }
 
-
 // Navigation button class
 class NavButton {
     constructor(textContent, id, className = 'nav_button button') {
@@ -87,7 +111,6 @@ class NavButton {
     }
 }
 
-
 // Navigation menu class
 class NavMenu {
     constructor(id = 'nav', className = 'page') {
@@ -101,7 +124,6 @@ class NavMenu {
         document.querySelector('.container').append(div);
     }
 }
-
 
 // Page class
 class Page {
@@ -121,28 +143,6 @@ class Page {
     }
     show() {
         document.querySelector(`#${this.id}`).style.display = 'block';
-    }
-}
-
-// div with paragraphs class
-class Paragraphs {
-    constructor(paragraphs, id, className) {
-        this.paragraphs = paragraphs;
-        this.id = id;
-        this.className = className;
-    }
-    append(appendTo) {
-        const div = document.createElement('div');
-        div.id = this.id;
-        div.className = this.className;
-        document.querySelector(`#${appendTo}`).append(div);
-        // Create the paragraphs inside the div
-        for (const [key, value] of Object.entries(this.paragraphs)) {
-            const p = document.createElement('p');
-            p.id = `${this.id}_${key}`;
-            p.textContent = value;
-            document.querySelector(`#${this.id}`).append(p);
-        }
     }
 }
 
