@@ -92,6 +92,7 @@ AUTH_USER_MODEL = 'testapp.User'  #  where testapp is the app name and User is t
 ```
 
 ### Static css files directory
+
 For some reason, it seems that the `/app/testapp/static/testapp/css` directory is not picked up by git. If so, add that manually.
 
 ## Sources
@@ -109,6 +110,14 @@ A rather in-depth guide on how to use Gunicorn as a Django wsgi server for produ
 ### [Dimple Django deployment: a guide](https://mattsegal.dev/simple-django-deployment.html)
 
 Lots of helpful detail on Django deployment. However, not using Docker.
+
+### Texts
+
+The texts of Walt Whitman, Ralph Waldo Emerson, and The Gilgamesh epic are sourced from:
+
+- https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version
+- https://www.thefreshreads.com/self-reliance/
+- http://www.ancienttexts.org/library/mesopotamian/gilgamesh/
 
 ## Articles for further research and development
 

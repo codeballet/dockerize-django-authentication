@@ -217,8 +217,8 @@ def test_username(username):
 # AI #
 ######
 
-FILE_MATCHES =1
-SENTENCE_MATCHES = 2
+FILE_MATCHES = 2
+SENTENCE_MATCHES = 3
 
 
 def ai(question):
