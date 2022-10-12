@@ -94,7 +94,7 @@ The `.gitignore` file most notably lists the `.env.prod` file, to be used for pr
 
 ### Inside the `testapp` directory
 
-The `testapp` directory is where the main body of my files are. There is a `Dockerfile`, defining how to build and run the container of the web application.
+The `testapp` directory is where the main body of my files are. There is a `Dockerfile`, defining how to build and run the container of the Docker `web` service.
 
 Inside the `testapp/templates/testapp/` directory, there is a single `index.html` file, serving as the basis for the singlepage frontend.
 
@@ -122,9 +122,9 @@ The `js` subdirectory is where all the JavaScript action is happening. Inside th
 
 ### Inside the `styles` directory
 
-There is a Dockerfile, specifying how to build the image and run the container that does the job of compiling the SASS files to CSS. There is also a subdirectory called `testapp/`, which contains the `styles.scss` file and the compiled `styles.css` file.
+There is a Dockerfile, specifying how to build the image and run the `styles` Docker service that does the job of compiling the SASS files to CSS. There is also a subdirectory called `testapp/`, which contains the `styles.scss` file and the compiled `styles.css` file.
 
-The `styles/testapp/` directory acts as a Docker bind-volume to make sure that the Docker `web` service gets the compiled `styles.css` file, as defined in the `docker-compose.yml` file.
+The `styles/testapp/` directory acts as a Docker bind-volume both to the Docker `styles` and the `web` services, to make sure that the Docker `web` service gets access to the compiled `styles.css` file, as defined in the `docker-compose.yml` file.
 
 ## How to run the application
 
