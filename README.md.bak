@@ -107,7 +107,7 @@ Basic information on how to set up Django and Postgres on Docker, with everythin
 
 A rather in-depth guide on how to use Gunicorn as a Django wsgi server for production, with Nginx as a proxy-server, everthing running on Docker.
 
-### [Dimple Django deployment: a guide](https://mattsegal.dev/simple-django-deployment.html)
+### [Simple Django deployment: a guide](https://mattsegal.dev/simple-django-deployment.html)
 
 Lots of helpful detail on Django deployment. However, not using Docker.
 

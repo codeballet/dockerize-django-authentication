@@ -110,12 +110,12 @@ Inside the `testapp/static/testapp/` directory, there are three subdirectories:
 
 The `corpus` subdirectory contains the text files that the AI reads and generates its answers from
 
-The `css` subdirectory is a directory for linking the `web` Docker service to the `styles` Docker service, which compiles the SASS files, as defined in the `docker-compose.yml` file. Note that the `css` directory is typically only populated inside the running Docker container of the `web` service itself, since the CSS files between the two services are linked by means of Docker bind-volumes. The `css` directory on the versioning repository is typically empty.
+The `css` subdirectory is a directory for linking the `web` Docker service to the `styles` Docker service, which compiles the SASS files, as defined in the `docker-compose.yml` file. Note that the `css` directory is typically only populated inside the running Docker container of the `web` service itself, since the CSS files between the two services are linked by means of Docker bind-volumes. The `css` directory on the versioning repository is typically empty. However, in case it is missing, it seems to produce errors.
 
 IMPORTANT NOTE:
-For some reason, it seems that the `/app/testapp/static/testapp/css` directory is not picked up by git. If so, add that manually.
+For some reason, it appears that the `/app/testapp/static/testapp/css` directory is not picked up by the git versioning system, unless there is a file inside that directory. Hence, in order not to get errors due to a missing directory, I added the file `css/empty.txt`. That file serves no other purpuse than simply making sure that the `css` directory indeed is picked up by the git versioning system.
 
-the `js` subdirectory is where all the JavaScript action is happening. Inside that directory is a bunch of files:
+The `js` subdirectory is where all the JavaScript action is happening. Inside that directory is a bunch of files:
 
 - `classes.js`, defining all the classes for the frontend.
 - `eventHandlers.js`, providing all the event handlers for buttons, etc.
@@ -146,6 +146,16 @@ Apply the migrations with:
 docker compose exec web python manage.py migrate --no-input
 ```
 
+At this point, the application should be up and running. Do note that unless you delete the volume created by Docker, you do not need to once again migrate the database next time you run `docker compose up`. The database is stored in a Docker volume called `postgres_data`.
+
 ## Additional information
 
-Corpus content.
+Please note that the Artificial Intelligence used in this project is my own, original work, created as part of my final project "Questions" for the Harvard online course CS50's Introduction to Artificial Intelligence with Python. However, the AI is customized and modified for this particular project, for the purpose of integrating the AI with the web application.
+
+When filling in the form to ask the AI a question, please be patient. I have not yet implemented any visual feedback while the AI is processing the answers. Please just be aware that depending on the speed of the server, the answer will take some time to generate before it appears on the webpage.
+
+The content of the Corpus is sourced from:
+
+- https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version
+- https://www.thefreshreads.com/self-reliance/
+- http://www.ancienttexts.org/library/mesopotamian/gilgamesh/
