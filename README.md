@@ -1,125 +1,151 @@
-# Introduction to the Dockerize Django app
+# Ask Me - an AI driven webapp
 
-This is a test app to explore the development of a webapp based on Django, running on Docker.
+## Introduction to Ask Me
 
-The overall aim is for the app to be production ready, using the following components:
+Ask Me is an intelligent, dynamic web application. The application allows a user to register, log in, and ask questions to an Artificial Intelligence. The AI generates answers by means of reading a corpus of documents and matching sentences from those documents to the user's questions.
 
-- A Singlepage frontend, programmed in Object Oriented JavaScript.
-- SASS for styling.
-- Django as the backend server
-- Gunicorn as production server.
-- Nginx as proxy-server.
-- Postgres as database.
-- Certbot with Let's Encrypt for HTTPS encryption.
+Please see below "Additional Information" for more details on the AI.
 
-## The Frontend: Modularity with vanilla JavaScript
+## Criteria
 
-The frontend is coded solely in JavaScript, using an object oriented approach. The aim is to keep the code modular and re-useable. Thus, there are some conceptual similarities to how React components work, while still keeping a strict separation between the JavaScript code and the CSS styling.
+The application fulfills the following stated criteria:
 
-## Start a new Django project
+### Utilizing Django on the backend with one model
 
-Here are some brief instructions for how to get going with your own project.
+The application backend is programmed in Django, using one model `User`, which enables users to to register and log in to the application.
 
-Initial file structure:
+### Utilizing JavaScript on the frontend
 
-```
-.
-├── README.md
-├── app/
-│   ├── Dockerfile
-│   └── requirements.txt
-├── .env.dev
-├── .gitignore
-├── docker-compose.yml
-└── nginx/
-```
+The frontend is written almost entirely in JavaScript, according to the singlepage paradigm.
 
-After having created the initial project directory structure, with the `Dockerfile` and `docker-compose.yml` files: from the project root directory, start a new Django project called "project" with command:
+### Mobile Responsive
+
+The webpage is Mobile Responsive, partly because it is taking into account the viewport width of the user's device. The `<head></head>` of the webpage contains the following `<meta>` element:
 
 ```
-docker-compose run web django-admin startproject project .
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
 
-## Ownership of files created inside containers
+Additionally, the application is using Flexbox to wrap the navigation buttons according to the size of the display.
 
-If you are running Docker on Linux, the files django-admin created are owned by root. This happens because the container runs as the root user. Change the ownership of the new files.
+## Distinctiveness and Complexity
 
-In case you use a data folder for a database, do not change the permission of the data folder where the database has its file, otherwise the database will not be able to start due to permission issues.
+The webpage has complexity and distinctiveness that goes beyond all the previous course projects in several ways. Below is an overview of some of its main features.
+
+### Content and purpose
+
+First, it is neither a social network, nor an e-commerce platform. Instead, the application is an Artificial Intelligence driven site that can answer questions from a user, drawing on 'knowledge' from a corpus of documents that the AI has access to read.
+
+### Docker
+
+Secondly, the application is entirely packaged in Docker containers, which was briefly mentioned in the course lectures, but never fully explored. Here, I have taken inspiration from the brief introduction to Docker in the lectures, and I use Docker Compose to make it easy to run and deliver the application across platforms in a consistent manner.
+
+### Styling with SASS in a Docker container
+
+Thirdly, I am using SASS for styling, which again goes beyond the criteria for all the previous course projects. Part of the challenge here was how to generate a Docker container that could dynamically generate CSS files to be available for the web application, running in a separate Docker container.
+
+### A Class-based, modular JavaScript singlepage frontend paradigm
+
+Fourthly, I spent a lot of effort designing the frontend according to the singlepage paradigm, using JavaScript. However, my approach goes well beyond that of just being a singlepage, and it is the frontpage conceptual design that constitutes the main part of the complexity of my application, excluding the AI.
+
+The result of my effort is what I believe is a rather novel and evolutionary approach to how to code singlepage apps in JavaScript on the Django platform. I have not come across any other project and website that uses the approach I developed for my Ask Me application. Please do inform me if you know of anyone using a similar approach.
+
+The approach I used was to try to create as much of the site content as Classes and Objects in JavaScript. For instance, all the forms in the application are instances of one single Class called `InputForm`. The unique fields of each form are then stored as JavaScript Objects. In order to generate a new instance of a form, I pass the form Object into the `InputForm` class and append it to wherever it should go.
+
+The advantage of the above described approach to forms is that it makes it very easy to generate new forms: Write the form Object, instantiate it with the generic `InputForm` class, and append it to the page.
+
+In more general terms, the approach that I developed could be described as having a somewhat modular character. It may loosely be compared with the React framework, sharing the idea of a sense of modularity: My JavaScript classes in some ways approximate the modular functionality of React components, but without having to use the JSX syntax. Instead, my approach consistently uses vanilla JavaScript.
+
+One potential downside of my approach may be that the structure of the website becomes a bit more abstract and complex, as virtually no HTML is used at all. Everything on the page consists of JavaScript instances of modular Classes and Objects.
+
+However, one of the advantages of the modular approach is that it makes it easier to track various states, and to modify the pages based on those states. In particular, I use two Classes: `UserState` and `BrowserState`. The former for keeping track of the state of the user, wether they are logged in and logged out, and the latter for keeping track of the Website, which virtual page the user is on.
+
+The `BrowserState` Class enables the navigation buttons to be dynamically coloured and responding to user interaction, depending on which page they are watching. The `UserState` class makes it possible to easily show or hide elements of the interface, depending on wether the user is logged in or logged out.
+
+### Preparing for production
+
+Fifthly, I have started to think about how to prepare the application for production. In particular, I have moved several of the configuration parameters to a `.env.dev` file, which later on can be complemented by a `.env.prod` file, once the project goes to production.
+
+The planned `.env.prod` file will contain sensitive and secret materials, such as the Django `SECRET_KEY` variable, and the database password, and should hence be kept strictly private.
+
+### Artificial Intelligence
+
+Lastly, the standout feature of the application is its use of Artificial Intelligence. The AI part of the application is a modification of my final project submission of "Questions" for the CS50's Introduction to Artificial Intelligence with Python.
+
+The main modification of the AI, as compared to how I submitted it for the CS50 course in Artificial Intelligence, is how it here integrates with a webpage, as opposed to having a command-line driven interface.
+
+In this project, I use a Form on the webpage to acquire a question from the user. The question is sent with a `Fetch` request to the backend API on Django, processed by the AI, and the answer is then sent back to the frontend and displayed on the user's homepage.
+
+As for the corpus that the AI draws its knowledge from, I have here included texts from Walt Whitman, Ralph Waldo Emerson, and the Gilgamesh Epic, which makes for some rather interesting answers. Please see the below "Additional Information" for details and acknowledgements.
+
+## Files overview
+
+### Docker files
+
+The project has one `docker-compose.yml` file, which enables the entire application to be run with one `docker compose up` command. The `docker-compose.yml` file starts three services, two of which are defined by `Dockerfile` files: one for the web application and one for compiling the SASS files to standard CSS. The third service is a Postgres image pulled from the Docker hub.
+
+### The `views.py` file
+
+The `views.py`, this file contains the one view that activates the the one singlepage view. The file also contains the API of the server, as well as the AI functions.
+
+### The `.gitignore` file
+
+The `.gitignore` file most notably lists the `.env.prod` file, to be used for production settings of the application, and it should be kept private and secret.
+
+### The `nginx` directory
+
+The `nginx` directory is presently empty, but will be used when the application goes to production, when I plan to use Nginx as a proxy server.
+
+### Inside the `testapp` directory
+
+The `testapp` directory is where the main body of my files are. There is a `Dockerfile`, defining how to build the container of the web application.
+
+Inside the `testapp/templates/testapp/` directory, there is a single `index.html` file, serving as the basis for the singlepage frontend.
+
+Inside the `testapp/static/testapp/` directory, there are three subdirectories:
+
+- `corpus`
+- `css`
+- `js`
+
+The `corpus` subdirectory contains the text files that the AI reads and generates its answers from
+
+The `css` subdirectory is a directory for linking the `web` Docker service to the `styles` Docker service, which compiles the SASS files, as defined in the `docker-compose.yml` file. Note that the `css` directory is typically only populated inside the running Docker container of the `web` service itself, since the CSS files between the two services are linked by means of Docker bind-volumes. The `css` directory on the versioning repository is typically empty.
+
+IMPORTANT NOTE:
+For some reason, it seems that the `/app/testapp/static/testapp/css` directory is not picked up by git. If so, add that manually.
+
+the `js` subdirectory is where all the JavaScript action is happening. Inside that directory is a bunch of files:
+
+- `classes.js`, defining all the classes for the frontend.
+- `eventHandlers.js`, providing all the event handlers for buttons, etc.
+- `forms.js`, containing all the form Objects, used for instantiation of forms by means of the `InputForm` Class.
+- `helperFunction.js` contains all the functions that are called by the event handlers and the `index.js` files.
+- `index.js` contains the central JavaScript file that goes into action once the HTML content is initially loaded. This file acts as the 'director' that controls all the other JavaScript files.
+- `objects.js` instantiates the classes in the above `classes.js` file, and defines some other JavaScript Objects as global variables.
+
+## How to run the application
+
+Since the appliation is packaged in Docker containers, you first need to have Docker installed and running.
+
+From the same directory as where the `docker-compose.yml` file is, run the project with command:
 
 ```
-sudo chown -R $USER:$USER ./app/project ./app/manage.py
+docker compose up
 ```
 
-## Test run the project
-
-The Django project should now be possible to run with `docker compose up`.
-
-## Database migrations
-
-To create migrations:
+You may add the flag `-d` to the above command in order to run the containers in a detached mode, getting your command prompt back. Otherwise, start up a new terminal window, `cd` to the same directory as above, and create migrations with:
 
 ```
 docker compose exec web python manage.py makemigrations
 ```
 
-To apply migrations:
+Apply the migrations with:
 
 ```
 docker compose exec web python manage.py migrate --no-input
-
 ```
 
-## Start a new app
+## Additional information
 
-To start a new app called "testapp":
-
-```
-docker compose exec web python manage.py startapp testapp
-```
-
-As above for the project, remember to change the ownership of the files created by the Docker containers.
-
-## Errors and troubleshoting
-
-### ERROR -- Django auth.User.groups: (fields.E304) Reverse accessor for User.groups clashes with reverse
-
-According to [DebugAH](https://debugah.com/django-auth-user-groups-fields-e304-reverse-accessor-for-user-groups-clashes-with-reverse-5735/), this is because a new AbstractUser user class conflicts with Django’s own user class.
-
-Solution: Add a line of configuration in the `settings.py` file:
-
-```
-AUTH_USER_MODEL = 'testapp.User'  #  where testapp is the app name and User is the model class name
-```
-
-### Static css files directory
-
-For some reason, it seems that the `/app/testapp/static/testapp/css` directory is not picked up by git. If so, add that manually.
-
-## Sources
-
-Here are some of the key sources used for the development of the app.
-
-### [Quickstart: Compose and Django](https://docs.docker.com/samples/django/)
-
-Basic information on how to set up Django and Postgres on Docker, with everything running in Docker.
-
-### [Dockerizing Django with Postgres, Gunicorn, and Nginx](https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/)
-
-A rather in-depth guide on how to use Gunicorn as a Django wsgi server for production, with Nginx as a proxy-server, everthing running on Docker.
-
-### [Dimple Django deployment: a guide](https://mattsegal.dev/simple-django-deployment.html)
-
-Lots of helpful detail on Django deployment. However, not using Docker.
-
-### Texts
-
-The texts of Walt Whitman, Ralph Waldo Emerson, and The Gilgamesh epic are sourced from:
-
-- https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version
-- https://www.thefreshreads.com/self-reliance/
-- http://www.ancienttexts.org/library/mesopotamian/gilgamesh/
-
-## Articles for further research and development
-
-- [How to backup and restore a Postgres database](https://mattsegal.dev/postgres-backup-and-restore.html)
-- [How to automate your Postgres database backups](https://mattsegal.dev/postgres-backup-automate.html)
+Corpus content.
