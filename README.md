@@ -46,15 +46,15 @@ Thirdly, I am using SASS for styling, which again goes beyond the criteria for a
 
 ### A Class-based, modular JavaScript singlepage frontend paradigm
 
-Fourthly, I spent a lot of effort designing the frontend according to the singlepage paradigm, using JavaScript. However, my approach goes well beyond that of just being a singlepage, and it is the frontpage conceptual design that constitutes the main part of the complexity of my application, excluding the AI.
+Fourthly, I spent a lot of effort designing the frontend with JavaScript. Not only according to the singlepage paradigm, however, my approach goes well beyond that of just being a singlepage. It is the frontpage conceptual design that constitutes the main part of the complexity of my application, excluding the AI.
 
-The result of my effort is what I believe is a rather novel and evolutionary approach to how to code singlepage apps in JavaScript on the Django platform. I have not come across any other project and website that uses the approach I developed for my Ask Me application. Please do inform me if you know of anyone using a similar approach.
+The result of my frontend design effort, I believe, is a rather novel and evolutionary approach to how to code singlepage apps in JavaScript on the Django platform. I have not come across any other project and website that uses the approach I developed for my Ask Me application. Please do inform me if you know of anyone using a similar approach.
 
-The approach I used was to try to create as much of the site content as Classes and Objects in JavaScript. For instance, all the forms in the application are instances of one single Class called `InputForm`. The unique fields of each form are then stored as JavaScript Objects. In order to generate a new instance of a form, I pass the form Object into the `InputForm` class and append it to wherever it should go.
+The approach I used was to try to create as much as possible of the site content as Classes and Objects in JavaScript. For instance, all the forms in the application are instances of one single Class called `InputForm`. Meanwhile, the unique fields of each form are stored as JavaScript Objects. In order to generate a new instance of a form, the form Object is passed into the `InputForm` class and appended to the relevant HTML element.
 
-The advantage of the above described approach to forms is that it makes it very easy to generate new forms: Write the form Object, instantiate it with the generic `InputForm` class, and append it to the page.
+The advantage of the above described approach to forms is that it makes it very easy to generate new forms. The workflow is: Define a form Object, instantiate it with the generic `InputForm` class, and append it to the page.
 
-In more general terms, the approach that I developed could be described as having a somewhat modular character. It may loosely be compared with the React framework, sharing the idea of a sense of modularity: My JavaScript classes in some ways approximate the modular functionality of React components, but without having to use the JSX syntax. Instead, my approach consistently uses vanilla JavaScript.
+In more general terms, the approach that I developed could be described as having a somewhat modular character. It may be loosely compared with the React framework: My JavaScript classes in some ways approximate the modular functionality of React components, but without having to use the JSX syntax. Instead, my approach consistently uses vanilla JavaScript.
 
 One potential downside of my approach may be that the structure of the website becomes a bit more abstract and complex, as virtually no HTML is used at all. Everything on the page consists of JavaScript instances of modular Classes and Objects.
 
