@@ -122,7 +122,7 @@ The `js` subdirectory is where all the JavaScript action is happening. Inside th
 
 ### Inside the `styles` directory
 
-There is a Dockerfile, specifying how to build the image and run the container. There is also a subdirectory called `testapp/`, which contains the `styles.scss` file and the compiled `styles.css` file.
+There is a Dockerfile, specifying how to build the image and run the container that does the job of compiling the SASS files to CSS. There is also a subdirectory called `testapp/`, which contains the `styles.scss` file and the compiled `styles.css` file.
 
 The `styles/testapp/` directory acts as a Docker bind-volume to make sure that the Docker `web` service gets the compiled `styles.css` file, as defined in the `docker-compose.yml` file.
 
