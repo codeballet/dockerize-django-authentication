@@ -156,6 +156,8 @@ Please note that the Artificial Intelligence used in this project is my own, ori
 
 When filling in the form to ask the AI a question, please be patient. I have not yet implemented any visual feedback while the AI is processing the answers. Please just be aware that depending on the speed of the server, the answer will take some time to generate before it appears on the webpage.
 
+### Acknowledgements
+
 The content of the Corpus is sourced from:
 
 - https://www.poetryfoundation.org/poems/45477/song-of-myself-1892-version
