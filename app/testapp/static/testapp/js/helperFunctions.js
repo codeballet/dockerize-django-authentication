@@ -122,8 +122,11 @@ const logout = async() => {
         // Register new userState
         userState.loggedIn = false;
 
-        return result;
+        return result.message;
     } else {
+        // Change userstate anyway
+        userState.loggedIn = false;
+
         throw new Error(result.error);
     }
 }

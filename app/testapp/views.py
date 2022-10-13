@@ -104,9 +104,8 @@ def login_api(request):
     if user is not None:
         login(request, user)
         
-        # Store username in session as 'user'
-        request.session['user'] = username
-        print(f"Logged in user: {request.session['user']}")
+        # Store username in session
+        store_user(request, username)
 
         return JsonResponse({
             "message": f"{user} logged in"
@@ -124,13 +123,14 @@ def logout_api(request):
             "error": "POST request required"
         }, status=405)
     
-    # identify user to log out
-    user_leaving = request.session["user"]
-
     try:
+        # identify user to log out
+        if request.session["user"]:
+            user_leaving = request.session["user"]
+
         logout(request)
+
         return JsonResponse({
-            "user": user_leaving,
             "message": "Logged out"
         }, status=200)
     except:
@@ -189,9 +189,13 @@ def register_api(request):
     # log in user
     try:
         login(request, user)
+
+        # Store username in session
+        store_user(request, username)
+
         return JsonResponse({
             "message": f"{username} is registered and logged in"
-        }, status=201)
+        }, status=200)
     except:
         return JsonResponse({
             "error": "Failed to log in"
@@ -211,6 +215,11 @@ def test_username(username):
     """Detect if username has non-alphanumeric characters"""
     pattern = re.compile("\W")
     return pattern.search(username)
+
+def store_user(request, username):
+    # Store username in session as 'user'
+    request.session['user'] = username
+    print(f"Logged in user: {request.session['user']}")
 
 
 ######
