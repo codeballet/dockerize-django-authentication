@@ -124,10 +124,6 @@ def logout_api(request):
         }, status=405)
     
     try:
-        # identify user to log out
-        if request.session["user"]:
-            user_leaving = request.session["user"]
-
         logout(request)
 
         return JsonResponse({
