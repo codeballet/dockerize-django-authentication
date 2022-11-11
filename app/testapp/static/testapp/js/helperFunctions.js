@@ -13,6 +13,9 @@ function appendContent() {
     loginNavButton.append();
     logoutNavButton.append();
 
+    // Alert
+    alertMessage.append();
+
     // Home page
     homePage.append();
     homeGreeting.append('home_page');

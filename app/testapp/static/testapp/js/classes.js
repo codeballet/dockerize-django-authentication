@@ -4,6 +4,46 @@
 // Page Classes //
 //////////////////
 
+// div with alert message
+// TODO: create an alert message box
+// https://www.w3schools.com/howto/howto_js_alert.asp
+class AlertMessage {
+    constructor(content) {
+        this.content = content;
+    }
+    append() {
+        // create div
+        const div = document.createElement('div');
+        div.id = 'alert';
+        document.querySelector('.container').append(div);
+
+        // span with alert message
+        const msgDiv = document.createElement('div');
+        msgDiv.id = 'alert_message';
+        msgDiv.textContent = this.content;
+        document.querySelector('#alert').append(msgDiv);
+
+        // span with close symbol
+        const closeDiv = document.createElement('div');
+        closeDiv.id = 'close_alert';
+        closeDiv.textContent = '\u00D7';
+        document.querySelector('#alert').append(closeDiv);
+
+        document.querySelector('#alert').style.display = 'none';
+    }
+    hide() {
+        document.querySelector('#alert').style.display = 'none';
+    }
+    show() {
+        document.querySelector('#alert').style.display = 'flex';
+    }
+    set message(m) {
+        this.content = m;
+        document.querySelector('#alert_message').textContent = this.content;
+        this.show();
+    }
+}
+
 // div with AI answers class
 class Answers {
     constructor(content, id, className) {

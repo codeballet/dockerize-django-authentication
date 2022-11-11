@@ -4,6 +4,9 @@
 // HTML //
 //////////
 
+// Alert
+const alertMessage = new AlertMessage('Alert message');
+
 // Navigation menu
 const navMenu = new NavMenu();
 const homeNavButton = new NavButton('Home', 'home_nav');

@@ -41,6 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event listeners //
     /////////////////////
 
+    // Alert message close event
+    document.querySelector('#close_alert').onclick = () => {
+        alertMessage.hide();
+    }
+
     // Navigation button events
     document.querySelectorAll('.nav_button').forEach(button => {
         button.onclick = () => {
@@ -66,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         registerEvent(e);
     }
 
-    // Button highlight events
+    // Button mouseover highlight events
     document.querySelectorAll('.button').forEach(button => {
         button.onmouseenter = e => {
             // hover color button if not active

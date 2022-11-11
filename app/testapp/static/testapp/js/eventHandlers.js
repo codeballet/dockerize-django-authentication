@@ -94,6 +94,7 @@ function registerEvent(e) {
         });
     } catch (error) {
         console.log(error.message);
-        alert(error.message)
+        alertMessage.message = error.message;
+        // alert(error.message)
     }
 }
