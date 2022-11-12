@@ -105,6 +105,9 @@ body .form .form_field {
 body .pages {
   display: block;
 }
+body h2 {
+  margin-left: 0.3rem;
+}
 body p {
   margin-left: 0.3rem;
 }

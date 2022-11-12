@@ -4,40 +4,6 @@
 // helper functions //
 //////////////////////
 
-// Append elements to HTML page
-function appendContent() {
-    // Page title
-    pageTitle.append();
-
-    // Navigation
-    navMenu.append();
-    homeNavButton.append();
-    registerNavButton.append();
-    loginNavButton.append();
-    logoutNavButton.append();
-
-    // Alert
-    alertMessage.append();
-
-    // Home page
-    homePage.append();
-    homeGreeting.append('home_page');
-    questionForm.append();
-    questionForm.hide();
-    thinkingMessage.append();
-
-    // Login page
-    loginPage.append();
-
-    // Registration page
-    registerPage.append();
-    registerForm.append();
-    loginForm.append();
-
-    // Footer
-    footer.append();
-}
-
 // Set focus on form fields
 const formFocus = () => {
     for (const [key, value] of Object.entries(focus)) {
@@ -203,8 +169,9 @@ const showAnswers = result => {
 
 // Show home page content from API
 const showHome = async () => {
-    // Remove previous answers
+    // Remove old content
     removeUserContent('answers', 'home_page');
+    removeUserContent('logged_out', 'home_page');
 
     try {
         // Call the home api
@@ -215,17 +182,15 @@ const showHome = async () => {
         questionForm.show();
         formFocus();
 
-        // Greet the user
-        document.querySelector(('#home_greeting')).textContent = `Hello ${result.user}, please ask the AI some questions`;
-
         return result.user;
     } catch {
         // Not logged in
+
+        // Hide irrelevant content
         questionForm.hide();
 
-         // Change the greeting
-         document.querySelector(('#home_greeting')).textContent = `Please log in to ask the AI questions`;
-
+        // Append new content
+        welcomeH2.append('home_page');
 
         return 'Not logged in';
     }

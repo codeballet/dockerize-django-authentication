@@ -24,7 +24,7 @@ const loginPage = new Page('login_page', 'page');
 const registerPage = new Page('register_page', 'page');
 
 // Non logged-in greeting
-const homeGreeting = new Greeting('Please log in to ask the AI questions', 'home_greeting', 'page_greeting');
+const welcomeH2 = new Header2('Welcome!', 'welcome', 'logged_out');
 
 // Forms
 const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');

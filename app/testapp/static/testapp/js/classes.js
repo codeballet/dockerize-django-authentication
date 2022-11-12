@@ -97,19 +97,25 @@ class Footer {
     }
 }
 
-// Header class
-class Greeting {
-    constructor(textContent, id, className) {
-        this.textContent = textContent;
+// Header classes
+class Header2 {
+    constructor(content, id, className) {
+        this.content = content;
         this.id = id;
         this.className = className;
     }
     append(appendTo) {
-        const p = document.createElement('p');
-        p.id = this.id;
-        p.className = this.className;
-        p.textContent = this.textContent;
-        document.querySelector(`#${appendTo}`).append(p);
+        const h2 = document.createElement('h2');
+        h2.id = this.id;
+        h2.className = this.className;
+        h2.textContent = this.content;
+        document.querySelector(`#${appendTo}`).append(h2);
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'block'
     }
 }
 
