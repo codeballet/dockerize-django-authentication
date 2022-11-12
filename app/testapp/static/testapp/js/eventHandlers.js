@@ -53,9 +53,15 @@ function navEvent(id) {
 
 // On submitting the question form
 function questionEvent(e) {
+    // Show the thinking message
+    thinkingMessage.show();
+
     try {
         getAnswers(e.target.elements.question.value)
         .then(result => {
+            // Hide the thinking message
+            thinkingMessage.hide();
+            
             showAnswers(result);
         })
         .catch (error => {
