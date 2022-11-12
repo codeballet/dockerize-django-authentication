@@ -56,12 +56,15 @@ function questionEvent(e) {
     // Show the thinking message
     thinkingMessage.show();
 
+    // Remove previous answers
+    removeUserContent('answers', 'home_page');
+
     try {
         getAnswers(e.target.elements.question.value)
         .then(result => {
             // Hide the thinking message
             thinkingMessage.hide();
-            
+
             showAnswers(result);
         })
         .catch (error => {
