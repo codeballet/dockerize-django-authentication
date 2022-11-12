@@ -77,6 +77,12 @@ body .nav_button {
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+body #thinking_div {
+  display: flex;
+  margin: 1rem;
+  font-size: large;
+  font-weight: bold;
+}
 body .form {
   display: flex;
   flex-direction: column;

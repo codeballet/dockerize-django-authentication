@@ -87,6 +87,13 @@ body {
             animation-duration: 1s;
             animation-fill-mode: forwards;
         }
+    
+    #thinking_div {
+        display: flex;
+        margin: 1rem;
+        font-size: large;
+        font-weight: bold;
+    }
 
     .button {
         @extend %button;
