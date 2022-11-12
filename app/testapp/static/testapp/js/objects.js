@@ -4,6 +4,9 @@
 // HTML //
 //////////
 
+// Links internal
+const linkLoginWelcome = new Link('login', 'login_nav', 'link_login_welcome', 'logged_out link');
+
 // Page Title
 const pageTitle = new PageTitle('Ask me');
 
@@ -23,8 +26,23 @@ const homePage = new Page('home_page', 'page');
 const loginPage = new Page('login_page', 'page');
 const registerPage = new Page('register_page', 'page');
 
-// Non logged-in greeting
-const welcomeH2 = new Header2('Welcome!', 'welcome', 'logged_out');
+// Not logged-in content
+const welcomeH2 = new Header2(
+    'Welcome!', 
+    'welcome_h2', 
+    'logged_out'
+);
+const paragraphWelcome1 = new Paragraph(
+    'This is a web application where you can ask questions to an Artificial Intelligence. The AI will respond based on the specific texts it has read.', 
+    'paragraph_welcome_1', 
+    'logged_out'
+);
+
+const paragraphWelcome2 = new Paragraph(
+    `Please login to start asking questions`,
+    'paragraph_welcome_2',
+    'logged_out'
+)
 
 // Forms
 const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');

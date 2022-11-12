@@ -4,9 +4,7 @@
 // Page Classes //
 //////////////////
 
-// div with alert message
-// TODO: create an alert message box
-// https://www.w3schools.com/howto/howto_js_alert.asp
+// Alert message class
 class AlertMessage {
     constructor(content) {
         this.content = content;
@@ -45,7 +43,7 @@ class AlertMessage {
     }
 }
 
-// div with AI answers class
+// Answers from AI class
 class Answers {
     constructor(content, id, className) {
         this.content = content;
@@ -111,12 +109,6 @@ class Header2 {
         h2.textContent = this.content;
         document.querySelector(`#${appendTo}`).append(h2);
     }
-    hide() {
-        document.querySelector(`#${this.id}`).style.display = 'none';
-    }
-    show() {
-        document.querySelector(`#${this.id}`).style.display = 'block'
-    }
 }
 
 // Form class
@@ -157,6 +149,27 @@ class InputForm {
     }
     show() {
         document.querySelector(`#${this.id}`).style.display = 'block'
+    }
+}
+
+// Link to another page class
+class Link {
+    constructor(content, linkTo, id, className) {
+        this.content = content;
+        this.linkTo = linkTo;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const span = document.createElement('span');
+        span.textContent = this.content;
+        span.id = this.id;
+        span.className = this.className;
+        span.style.color = 'blue';
+        document.querySelector(`#${appendTo}`).append(span);
+    }
+    forward() {
+        showPage(`#${linkTo}`);
     }
 }
 
@@ -228,7 +241,7 @@ class PageTitle {
         this.className = className;
     }
     append() {
-        // Crate div
+        // Create div
         const div = document.createElement('div');
         div.id = this.id;
         div.className = this.className;
@@ -242,6 +255,22 @@ class PageTitle {
         // Create dividing line
         const hr = document.createElement('hr')
         document.querySelector(`#${this.id}`).append(hr);
+    }
+}
+
+// Paragraph class
+class Paragraph {
+    constructor(content, id, className) {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const p = document.createElement('p');
+        p.id = this.id;
+        p.className = this.className;
+        p.textContent = this.content;
+        document.querySelector(`#${appendTo}`).append(p);
     }
 }
 

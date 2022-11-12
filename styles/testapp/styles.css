@@ -109,7 +109,8 @@ body h2 {
   margin-left: 0.3rem;
 }
 body p {
-  margin-left: 0.3rem;
+  width: 50%;
+  margin: 0rem 5rem 1rem 0.3rem;
 }
 body .title {
   padding: 0;

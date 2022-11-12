@@ -46,31 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.parentElement.style.display = 'none';
     }
 
-    // Navigation button events
-    document.querySelectorAll('.nav_button').forEach(button => {
-        button.onclick = () => {
-            navEvent(button.id);
-        }
-    });
-
-    // Login form event
-    document.querySelector('#login_form').onsubmit = e => {
-        e.preventDefault();
-        loginEvent(e);
-    }
-
-    // Question form event
-    document.querySelector('#question_form').onsubmit = e => {
-        e.preventDefault();
-        questionEvent(e);
-    }
-
-    // Registration form event
-    document.querySelector('#register_form').onsubmit = e => {
-        e.preventDefault();
-        registerEvent(e);
-    }
-
     // Button mouseover highlight events
     document.querySelectorAll('.button').forEach(button => {
         button.onmouseenter = e => {
@@ -92,4 +67,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     })
+
+    // Login form event
+    document.querySelector('#login_form').onsubmit = e => {
+        e.preventDefault();
+        loginEvent(e);
+    };
+
+    // Navigation button click events
+    document.querySelectorAll('.nav_button').forEach(button => {
+        button.onclick = () => {
+            navEvent(button.id);
+        }
+    });
+
+    // Question form event
+    document.querySelector('#question_form').onsubmit = e => {
+        e.preventDefault();
+        questionEvent(e);
+    }
+
+    // Registration form event
+    document.querySelector('#register_form').onsubmit = e => {
+        e.preventDefault();
+        registerEvent(e);
+    }
 });

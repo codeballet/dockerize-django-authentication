@@ -21,7 +21,6 @@ function appendContent() {
 
     // Home page
     homePage.append();
-    welcomeH2.append('home_page');
     questionForm.append();
     questionForm.hide();
     thinkingMessage.append();

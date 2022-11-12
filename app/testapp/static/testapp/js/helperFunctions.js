@@ -185,12 +185,18 @@ const showHome = async () => {
         return result.user;
     } catch {
         // Not logged in
-
         // Hide irrelevant content
         questionForm.hide();
 
         // Append new content
         welcomeH2.append('home_page');
+        paragraphWelcome1.append('home_page');
+        paragraphWelcome2.append('home_page');
+        linkLoginWelcome.append('home_page');
+
+        // Testing getting element
+        // TODO: Make span element link to login
+        console.log(document.querySelector('.link'));
 
         return 'Not logged in';
     }
