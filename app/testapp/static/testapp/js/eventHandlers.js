@@ -33,6 +33,9 @@ function loginEvent(e) {
 
 // On clicking a navigation button
 function navEvent(id) {
+    // Hide alert message
+    alertMessage.hide();
+
     // If logout button clicked
     if (id === 'logout_nav') {        
         // call the async logout helperFunction

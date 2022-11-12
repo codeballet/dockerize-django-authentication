@@ -4,8 +4,9 @@
 // HTML //
 //////////
 
-// Alert
+// Alerts and Messages
 const alertMessage = new AlertMessage('Alert message');
+const thinkingMessage = new ThinkingMessage('Please wait, I am thinking about it...');
 
 // Navigation menu
 const navMenu = new NavMenu();

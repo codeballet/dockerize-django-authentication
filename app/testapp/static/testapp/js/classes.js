@@ -17,18 +17,19 @@ class AlertMessage {
         div.id = 'alert';
         document.querySelector('.container').append(div);
 
-        // span with alert message
+        // create alert message
         const msgDiv = document.createElement('div');
         msgDiv.id = 'alert_message';
         msgDiv.textContent = this.content;
         document.querySelector('#alert').append(msgDiv);
 
-        // span with close symbol
+        // create close symbol 'x'
         const closeDiv = document.createElement('div');
         closeDiv.id = 'close_alert';
         closeDiv.textContent = '\u00D7';
         document.querySelector('#alert').append(closeDiv);
 
+        // hide element
         document.querySelector('#alert').style.display = 'none';
     }
     hide() {
@@ -183,6 +184,41 @@ class Page {
     }
     show() {
         document.querySelector(`#${this.id}`).style.display = 'block';
+    }
+}
+
+// While thinking message
+class ThinkingMessage {
+    constructor(content, id = 'thinking_div', className = 'hidden') {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append() {
+        // create enclosing div
+        const div = document.createElement('div');
+        div.id = this.id;
+        div.className = this.className;
+        document.querySelector('.container').append(div);
+
+        // create message
+        const msgDiv = document.createElement('div');
+        msgDiv.id = `${this.id}_msg`;
+        msgDiv.textContent = this.content;
+        document.querySelector(`#${this.id}`).append(msgDiv);
+
+        // hide element
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+        this.className = 'hidden';
+        document.querySelector(`#${this.id}`).className = this.className
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'flex';
+        this.className = 'visible';
+        document.querySelector(`#${this.id}`).className = this.className
     }
 }
 

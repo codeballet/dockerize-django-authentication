@@ -21,6 +21,7 @@ function appendContent() {
     homeGreeting.append('home_page');
     questionForm.append();
     questionForm.hide();
+    thinkingMessage.append();
 
     // Login page
     loginPage.append();
