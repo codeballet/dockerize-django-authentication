@@ -251,6 +251,9 @@ function showNav() {
 
 // Show relevant page and update browserState state
 function showPage(navId = 'home_nav', source = '') {
+    // Hide alert message
+    alertMessage.hide();
+    
     for (const [key, value] of Object.entries(pages)) {
         if (key === navId) {
             value.show();
