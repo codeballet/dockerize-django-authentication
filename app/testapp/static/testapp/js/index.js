@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /////////////////////
 
     // Alert message close event
-    document.querySelector('#close_alert').onclick = () => {
-        alertMessage.hide();
+    document.querySelector('#close_alert').onclick = (e) => {
+        e.target.parentElement.style.display = 'none';
     }
 
     // Navigation button events
