@@ -4,6 +4,9 @@
 // HTML //
 //////////
 
+// Page Title
+const pageTitle = new PageTitle('Ask me');
+
 // Alerts and Messages
 const alertMessage = new AlertMessage('Alert message');
 const thinkingMessage = new ThinkingMessage('Please wait, I am thinking about it...');
@@ -20,13 +23,16 @@ const homePage = new Page('home_page', 'page');
 const loginPage = new Page('login_page', 'page');
 const registerPage = new Page('register_page', 'page');
 
-// Greeting
+// Non logged-in greeting
 const homeGreeting = new Greeting('Please log in to ask the AI questions', 'home_greeting', 'page_greeting');
 
 // Forms
 const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
 const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'form');
 const questionForm = new InputForm(questionFormInput, 'home_page', 'question_form', 'form' );
+
+// Footer
+const footer = new Footer('©Johan Stjernholm 2022, https://github.com/codeballet')
 
 
 ///////////////

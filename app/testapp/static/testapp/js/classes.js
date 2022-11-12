@@ -70,6 +70,33 @@ class Answers {
     }
 }
 
+// Footnote
+class Footer {
+    constructor(content, id = 'footer_div', className = 'footer') {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append() {
+        // Create div
+        const div = document.createElement('div');
+        div.id = this.id;
+        div.className = this.className;
+        div.style.position = 'absolute';
+        div.style.top = window.scrollY + window.innerHeight - 50 + 'px';
+        document.querySelector('.container').append(div);
+
+        // Create dividing line
+        const hr = document.createElement('hr');
+        document.querySelector(`#${this.id}`).append(hr);
+        
+        // footer text
+        const footer = document.createElement('footer');
+        footer.textContent = this.content;
+        document.querySelector(`#${this.id}`).append(footer);
+    }
+}
+
 // Header class
 class Greeting {
     constructor(textContent, id, className) {
@@ -184,6 +211,31 @@ class Page {
     }
     show() {
         document.querySelector(`#${this.id}`).style.display = 'block';
+    }
+}
+
+// Page title
+class PageTitle {
+    constructor(content, id = 'page_title', className = 'title') {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append() {
+        // Crate div
+        const div = document.createElement('div');
+        div.id = this.id;
+        div.className = this.className;
+        document.querySelector('.container').append(div);
+
+        // Create title header
+        const h1 = document.createElement('h1');
+        h1.textContent = this.content;
+        document.querySelector(`#${this.id}`).append(h1);
+
+        // Create dividing line
+        const hr = document.createElement('hr')
+        document.querySelector(`#${this.id}`).append(hr);
     }
 }
 

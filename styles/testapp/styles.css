@@ -83,6 +83,12 @@ body #thinking_div {
   font-size: large;
   font-weight: bold;
 }
+body .footer {
+  width: 96%;
+  font-weight: bold;
+  font-size: small;
+  color: #7e7e7e;
+}
 body .form {
   display: flex;
   flex-direction: column;
@@ -101,6 +107,19 @@ body .pages {
 }
 body p {
   margin-left: 0.3rem;
+}
+body .title {
+  padding: 0;
+  margin: 0;
+  color: #7e7e7e;
+}
+body .title h1 {
+  margin: 0;
+}
+body hr {
+  width: 95%;
+  margin: 0rem 1rem 0.5rem 0rem;
+  color: #7e7e7e;
 }
 
 /*# sourceMappingURL=styles.css.map */

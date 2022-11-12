@@ -6,6 +6,9 @@
 
 // Append elements to HTML page
 function appendContent() {
+    // Page title
+    pageTitle.append();
+
     // Navigation
     navMenu.append();
     homeNavButton.append();
@@ -30,6 +33,9 @@ function appendContent() {
     registerPage.append();
     registerForm.append();
     loginForm.append();
+
+    // Footer
+    footer.append();
 }
 
 // Set focus on form fields
