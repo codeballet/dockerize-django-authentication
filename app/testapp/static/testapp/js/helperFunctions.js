@@ -131,7 +131,7 @@ const register = async(username, email, password, confirmation) => {
     }
 }
 
-const removeUserContent = (contentClass, page) => {
+const removeElements = (contentClass, page) => {
     if (document.querySelectorAll(`.${contentClass}`)) {
         const parent = document.querySelector(`#${page}`);
         const children = document.querySelectorAll(`.${contentClass}`);
@@ -146,7 +146,7 @@ const showAnswers = result => {
     console.log(result);
     
     // Remove previous answers
-    removeUserContent('answers', 'home_page');
+    removeElements('answers', 'home_page');
 
     let content = {
         1: 'Your question was:',
@@ -169,11 +169,13 @@ const showAnswers = result => {
 
 // Show home page content from API
 const showHome = async () => {
-    // Remove old content
-    removeUserContent('answers', 'home_page');
-    removeUserContent('logged_out', 'home_page');
+    // Remove any remaining answers
+    removeElements('answers', 'home_page');
 
     try {
+        // Logged in, hide logged out message
+        welcomeAnonDiv.hide();
+
         // Call the home api
         const response = await fetch('api/home_loggedin');
         const result = await response.json();
@@ -184,10 +186,9 @@ const showHome = async () => {
 
         return result.user;
     } catch {
-        // Not logged in
-        
-        // Hide irrelevant content
+        // Logged out, show relevant content
         questionForm.hide();
+        welcomeAnonDiv.show();
 
         return 'Not logged in';
     }

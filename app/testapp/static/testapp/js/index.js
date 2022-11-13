@@ -74,6 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    // Internal links events
+    document.querySelector('#welcome_anon_span2').onclick = () => {
+        showPage('login_nav');
+    }
+
     // Login form event
     document.querySelector('#login_form').onsubmit = e => {
         e.preventDefault();

@@ -144,6 +144,15 @@ body {
                 border-radius: 0.3rem;
             }
         }
+
+        .link {
+            color: blue;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
     
         .pages {
             display: block;

@@ -1,8 +1,8 @@
 'use strict'
 
-/////////////////////////////
-// Generic Element Classes //
-/////////////////////////////
+//////////////////////////////////
+// Generic HTML Element Classes //
+//////////////////////////////////
 
 // anchor class
 class AClass {
@@ -38,7 +38,7 @@ class DivClass {
         document.querySelector(`#${this.id}`).style.display = 'none';
     }
     show() {
-        document.querySelector(`#${this.id}`).style.display = 'flex'
+        document.querySelector(`#${this.id}`).style.display = 'block'
     }
 }
 
@@ -69,7 +69,7 @@ class H1Class {
         document.querySelector(`#${this.id}`).style.display = 'none';
     }
     show() {
-        document.querySelector(`#${this.id}`).style.display = 'flex'
+        document.querySelector(`#${this.id}`).style.display = 'block'
     }
 }
 
@@ -91,7 +91,7 @@ class H2Class {
         document.querySelector(`#${this.id}`).style.display = 'none';
     }
     show() {
-        document.querySelector(`#${this.id}`).style.display = 'flex'
+        document.querySelector(`#${this.id}`).style.display = 'block'
     }
 }
 
@@ -113,7 +113,7 @@ class PClass {
         document.querySelector(`#${this.id}`).style.display = 'none';
     }
     show() {
-        document.querySelector(`#${this.id}`).style.display = 'flex'
+        document.querySelector(`#${this.id}`).style.display = 'block'
     }
 }
 
@@ -140,9 +140,9 @@ class SpanClass {
 }
 
 
-//////////////////
-// Page Classes //
-//////////////////
+/////////////////////////
+// Custom HTML Classes //
+/////////////////////////
 
 // Alert message class
 class AlertMessage {

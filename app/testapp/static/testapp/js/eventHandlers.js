@@ -4,6 +4,20 @@
 // Event handlers //
 ////////////////////
 
+// // hide class content
+// const hideClass = className => {
+//     document.querySelectorAll(`.${className}`).forEach(item => {
+//         item.style.display = 'none';
+//     });
+// }
+
+// // show class content
+// const showClass = className => {
+//     document.querySelectorAll(`#${className}`).forEach(item => {
+//         item.style.display = 'flex';
+//     });
+// }
+
 // On submitting the login form
 function loginEvent(e) {
     try {
@@ -57,7 +71,7 @@ function questionEvent(e) {
     thinkingMessage.show();
 
     // Remove previous answers
-    removeUserContent('answers', 'home_page');
+    removeElements('answers', 'home_page');
 
     try {
         getAnswers(e.target.elements.question.value)

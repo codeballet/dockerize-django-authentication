@@ -21,11 +21,18 @@ function appendContent() {
     // Alert
     alertMessage.append();
 
-    // Home page
+    // Home page, logged in content
     homePage.append();
     questionForm.append();
     questionForm.hide();
     thinkingMessage.append();
+    // Home page, logged out welcome message
+    welcomeAnonDiv.append('home_page');
+    welcomeAnonH2.append('welcome_anon_div');
+    welcomeAnonP1.append('welcome_anon_div');
+    welcomeAnonSpan1.append('welcome_anon_p1');
+    welcomeAnonSpan2.append('welcome_anon_p1');
+    welcomeAnonSpan3.append('welcome_anon_p1');
 
     // Login page
     loginPage.append();

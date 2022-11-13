@@ -116,6 +116,13 @@ body #container_root .form .form_field {
   border: 1px solid #808080;
   border-radius: 0.3rem;
 }
+body #container_root .link {
+  color: blue;
+}
+body #container_root .link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 body #container_root .pages {
   display: block;
 }
