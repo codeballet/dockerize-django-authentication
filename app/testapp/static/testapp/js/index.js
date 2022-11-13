@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Position footer at bottom of page
     const footer = document.querySelector('#footer_div');
-    console.log(footer);
     footer.style.position = 'absolute';
     footer.style.top = window.innerHeight + window.scrollY - 50 + 'px';
 

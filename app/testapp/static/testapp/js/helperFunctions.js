@@ -32,7 +32,6 @@ function getCookie(name) {
 const getAnswers = async (question) => {
     const csrftoken = getCookie('csrftoken');
 
-    console.log('inside getAnswers, sending a fetch request');
     const response = await fetch('api/question', {
         method: 'POST',
         headers: {'X-CSRFToken': csrftoken},
