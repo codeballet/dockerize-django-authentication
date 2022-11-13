@@ -7,7 +7,9 @@
 // Append elements to HTML page
 function appendContent() {
     // Page title
-    pageTitle.append();
+    titleDiv.append('container_root');
+    titleH1.append('title_div');
+    titleHr.append('title_div');
 
     // Navigation
     navMenu.append();
@@ -34,5 +36,9 @@ function appendContent() {
     loginForm.append();
 
     // Footer
-    footer.append();
+    footerDiv.append('container_root');
+    footerHr.append('footer_div');
+    footerP.append('footer_div');
+    footerSpan.append('footer_paragraph');
+    footerAnchor.append('footer_paragraph');
 }

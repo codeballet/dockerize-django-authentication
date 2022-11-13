@@ -1,5 +1,145 @@
 'use strict'
 
+/////////////////////////////
+// Generic Element Classes //
+/////////////////////////////
+
+// anchor class
+class AClass {
+    constructor(content, href, id, className) {
+        this.content = content;
+        this.href = href;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const a = document.createElement('a');
+        a.textContent = this.content;
+        a.href = this.href;
+        a.id = this.id;
+        a.className = this.className
+        document.querySelector(`#${appendTo}`).append(a);
+    }
+}
+
+// div class with flex
+class DivClass {
+    constructor(id, className) {
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const div = document.createElement('div');
+        div.id = this.id;
+        div.className = this.className;
+        document.querySelector(`#${appendTo}`).append(div);
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'flex'
+    }
+}
+
+// hr divider class
+class HrClass {
+    constructor() {}
+    append(appendTo) {
+        const hr = document.createElement('hr');
+        document.querySelector(`#${appendTo}`).append(hr);
+    }
+}
+
+// h1 class
+class H1Class {
+    constructor(content, id, className) {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const h1 = document.createElement('h1');
+        h1.id = this.id;
+        h1.className = this.className;
+        h1.textContent = this.content;
+        document.querySelector(`#${appendTo}`).append(h1);
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'flex'
+    }
+}
+
+// h2 class
+class H2Class {
+    constructor(content, id, className) {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const h2 = document.createElement('h2');
+        h2.id = this.id;
+        h2.className = this.className;
+        h2.textContent = this.content;
+        document.querySelector(`#${appendTo}`).append(h2);
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'flex'
+    }
+}
+
+// p class
+class PClass {
+    constructor(content, id, className) {
+        this.content = content;
+        this.id = id;
+        this.className = className;   
+    }
+    append(appendTo) {
+        const p = document.createElement('p');
+        p.id = this.id;
+        p.className = this.className;
+        p.textContent = this.content;
+        document.querySelector(`#${appendTo}`).append(p);
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'flex'
+    }
+}
+
+// span class
+class SpanClass {
+    constructor(content, id, className) {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const span = document.createElement('span');
+        span.id = this.id;
+        span.className = this.className;
+        span.textContent = this.content;
+        document.querySelector(`#${appendTo}`).append(span);
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'flex'
+    }
+}
+
+
 //////////////////
 // Page Classes //
 //////////////////
@@ -68,49 +208,6 @@ class Answers {
     }
 }
 
-// Footnote
-class Footer {
-    constructor(content, id = 'footer_div', className = 'footer') {
-        this.content = content;
-        this.id = id;
-        this.className = className;
-    }
-    append() {
-        // Create div
-        const div = document.createElement('div');
-        div.id = this.id;
-        div.className = this.className;
-        div.style.position = 'absolute';
-        div.style.top = window.scrollY + window.innerHeight - 50 + 'px';
-        document.querySelector('.container').append(div);
-
-        // Create dividing line
-        const hr = document.createElement('hr');
-        document.querySelector(`#${this.id}`).append(hr);
-        
-        // footer text
-        const footer = document.createElement('footer');
-        footer.textContent = this.content;
-        document.querySelector(`#${this.id}`).append(footer);
-    }
-}
-
-// Header classes
-class Header2 {
-    constructor(content, id, className) {
-        this.content = content;
-        this.id = id;
-        this.className = className;
-    }
-    append(appendTo) {
-        const h2 = document.createElement('h2');
-        h2.id = this.id;
-        h2.className = this.className;
-        h2.textContent = this.content;
-        document.querySelector(`#${appendTo}`).append(h2);
-    }
-}
-
 // Form class
 class InputForm {
     constructor(object, appendTo, id, className = 'form') {
@@ -149,27 +246,6 @@ class InputForm {
     }
     show() {
         document.querySelector(`#${this.id}`).style.display = 'block'
-    }
-}
-
-// Link to another page class
-class Link {
-    constructor(content, linkTo, id, className) {
-        this.content = content;
-        this.linkTo = linkTo;
-        this.id = id;
-        this.className = className;
-    }
-    append(appendTo) {
-        const span = document.createElement('span');
-        span.textContent = this.content;
-        span.id = this.id;
-        span.className = this.className;
-        span.style.color = 'blue';
-        document.querySelector(`#${appendTo}`).append(span);
-    }
-    forward() {
-        showPage(`#${linkTo}`);
     }
 }
 
@@ -230,47 +306,6 @@ class Page {
     }
     show() {
         document.querySelector(`#${this.id}`).style.display = 'block';
-    }
-}
-
-// Page title
-class PageTitle {
-    constructor(content, id = 'page_title', className = 'title') {
-        this.content = content;
-        this.id = id;
-        this.className = className;
-    }
-    append() {
-        // Create div
-        const div = document.createElement('div');
-        div.id = this.id;
-        div.className = this.className;
-        document.querySelector('.container').append(div);
-
-        // Create title header
-        const h1 = document.createElement('h1');
-        h1.textContent = this.content;
-        document.querySelector(`#${this.id}`).append(h1);
-
-        // Create dividing line
-        const hr = document.createElement('hr')
-        document.querySelector(`#${this.id}`).append(hr);
-    }
-}
-
-// Paragraph class
-class Paragraph {
-    constructor(content, id, className) {
-        this.content = content;
-        this.id = id;
-        this.className = className;
-    }
-    append(appendTo) {
-        const p = document.createElement('p');
-        p.id = this.id;
-        p.className = this.className;
-        p.textContent = this.content;
-        document.querySelector(`#${appendTo}`).append(p);
     }
 }
 
