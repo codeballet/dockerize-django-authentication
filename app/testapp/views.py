@@ -218,7 +218,7 @@ def store_user(request, username):
 # AI #
 ######
 
-FILE_MATCHES = 2
+FILE_MATCHES = 5
 SENTENCE_MATCHES = 3
 
 
