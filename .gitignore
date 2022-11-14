@@ -178,7 +178,7 @@ cython_debug/
 .env.prod.db
 
 # Corpus
-# static/testapp/corpus/*.txt
+static/testapp/corpus/*.txt
 
 # Media files
 mediafiles/
