@@ -155,10 +155,16 @@ const showAnswers = result => {
 
     // Incrementally add the answers to content
     let i = 4;
-    result.answers.forEach(answer => {
-        content[i] = `"${answer}"`;
-        i++;
-    });
+    // result.answers.forEach(answer => {
+    //     content[i] = `"${answer}"`;
+    //     i++;
+    // });
+    for (const [key, value] of Object.entries(result.answers)) {
+        for (const [k, v] of Object.entries(value)) {
+            content[i] = `${v}--${k}`;
+            i++;
+        }
+    }
 
     // Append content to user's home page
     const answers = new Answers(content, `answers_${result.user}`, `${result.user} answers`);

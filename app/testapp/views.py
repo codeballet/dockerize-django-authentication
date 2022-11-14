@@ -48,8 +48,6 @@ def home_loggedin_api(request):
 
 @login_required
 def question_api(request):
-    print('Inside question_api')
-
     if request.method != "POST":
         return JsonResponse({
             "error": "POST request required"
@@ -58,8 +56,6 @@ def question_api(request):
     data = json.loads(request.body)
     question = data["question"]
     answers = ai(question)
-
-    print(answers)
 
     return JsonResponse({
         "user": request.session['user'],
@@ -227,11 +223,9 @@ SENTENCE_MATCHES = 3
 
 
 def ai(question):
-
-    # TODO: Use form input instead of command-line arguments
-
     # Calculate IDF values across files
-    files = load_files(os.path.abspath("testapp/static/testapp/corpus"))
+    directory = os.path.abspath("testapp/static/testapp/corpus")
+    files = load_files(directory)
     file_words = {
         filename: tokenize(files[filename])
         for filename in files
@@ -243,6 +237,8 @@ def ai(question):
 
     # Determine top file matches according to TF-IDF
     filenames = top_files(query, file_words, file_idfs, n=FILE_MATCHES)
+    
+    print(f"filenames: {filenames}")
 
     # Extract sentences from top files
     sentences = dict()
@@ -258,8 +254,22 @@ def ai(question):
 
     # Determine top sentence matches
     matches = top_sentences(query, sentences, idfs, n=SENTENCE_MATCHES)
+
+    # Re-link matches with filenames
+    file_matches = {}
+    i = 0
+    for match in matches:
+        for filename in filenames:
+            with open(os.path.join(directory, filename)) as f:
+                if match in f.read():
+                    file_matches[i] = {
+                        filename: match
+                    }
+                    i += 1
     
-    return matches
+    print(f"file_matches: {file_matches}")
+
+    return file_matches
 
 
 def load_files(directory):
