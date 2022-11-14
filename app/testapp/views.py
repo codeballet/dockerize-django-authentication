@@ -198,6 +198,13 @@ def register_api(request):
 # Helper functions #
 ####################
 
+def clean_digits(data):
+    p = re.compile('\.txt')
+    digits, n = p.subn('', data)
+    p = re.compile('^0*')
+    clean_digits, n = p.subn('', digits)
+    return clean_digits
+
 def test_email(email):
     """Detect if email appears valid"""
     pattern = re.compile("^(\w+)@(\w+)(\.\w+)+$")
@@ -214,12 +221,27 @@ def store_user(request, username):
     print(f"Logged in user: {request.session['user']}")
 
 
+###########
+# Library #
+###########
+
+library = {
+    "stj2009": {
+        "author_first": "johan",
+        "author_family": "stjernholm",
+        "year": "2009",
+        "title": "Performativities, Virtualities, Abstractions, and Cunningham's BIPED",
+        "type": "PhD diss.",
+        "publisher": "University of the Arts London"
+    }
+}
+
 ######
 # AI #
 ######
 
-FILE_MATCHES = 5
-SENTENCE_MATCHES = 3
+FILE_MATCHES = 4
+SENTENCE_MATCHES = 4
 
 
 def ai(question):
@@ -259,12 +281,20 @@ def ai(question):
     file_matches = {}
     i = 0
     for match in matches:
+        # find the filename for the match
         for filename in filenames:
             with open(os.path.join(directory, filename)) as f:
                 if match in f.read():
-                    file_matches[i] = {
-                        filename: match
-                    }
+                    # find library data for the match
+                    reference = filename.split('_')
+                    page = clean_digits(reference[1])
+                    for item in library:
+                        if item == reference[0]:
+                            file_matches[i] = {
+                                **library[item],
+                                'page': page,
+                                'match': match
+                            }
                     i += 1
     
     print(f"file_matches: {file_matches}")
