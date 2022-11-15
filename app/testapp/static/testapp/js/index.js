@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     appendContent();
 
     // Position footer at bottom of page
-    const footer = document.querySelector('#footer_div');
-    footer.style.position = 'absolute';
-    footer.style.top = window.innerHeight + window.scrollY - 50 + 'px';
+    // const footer = document.querySelector('#footer_div');
+    // footer.style.position = 'absolute';
+    // footer.style.top = window.innerHeight + window.scrollY - 50 + 'px';
 
     // Decide which page to show
     if (browserState.currentPage === '') {

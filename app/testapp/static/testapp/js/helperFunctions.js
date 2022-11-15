@@ -29,7 +29,7 @@ function getCookie(name) {
 }
 
 // Acquire answers from AI
-const getAnswers = async (question) => {
+const getAnswer = async (question) => {
     const csrftoken = getCookie('csrftoken');
 
     const response = await fetch('api/question', {
@@ -46,12 +46,9 @@ const getAnswers = async (question) => {
     if (result) {
         return result;
     } else {
-        // Logged out
+        // Logged out, go to home page
         questionForm.hide();
-
-        // Change the greeting
-        document.querySelector(('#home_greeting')).textContent = `Please log in to ask the AI questions`;
-
+        showPage('home_nav');
         return 'Not logged in';
     }
 
@@ -141,41 +138,21 @@ const removeElements = (contentClass, page) => {
 }
 
 // Show the AI result on the home page
-const showAnswers = result => {
-    console.log(result);
+const showAnswer = content => {
+    console.log(content);
     
     // Remove previous answers
-    removeElements('answers', 'home_page');
+    removeElements('answer', 'home_page');
 
-    let content = {
-        1: 'Your question was:',
-        2: `"${result['question']}"`,
-        3: 'The AI says:'
-    };
-
-    // Incrementally add the answers to content
-    let i = 4;
-    // result.answers.forEach(answer => {
-    //     content[i] = `"${answer}"`;
-    //     i++;
-    // });
-    for (const [key, value] of Object.entries(result.answers)) {
-        for (const [k, v] of Object.entries(value)) {
-            content[i] = `${v}--${k}`;
-            i++;
-        }
-    }
-
-    // Append content to user's home page
-    const answers = new Answers(content, `answers_${result.user}`, `${result.user} answers`);
-    answers.append('home_page');
-    
+    // Instantiate and append answer to user's home page
+    const answer = new Answer(content, `answer_${content.user}`, `answer`);
+    answer.append('home_page');
 }
 
 // Show home page content from API
 const showHome = async () => {
     // Remove any remaining answers
-    removeElements('answers', 'home_page');
+    removeElements('answer', 'home_page');
 
     try {
         // Logged in, hide logged out message

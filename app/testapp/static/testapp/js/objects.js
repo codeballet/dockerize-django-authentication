@@ -20,10 +20,11 @@ const registerNavButton = new NavButton('Register', 'register_nav');
 const loginNavButton = new NavButton('Login', 'login_nav');
 const logoutNavButton = new NavButton('Logout', 'logout_nav');
 
-// Home page, logged in
+// Home page
 const homePage = new Page('home_page', 'page');
+// Logged in content
 const questionForm = new InputForm(questionFormInput, 'home_page', 'question_form', 'form' );
-// Home page, logged out welcome message
+// Logged out content
 const welcomeAnonDiv = new DivClass('welcome_anon_div', 'logged_out');
 const welcomeAnonH2 = new H2Class('Welcome!', 'welcome_anon_h2', 'logged_out');
 const welcomeAnonP1 = new PClass('', 'welcome_anon_p1', 'logged_out');
@@ -40,20 +41,20 @@ const registerPage = new Page('register_page', 'page');
 const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
 
 // Footer, Static
-const footerDiv = new DivClass('footer_div', 'static');
-const footerHr = new HrClass();
-const footerP = new PClass('', 'footer_paragraph', 'static');
-const footerSpan = new SpanClass(
-    '©Johan Stjernholm 2022, ', 
-    'footer_span', 
-    'static'
-);
-const footerAnchor = new AClass(
-    'https://github.com/codeballet',
-    'https://github.com/codeballet',
-    'footer_anchor',
-    'static'
-)
+// const footerDiv = new DivClass('footer_div', 'static');
+// const footerHr = new HrClass();
+// const footerP = new PClass('', 'footer_paragraph', 'static');
+// const footerSpan = new SpanClass(
+//     '©Johan Stjernholm 2022, ', 
+//     'footer_span', 
+//     'static'
+// );
+// const footerAnchor = new AClass(
+//     'https://github.com/codeballet',
+//     'https://github.com/codeballet',
+//     'footer_anchor',
+//     'static'
+// )
 
 ///////////////
 // Variables //

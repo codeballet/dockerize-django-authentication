@@ -184,26 +184,59 @@ class AlertMessage {
 }
 
 // Answers from AI class
-class Answers {
+class Answer {
     constructor(content, id, className) {
         this.content = content;
         this.id = id;
         this.className = className;
     }
     append(appendTo) {
-        const div = document.createElement('div');
-        div.id = this.id;
-        div.className = this.className;
-        document.querySelector(`#${appendTo}`).append(div);
-        // Create the paragraphs inside the div
-        for (const [key, value] of Object.entries(this.content)) {
-            const p = document.createElement('p');
-            p.id = `${this.id}_${key}`;
-            p.textContent = value;
-            if (key === '1' || key === '3') {
-                p.style.fontWeight = 'bold';
+        // Create the outer div for the entire answer
+        const answerDiv = new DivClass(this.id, this.className);
+        answerDiv.append(appendTo);
+
+        // Create sub divs with match and reference paragraphs
+        for (const [k, v] of Object.entries(this.content['answer'])) {
+            // Create dividing line
+            const hr = new HrClass();
+            hr.append(this.id);
+
+            // Create inner div for each sub-answer
+            const answerSubDiv = new DivClass(`sub_div_${k}`, 'sub_div');
+            answerSubDiv.append(this.id);
+
+            // div for each quote
+            const quoteDiv = new DivClass(
+                `quote_div_${k}`,
+                'quote_div'
+            )
+            quoteDiv.append(`sub_div_${k}`);
+            
+            // match paragraph
+            const matchP = new PClass(
+                `"${v['match']}"`,
+                `match_p_${k}`,
+                'match_p'
+            );
+            matchP.append(`quote_div_${k}`);
+
+            // reference div
+            const refDiv = new DivClass(
+                `ref_div_${k}`,
+                'ref_div'
+            )
+            refDiv.append(`sub_div_${k}`);
+
+            // reference paragraphs
+            for (const [key, value] of Object.entries(v)) {
+                if (key == 'match') { continue; }
+                const p = new PClass(
+                    `${key}: ${value}`,
+                    `${key}_${value}_p`,
+                    'ref_p'
+                )
+                p.append(`ref_div_${k}`)
             }
-            document.querySelector(`#${this.id}`).append(p);
         }
     }
 }

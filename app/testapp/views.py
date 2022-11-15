@@ -55,12 +55,12 @@ def question_api(request):
 
     data = json.loads(request.body)
     question = data["question"]
-    answers = ai(question)
+    answer = ai(question)
 
     return JsonResponse({
         "user": request.session['user'],
         "question": question,
-        "answers": answers
+        "answer": answer
     }, status=200)
 
 
@@ -250,12 +250,11 @@ def store_user(request, username):
 
 library = {
     "stj2009": {
-        "author_first": "johan",
-        "author_family": "stjernholm",
-        "year": "2009",
-        "title": "Performativities, Virtualities, Abstractions, and Cunningham's BIPED",
-        "type": "PhD diss.",
-        "publisher": "University of the Arts London"
+        "Authors": ['Johan Stjernholm'],
+        "Year": "2009",
+        "Title": "Performativities, Virtualities, Abstractions, and Cunningham's BIPED",
+        "Type": "PhD diss.",
+        "Publisher": "University of the Arts London"
     }
 }
 
