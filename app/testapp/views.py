@@ -199,11 +199,34 @@ def register_api(request):
 ####################
 
 def clean_digits(data):
+    """Returns page numbers from filenames"""
     p = re.compile('\.txt')
     digits, n = p.subn('', data)
     p = re.compile('^0*')
     clean_digits, n = p.subn('', digits)
     return clean_digits
+
+def match_files(matches, filenames, directory):
+    """Links matched sentences back to their files"""
+    file_matches = {}
+    i = 0
+    for match in matches:
+        # find the filename for the match
+        for filename in filenames:
+            with open(os.path.join(directory, filename)) as f:
+                if match in f.read():
+                    # find library data for the match
+                    reference = filename.split('_')
+                    page = clean_digits(reference[1])
+                    for item in library:
+                        if item == reference[0]:
+                            file_matches[i] = {
+                                **library[item],
+                                'page': page,
+                                'match': match
+                            }
+                    i += 1
+    return file_matches
 
 def test_email(email):
     """Detect if email appears valid"""
@@ -216,7 +239,7 @@ def test_username(username):
     return pattern.search(username)
 
 def store_user(request, username):
-    # Store username in session as 'user'
+    """Stores a username in the session as 'user'"""
     request.session['user'] = username
     print(f"Logged in user: {request.session['user']}")
 
@@ -278,28 +301,11 @@ def ai(question):
     matches = top_sentences(query, sentences, idfs, n=SENTENCE_MATCHES)
 
     # Re-link matches with filenames
-    file_matches = {}
-    i = 0
-    for match in matches:
-        # find the filename for the match
-        for filename in filenames:
-            with open(os.path.join(directory, filename)) as f:
-                if match in f.read():
-                    # find library data for the match
-                    reference = filename.split('_')
-                    page = clean_digits(reference[1])
-                    for item in library:
-                        if item == reference[0]:
-                            file_matches[i] = {
-                                **library[item],
-                                'page': page,
-                                'match': match
-                            }
-                    i += 1
+    result = match_files(matches, filenames, directory)
     
-    print(f"file_matches: {file_matches}")
+    print(f"file_matches: {result}")
 
-    return file_matches
+    return result
 
 
 def load_files(directory):
