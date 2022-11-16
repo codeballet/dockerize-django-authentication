@@ -53,9 +53,10 @@ function appendContent() {
     aboutAimsP1.append('about_div');
     aboutAimsP2.append('about_div');
     aboutAimsP3.append('about_div');
-    aboutAuthorH3.append('about_div');
+    aboutAuthorH2.append('about_div');
     aboutAuthorP1.append('about_div');
     aboutAuthorP2.append('about_div');
+    aboutAuthorUl1.append('about_div');
 
     // Footer
     footerDiv.append('container_root');

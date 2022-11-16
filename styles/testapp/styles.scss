@@ -50,6 +50,17 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 
     #container_root {
+
+        #about_div {
+            max-width: 40rem;
+
+            #about_author_ul1 {
+                li {
+                    margin: 0rem 3rem 0.4rem 0rem;
+                }
+            }
+        }
+
         #alert {
             display: flex;
             flex-direction: row;
@@ -125,10 +136,6 @@ body {
             hr {
                 margin-top: 0;
             }
-        }
-
-        .about {
-            max-width: 40rem;
         }
 
         .answer {

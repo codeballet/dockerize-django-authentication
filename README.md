@@ -18,7 +18,7 @@ Secondly, to publish an article that outlines in more detail the importance of r
 
 Johan Stjernholm (PhD) is an interdisciplinary artist, working as a Producer, Artistic Director, Choreographer, Composer, Fine Artist, Computer Scientist, and Author.
 
-Johan's work has been performed and exhibited across Europe, Asia, and America. Some notable examples of his creations include:
+Johan's artistic work has been performed and exhibited across Europe, Asia, and America. Some notable examples of his creations include:
 
 - Alice (2022). Exhibition by Victoria & Albert Museum, featuring performance art co-directed by Johan Stjernholm and Flora Zeta Cheong-Leen. U2 by UCCA, Joy Tower, Beijing, China.
 - Alchemy: Paths of Transformation (2021 to 2022). Exhibition co-curated by Johan Stjernholm and Flora Zeta Cheong-Leen. Art Haitang, Sanya, Hainan, China.
@@ -27,7 +27,7 @@ Johan's work has been performed and exhibited across Europe, Asia, and America. 
 - Desire Works (2017). Opera Ballet produced, directed, choreographed, and composed by Johan Stjernholm. Haedam Hall, Daegu, South Korea.
 - The Golden Apple (2016). Opera Ballet produced, directed, and choreographed by Johan Stjernholm. Haedam Hall, Daegu, South Korea.
 - Lost in Shangri-la (2016). Performance Art designed and choreographed by Johan Stjernholm in collaboration with Flora Zeta Cheong-Leen. Production: Laurence Brahm and National Geographic. Three Shadows Art Centre, Beijing, China.
-- Repetitions of Disappearance (2015). Choreographed and directed by Johan Stjernholm. Producer: Flora Zeta Cheong-Leen. Xin Dong Cheng Space for Contemporary Art, District 798, Beijing.
+- Repetitions of Disappearance (2015). Exhibition and performance art, designed, curated, choreographed and directed by Johan Stjernholm in collaboration with Flora Zeta Cheong-Leen. Xin Dong Cheng Space for Contemporary Art, District 798, Beijing.
 - Miss Chinese Cosmos of the Americas (2013 to 2017). TV Pageant Choreographed by Johan Stjernholm. Artistic Director: Flora Zeta Cheong-Leen. Production: Phoenix Satellite TV.
 
 ## Criteria
