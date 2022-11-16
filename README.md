@@ -23,6 +23,7 @@ Johan's artistic work has been performed and exhibited across Europe, Asia, and 
 - Alice (2022). Exhibition by Victoria & Albert Museum, featuring performance art co-directed by Johan Stjernholm and Flora Zeta Cheong-Leen. U2 by UCCA, Joy Tower, Beijing, China.
 - Alchemy: Paths of Transformation (2021 to 2022). Exhibition co-curated by Johan Stjernholm and Flora Zeta Cheong-Leen. Art Haitang, Sanya, Hainan, China.
 - The Rose of the Universe (2021). Exhibition including the film "Pilgrimate", co-directed by Johan Stjernholm and Flora Zeta Cheong-Leen. Nordic Contemporary Art Center, Xiamen, China.
+- The Routledge Companion to Dance Studies (2020). Book edited by Helen Thomas and Stacey Prickett. Johan Stjernholm is the author of Chapter 26: "The Scenography of Choreographing the Museum". London: Routledge.
 - Multiple Identities & Community (2018). Exhibition including works by Johan Stjernholm. Production: Ahang Baoquan and Muyun Art. Today Art Museum, Beijing, China.
 - Desire Works (2017). Opera Ballet produced, directed, choreographed, and composed by Johan Stjernholm. Haedam Hall, Daegu, South Korea.
 - The Golden Apple (2016). Opera Ballet produced, directed, and choreographed by Johan Stjernholm. Haedam Hall, Daegu, South Korea.
