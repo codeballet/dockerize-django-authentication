@@ -15,6 +15,7 @@ function appendContent() {
     navMenu.append();
     homeNavButton.append();
     registerNavButton.append();
+    aboutNavButton.append();
     loginNavButton.append();
     logoutNavButton.append();
 
@@ -41,6 +42,20 @@ function appendContent() {
     registerPage.append();
     registerForm.append();
     loginForm.append();
+
+    // About page
+    aboutPage.append();
+    aboutDiv.append('about_page');
+    aboutIntroH2.append('about_div');
+    aboutIntroP1.append('about_div');
+    aboutIntroP2.append('about_div');
+    aboutAimsH3.append('about_div');
+    aboutAimsP1.append('about_div');
+    aboutAimsP2.append('about_div');
+    aboutAimsP3.append('about_div');
+    aboutAuthorH3.append('about_div');
+    aboutAuthorP1.append('about_div');
+    aboutAuthorP2.append('about_div');
 
     // Footer
     footerDiv.append('container_root');

@@ -1,10 +1,34 @@
 # Ask Me - an AI driven webapp
 
-## Introduction to Ask Me
+## Introduction to the Ask Me application
 
-Ask Me is an intelligent, dynamic web application. The application allows a user to register, log in, and ask questions to an Artificial Intelligence. The AI generates answers by means of reading a corpus of documents and matching sentences from those documents to the user's questions.
+The Ask Me application is a research tool concept, created by Johan Stjernholm for the Space Engineering Arts Project.
 
-Please see below "Additional Information" for more details on the AI.
+Ask Me enables users to ask questions to an Artificial Intelligence, which looks for an answer by means of trying to match a given question to the content of a corpus of texts that the AI has read. The AI presents its answer in the form of a series of referenced quotes.
+
+## Aims and Objectives
+
+The main aim of Ask Me is to inspire researchers, scholars, and creative art practitioners to critically consider current trends concerning how various technologies and algorithms increasingly shape and influence creative practices and research within the creative arts, as well as the human and social sciences.
+
+There are two key objectives: First, the publication on the Internet of this web application called Ask Me, serving to provide a practical example of how it is possible for creative practitioners, researchers, and scholars to make choices and selectively take charge of the use, and production, of digital tools and algorithms.
+
+Secondly, to publish an article that outlines in more detail the importance of raising our awareness of how to engage with digital technologies, drawing on some recent theory regarding algorithms, big data, and Artificial Intelligence. That article will also more extensively explain the tools and technologies that underpinds the Ask Me web application.
+
+## About Johan Stjernholm
+
+Johan Stjernholm (PhD) is an interdisciplinary artist, working as a Producer, Artistic Director, Choreographer, Composer, Fine Artist, Computer Scientist, and Author.
+
+Johan's work has been performed and exhibited across Europe, Asia, and America. Some examples of his creations include:
+
+- Who is Alice? (2022). Performance Art installation, co-directed by Johan Stjernholm and Flora Zeta Cheong-Leen, for the "Alice" exhibition by Victoria & Albert Museum and U2 by UCCA. U2 by UCCA, Joy Tower, Beijing, China.
+- Alchemy: Paths of Transformation (2021 to 2022). Exhibition curated by Johan Stjernholm. Production: Flora Zeta Zheong-Leen. Art Haitang, Sanya, Hainan, China.
+- The Rose of the Universe (2021). Exhibition including the film "Pilgrimate", co-directed by Johan Stjernholm and Flora Zeta Cheong-Leen. Nordic Contemporary Art Center, Xiamen, China.
+- Multiple Identities & Community (2018). Exhibition including works by Johan Stjernholm. Production: Ahang Baoquan and Muyun Art. Today Art Museum, Beijing, China.
+- Desire Works (2017). Opera Ballet produced, directed, choreographed, and composed by Johan Stjernholm. Haedam Hall, Daegu, South Korea.
+- The Golden Apple (2016). Opera Ballet produced, directed, and choreographed by Johan Stjernholm. Haedam Hall, Daegu, South Korea.
+- Lost in Shangri-la (2016). Performance Art designed and choreographed by Johan Stjernholm in collaboration with Flora Zeta Cheong-Leen. Production: Laurence Brahm and National Geographic. Three Shadows Art Centre, Beijing, China.
+- Repetitions of Disappearance (2015). Choreographed and directed by Johan Stjernholm. Producer: Flora Zeta Cheong-Leen. Xin Dong Cheng Space for Contemporary Art, District 798, Beijing.
+- Miss Chinese Cosmos of the Americas (2013 to 2017). TV pageant Choreographed by Johan Stjernholm. Artistic Director: Flora Zeta Cheong-Leen. Production: Phoenix Satellite TV.
 
 ## Criteria
 

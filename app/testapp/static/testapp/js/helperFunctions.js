@@ -184,10 +184,12 @@ function showNav() {
         registerNavButton.hide();
         loginNavButton.hide();
         logoutNavButton.show();
+        aboutNavButton.show();
     } else {
         // logged out
         registerNavButton.show();
         loginNavButton.show();
+        aboutNavButton.show();
         logoutNavButton.hide();
     }
 

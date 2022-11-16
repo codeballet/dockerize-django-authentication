@@ -104,6 +104,9 @@ body #container_root #title_div h1 {
 body #container_root #title_div hr {
   margin-top: 0;
 }
+body #container_root .about {
+  max-width: 40rem;
+}
 body #container_root .answer hr {
   margin-bottom: 0;
 }

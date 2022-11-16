@@ -95,6 +95,28 @@ class H2Class {
     }
 }
 
+// h3 class
+class H3Class {
+    constructor(content, id, className) {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const h3 = document.createElement('h3');
+        h3.id = this.id;
+        h3.className = this.className;
+        h3.textContent = this.content;
+        document.querySelector(`#${appendTo}`).append(h3);
+    }
+    hide() {
+        document.querySelector(`#${this.id}`).style.display = 'none';
+    }
+    show() {
+        document.querySelector(`#${this.id}`).style.display = 'block'
+    }
+}
+
 // p class
 class PClass {
     constructor(content, id, className) {
@@ -136,6 +158,30 @@ class SpanClass {
     }
     show() {
         document.querySelector(`#${this.id}`).style.display = 'flex'
+    }
+}
+
+// Unordered List class
+class UlClass {
+    constructor(content, id, className) {
+        this.content = content;
+        this.id = id;
+        this.className = className;
+    }
+    append(appendTo) {
+        const ul = document.createElement('ul');
+        ul.id = this.id;
+        ul.className = this.className;
+        document.querySelector(`#${appendTo}`).append(ul);
+
+        // create li elements from this.content list
+        this.content.forEach(item => {
+            const li = document.createElement('li');
+            li.id = `${this.id}_li_${this.content.indexOf(item)}`;
+            li.className = `${this.id}_li`;
+            li.textContent = item;
+            document.querySelector(`#${this.id}`).append(li);
+        });
     }
 }
 
