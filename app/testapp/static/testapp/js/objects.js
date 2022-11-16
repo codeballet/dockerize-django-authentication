@@ -40,21 +40,21 @@ const loginForm = new InputForm(loginFormInput, 'login_page', 'login_form', 'for
 const registerPage = new Page('register_page', 'page');
 const registerForm = new InputForm(registerFormInput, 'register_page', 'register_form', 'form');
 
-// Footer, Static
-// const footerDiv = new DivClass('footer_div', 'static');
-// const footerHr = new HrClass();
-// const footerP = new PClass('', 'footer_paragraph', 'static');
-// const footerSpan = new SpanClass(
-//     '©Johan Stjernholm 2022, ', 
-//     'footer_span', 
-//     'static'
-// );
-// const footerAnchor = new AClass(
-//     'https://github.com/codeballet',
-//     'https://github.com/codeballet',
-//     'footer_anchor',
-//     'static'
-// )
+// Footer
+const footerDiv = new DivClass('footer_div', 'footer');
+const footerHr = new HrClass();
+const footerP = new PClass('', 'footer_paragraph', 'footer');
+const footerSpan = new SpanClass(
+    '©Johan Stjernholm 2022, ', 
+    'footer_span', 
+    'footer'
+);
+const footerAnchor = new AClass(
+    'https://github.com/codeballet',
+    'https://github.com/codeballet',
+    'footer_anchor',
+    'footer'
+)
 
 ///////////////
 // Variables //

@@ -68,6 +68,7 @@ body #container_root #alert #close_alert:hover {
   color: black;
 }
 body #container_root #footer_div {
+  margin-top: 2rem;
   font-weight: bold;
   font-size: small;
   color: #7e7e7e;
@@ -126,9 +127,12 @@ body #container_root .form {
   display: flex;
   flex-direction: column;
 }
+body #container_root .form #question {
+  max-width: 90%;
+}
 body #container_root .form .form_field {
   height: 1.5rem;
-  width: 50%;
+  max-width: 30rem;
   margin: 0.3rem;
   text-align: left;
   padding-left: 0.3rem;

@@ -43,9 +43,9 @@ function appendContent() {
     loginForm.append();
 
     // Footer
-    // footerDiv.append('container_root');
-    // footerHr.append('footer_div');
-    // footerP.append('footer_div');
-    // footerSpan.append('footer_paragraph');
-    // footerAnchor.append('footer_paragraph');
+    footerDiv.append('container_root');
+    footerHr.append('footer_div');
+    footerP.append('footer_div');
+    footerSpan.append('footer_paragraph');
+    footerAnchor.append('footer_paragraph');
 }

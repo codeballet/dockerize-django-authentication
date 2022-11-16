@@ -278,7 +278,7 @@ class InputForm {
         document.querySelector(`#${this.id}`).style.display = 'none';
     }
     show() {
-        document.querySelector(`#${this.id}`).style.display = 'block'
+        document.querySelector(`#${this.id}`).style.display = 'flex'
     }
 }
 

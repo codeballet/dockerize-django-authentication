@@ -82,6 +82,7 @@ body {
         }
 
         #footer_div {
+            margin-top: 2rem;
             font-weight: bold;
             font-size: small;
             color: $static;
@@ -127,8 +128,6 @@ body {
         }
 
         .answer {
-            // display: flex;
-            // flex-direction: column;
 
             hr {
                 margin-bottom: 0;
@@ -152,7 +151,6 @@ body {
                         margin: 0rem 1rem 0.4rem 1rem;
                     }
                 }
-
             }
         }
         
@@ -163,10 +161,14 @@ body {
         .form {
             display: flex;
             flex-direction: column;
+
+            #question {
+                max-width: 90%;
+            }
     
             .form_field {
                 height: 1.5rem;
-                width: 50%;
+                max-width: 30rem;
                 margin: 0.3rem;
                 text-align: left;
                 padding-left: 0.3rem;
