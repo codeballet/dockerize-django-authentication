@@ -178,4 +178,4 @@ cython_debug/
 .env.prod.db
 
 # Corpus
-app/testapp/static/testapp/corpus/*.txt
+# app/testapp/static/testapp/corpus/*.txt
