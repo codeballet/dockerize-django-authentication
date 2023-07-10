@@ -16,32 +16,19 @@ Secondly, to publish an article that outlines in more detail the importance of r
 
 ## About Johan Stjernholm
 
-Johan Stjernholm (PhD) is an interdisciplinary artist, working as a Producer, Artistic Director, Choreographer, Composer, Fine Artist, Computer Scientist, and Author.
+Johan Stjernholm (PhD) is an acclaimed interdisciplinary artist, working as a Producer, Artistic Director, Choreographer, Composer, Fine Artist, Computer Scientist, and Author. Johan's artistic work has been performed and exhibited across Europe, Asia, and America.
 
-Johan's artistic work has been performed and exhibited across Europe, Asia, and America. Some notable examples of his creations include:
+## Features
 
-- Alice (2022). Exhibition by Victoria & Albert Museum, featuring performance art co-directed by Johan Stjernholm and Flora Zeta Cheong-Leen. U2 by UCCA, Joy Tower, Beijing, China.
-- Alchemy: Paths of Transformation (2021 to 2022). Exhibition co-curated by Johan Stjernholm and Flora Zeta Cheong-Leen. Art Haitang, Sanya, Hainan, China.
-- The Rose of the Universe (2021). Exhibition including the film "Pilgrimate", co-directed by Johan Stjernholm and Flora Zeta Cheong-Leen. Nordic Contemporary Art Center, Xiamen, China.
-- The Routledge Companion to Dance Studies (2020). Book edited by Helen Thomas and Stacey Prickett. Johan Stjernholm is the author of Chapter 26: "The Scenography of Choreographing the Museum". London: Routledge.
-- Multiple Identities & Community (2018). Exhibition including works by Johan Stjernholm. Production: Ahang Baoquan and Muyun Art. Today Art Museum, Beijing, China.
-- Desire Works (2017). Opera Ballet produced, directed, choreographed, and composed by Johan Stjernholm. Haedam Hall, Daegu, South Korea.
-- The Golden Apple (2016). Opera Ballet produced, directed, and choreographed by Johan Stjernholm. Haedam Hall, Daegu, South Korea.
-- Lost in Shangri-la (2016). Performance Art designed and choreographed by Johan Stjernholm in collaboration with Flora Zeta Cheong-Leen. Production: Laurence Brahm and National Geographic. Three Shadows Art Centre, Beijing, China.
-- Repetitions of Disappearance (2015). Exhibition and performance art, designed, curated, choreographed and directed by Johan Stjernholm in collaboration with Flora Zeta Cheong-Leen. Xin Dong Cheng Space for Contemporary Art, District 798, Beijing.
-- Miss Chinese Cosmos of the Americas (2013 to 2017). TV Pageant Choreographed by Johan Stjernholm. Artistic Director: Flora Zeta Cheong-Leen. Production: Phoenix Satellite TV.
+Here are some of the interesting features about the application.
 
-## Criteria
+### Utilizing Django on the backend
 
-The application fulfills the following stated criteria:
-
-### Utilizing Django on the backend with one model
-
-The application backend is programmed in Django, using one model `User`, which enables users to to register and log in to the application.
+The application backend is programmed in Django, using a database backend that enables users to to register and log in to the application.
 
 ### Utilizing JavaScript on the frontend
 
-The frontend is written almost entirely in JavaScript, according to the singlepage paradigm.
+The frontend is written almost entirely in JavaScript, according to the singlepage paradigm. The JavaScript code outlines a new mode of modular single page webprogramming for Django, combining the strengths and security features of Django with the advantages of the single page paradigm.
 
 ### Mobile Responsive
 
@@ -53,27 +40,21 @@ The webpage is Mobile Responsive, partly because it is taking into account the v
 
 Additionally, the application is using Flexbox to wrap the navigation buttons according to the size of the display.
 
-## Distinctiveness and Complexity
-
-The webpage has complexity and distinctiveness that goes beyond all the previous course projects in several ways. Below is an overview of some of its main features.
-
 ### Content and purpose
 
-First, it is neither a social network, nor an e-commerce platform. Instead, the application is an Artificial Intelligence driven site that can answer questions from a user, drawing on 'knowledge' from a corpus of documents that the AI has access to read.
+The application is an Artificial Intelligence driven site that can answer questions from a user, drawing on 'knowledge' from a corpus of documents that the AI has access to read.
 
 ### Docker
 
-Secondly, the application is entirely packaged in Docker containers, which was briefly mentioned in the course lectures, but never fully explored. Here, I have taken inspiration from the brief introduction to Docker in the lectures, and I use Docker Compose to make it easy to run and deliver the application across platforms in a consistent manner.
+The application is entirely packaged in Docker containers. I use Docker Compose to make it easy to run and deliver the application across platforms in a consistent manner.
 
 ### Styling with SASS in a Docker container
 
-Thirdly, I am using SASS for styling, which again goes beyond the criteria for all the previous course projects. Part of the challenge here was how to generate a Docker container that could dynamically generate CSS files to be available for the web application, running in a separate Docker container.
+I am using SASS for styling, which again goes beyond the criteria for all the previous course projects. Part of the challenge here was how to generate a Docker container that could dynamically generate CSS files to be available for the web application, running in a separate Docker container.
 
 ### A Class-based, modular JavaScript singlepage frontend paradigm
 
-Fourthly, I spent a lot of effort designing the frontend with JavaScript. However, not only according to the singlepage paradigm. My approach goes well beyond that. Excluding the AI itself, it is the frontpage conceptual design that constitutes the main part of the complexity of my application.
-
-The result of my frontend design effort, I believe, is a rather novel and evolutionary approach to coding singlepage apps in JavaScript on the Django platform. I have not come across any other project and website that uses the specific approach I developed for this Ask Me application. Please do inform me if you know of anyone using a similar approach.
+The design of the frontend with JavaScript not only according to the singlepage paradigm. It constitutes a rather novel and evolutionary approach to coding singlepage apps in JavaScript on the Django platform. I have not come across any other project and website that uses the specific approach I developed for this Ask Me application. Please do inform me if you know of anyone using a similar approach.
 
 The approach I used was to try to create as much as possible of the site content as Classes and Objects in JavaScript. For instance, all the forms in the application are instances of one single Class called `InputForm`. Meanwhile, the unique fields of each form are stored as JavaScript Objects. In order to generate a new instance of a form, the form Object is passed into the `InputForm` class and appended to the relevant HTML element.
 
@@ -89,19 +70,15 @@ The `BrowserState` Class enables the navigation buttons to be dynamically colour
 
 ### Preparing for production
 
-Fifthly, I have started to think about how to prepare the application for production. In particular, I have moved several of the configuration parameters to a `.env.dev` file, which later on may be complemented by a `.env.prod` file, once the project goes to production.
+In the project, I have started to prepare the application for production. In particular, I have moved several of the configuration parameters to a `.env.dev` file, which later on may be complemented by a `.env.prod` file, once the project goes to production.
 
 The planned `.env.prod` file will contain sensitive and secret materials, such as the Django `SECRET_KEY` variable, and the database password, and should hence be kept strictly private.
 
 ### Artificial Intelligence
 
-Lastly, the standout feature of the application is its use of Artificial Intelligence. The AI part of the application is a modification of my final project submission of "Questions" for the CS50's Introduction to Artificial Intelligence with Python.
+Lastly, the standout feature of the application is its use of Artificial Intelligence. I use a Form on the webpage to acquire a question from the user. The question is sent with a `Fetch` request to the backend API on Django, processed by the AI, and the answer is then sent back to the frontend and displayed on the user's homepage.
 
-The main modification of the AI, as compared to how I submitted it for the CS50 course in Artificial Intelligence, is how it here integrates with a webpage, as opposed to having a command-line driven interface.
-
-In this project, I use a Form on the webpage to acquire a question from the user. The question is sent with a `Fetch` request to the backend API on Django, processed by the AI, and the answer is then sent back to the frontend and displayed on the user's homepage.
-
-As for the corpus that the AI draws its knowledge from, I have here included texts from Walt Whitman, Ralph Waldo Emerson, and the Gilgamesh Epic, which makes for some rather interesting answers. Please see the below "Additional Information" for details and acknowledgements.
+As for the corpus that the AI draws its knowledge from, the text files are located inside the `testapp/static/testapp/corpus` directory. Originally, I have here included texts from Walt Whitman, Ralph Waldo Emerson, and the Gilgamesh Epic, which makes for some rather interesting answers. Please see the below "Additional Information" for details and acknowledgements. However, the corpus may vary according to future devlopments of the app.
 
 ## Files overview
 
